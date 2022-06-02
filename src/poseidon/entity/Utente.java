@@ -1,7 +1,5 @@
 package poseidon.entity;
 
-import java.util.*;
-
 public class Utente {
 	private String cognome;
 	private String nome;

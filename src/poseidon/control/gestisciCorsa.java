@@ -1,10 +1,9 @@
 package poseidon.control;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import poseidon.entity.Cliente;
-import poseidon.entity.Corsa;
-import poseidon.entity.CronologiaAcquisti;
+import poseidon.entity.*;
+import poseidon.DAO.*;
 
 public class gestisciCorsa {
 
@@ -27,7 +26,7 @@ public class gestisciCorsa {
 	public List<Corsa> ricercaCorsa(int codiceCorsa) {
 		// FUNZIONE NON IMPLEMENTATA
 		
-		List<Corsa> listaCorsa = new List<Corsa>;
+		List<Corsa> listaCorsa = new ArrayList<Corsa>();
 		Corsa c = CorsaDAO.readCorsa(codiceCorsa);
 		
 		listaCorsa.add(c);
@@ -40,8 +39,8 @@ public class gestisciCorsa {
 	public List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
 		// FUNZIONE NON IMPLEMENTATA
 		
-		List<CronologiaAcquisti> listaCronologia = new List<CronologiaAcquisti>;
-		Cliente c = CronologiaDAO.readCronologia(codiceCliente);
+		List<CronologiaAcquisti> listaCronologia = new ArrayList<CronologiaAcquisti>();
+		CronologiaAcquisti c = CronologiaDAO.readCronologia(codiceCliente);
 		
 		listaCronologia.add(c);
 		

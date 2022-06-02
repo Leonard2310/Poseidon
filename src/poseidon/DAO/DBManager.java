@@ -29,7 +29,7 @@ class DBManager {
 
 	public Connection getConnection() throws SQLException {
 		if (connection == null || connection.isClosed()) {
-			this.connection = DriverManager.getConnection("jdbc:postgresql://localhost/poseidon_db:", "poseidon", "");
+			this.connection = DriverManager.getConnection("jdbc:postgresql://localhost/poseidon_db", "poseidon", "project");
 		}
 		return connection;
 	}
@@ -41,4 +41,5 @@ class DBManager {
 	}
 
 	protected Connection connection;
+	
 }
