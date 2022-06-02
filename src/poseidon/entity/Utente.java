@@ -37,30 +37,5 @@ public class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public int login(String cognome, String nome, String password) {
-		// FUNZIONE NON IMPLEMENTATA
-		
-		int codiceCliente = -1;
-		
-		return codiceCliente;
-	}
-	
-	public boolean logout() {
-		// FUNZIONE NON IMPLEMENTATA
-		
-		return true;
-	}
-	
-	public List<Corsa> ricercaCorsa(int codiceCorsa) {
-		// FUNZIONE NON IMPLEMENTATA
-		
-		List<Corsa> listaCorsa = new List<Corsa>;
-		Corsa c = CorsaDAO.readCorsa(codiceCorsa);
-		
-		listaCorsa.add(c);
-		
-		return listaCorsa;
-	}
-	
+
 }

@@ -17,6 +17,4 @@ public class Dipendente extends Utente {
 		this.codiceImpiegato = codiceImpiegato;
 	}
 	
-	public Corsa inserimentoCorsa(String portoArrivo)
-	
 }
