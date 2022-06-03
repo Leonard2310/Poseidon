@@ -9,21 +9,21 @@ public class gestisciCorsa {
 
 	// UTENTE
 
-	public int login(String cognome, String nome, String password) {
+	public static int login(String cognome, String nome, String password) {
 		// FUNZIONE NON IMPLEMENTATA
 
-		int codiceCliente = -1;
+		int codiceCliente = 1;
 
 		return codiceCliente;
 	}
 
-	public boolean logout() {
+	public static boolean logout() {
 		// FUNZIONE NON IMPLEMENTATA
 
 		return true;
 	}
 
-	public List<Corsa> ricercaCorsa(int codiceCorsa) {
+	public static List<Corsa> ricercaCorsa(int codiceCorsa) {
 		// FUNZIONE NON IMPLEMENTATA
 		
 		List<Corsa> listaCorsa = new ArrayList<Corsa>();
@@ -36,7 +36,7 @@ public class gestisciCorsa {
 
 	// CLIENTE
 
-	public List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
+	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
 		// FUNZIONE NON IMPLEMENTATA
 		
 		List<CronologiaAcquisti> listaCronologia = new ArrayList<CronologiaAcquisti>();
@@ -47,7 +47,7 @@ public class gestisciCorsa {
 		return listaCronologia;
 	}
 
-	public int acquistaBiglietto(int codiceCliente, String nome, String cognome, String categoria, String codiceCorsa) {
+	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String categoria, String codiceCorsa) {
 
 		int ricevuta = 0;
 
@@ -56,12 +56,12 @@ public class gestisciCorsa {
 		return ricevuta;
 	}
 
-	public void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta) {
 
 		// TODO: Leonardo
 	}
 
-	public int calcolaDisponibilità(String codiceNave, String categoria) {
+	public static int calcolaDisponibilità(String codiceNave, String categoria) {
 
 		// TODO: Leonardo
 
@@ -70,7 +70,7 @@ public class gestisciCorsa {
 		return disponibilità;
 	}
 
-	public Corsa inserisciTipologiaBiglietto(String codiceNave, String categoria) {
+	public static Corsa inserisciTipologiaBiglietto(String codiceNave, String categoria) {
 
 		// TODO: Leonardo
 
@@ -81,26 +81,26 @@ public class gestisciCorsa {
 
 	// DIPENDENTE
 
-	public Corsa inserimentoCorsa(String portoArrivo, String portoPartenza,) {
+	public static Corsa inserimentoCorsa(String portoArrivo, String portoPartenza,) {
 		
 		// TODO: DAIANA SCEMA
 		
 	}
 
-	public Biglietto emissioneBiglietto() {
+	public static Biglietto emissioneBiglietto() {
 
 		// TODO: FRANCESCO
 	}
 
-	public int verificaAcquisti() {
+	public static int verificaAcquisti() {
 		// TODO: FRANCESCO
 	}
 
-	public void modificaCorsa() {
+	public static void modificaCorsa() {
 
 	}
 
-	public boolean cancellaCorsa() {
+	public static boolean cancellaCorsa() {
 
 	}
 

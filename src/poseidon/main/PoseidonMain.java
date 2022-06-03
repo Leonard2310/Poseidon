@@ -1,12 +1,7 @@
 package poseidon.main;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
-import poseidon.DAO.*;
-import poseidon.entity.*;
 import poseidon.boundary.*;
-import poseidon.control.*;
 
 public class PoseidonMain {
 
@@ -16,14 +11,10 @@ public class PoseidonMain {
 		int option = 0;
 		do {
 			System.out.println("Seleziona operazione: \n" +
-					"\t1) \n" +
-					"\t2) \n" +
-					"\t3) \n" +
-					"\t4) \n" +
-					"\t5) \n" +
-					"\t6) \n" +
-					"\t7) \n" +
-					"\t9) Esci");
+					"\t1) Login\n" +
+					"\t2) Logout\n" +
+					"\t3) Ricerca Corsa\n" +
+					"\t4) Esci");
 			System.out.flush();
 			
 			try {
@@ -35,22 +26,18 @@ public class PoseidonMain {
 			}
 			
 			switch (option) {
-				case 1: { ; break; }
-				case 2: { ; break; }
-				case 3: { ; break; }
-				case 4: { ; break; }
-				case 5: { ; break; }
-				case 6: { ; break; }
-				case 7: { ; break; }
-				case 9: {
-					System.out.println("Goodbye!\n");
+				case 1: { ApplicationConsoleBoundary.login(); break; }
+				case 2: { ApplicationConsoleBoundary.logout(); break; }
+				case 3: { ApplicationConsoleBoundary.ricercaCorsa(); break; }
+				case 4: {
+					System.out.println("Arrivederci!\n");
 					break; 
 				}
 				default: {
 					System.out.println("Carattere inserito non riconosciuto!\n");
 				}
 			}
-		} while (option != 9);
+		} while (option != 4);
 	}
 	
 
