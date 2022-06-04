@@ -10,76 +10,41 @@ public class ApplicationConsoleBoundary {
 		// POSTCONDITIONS:
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-		char answer = 0;
 		String nome = null;
 		String cognome = null;
-		String password = null;
-		
-		switch(flag) {
-			case 0: {		
-				System.out.println("Sei un dipendente (y/n)?");
-				try {
-					answer = inputReader.readLine().charAt(0);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		String password = null;		
 				
-				System.out.println("Inserisci il tuo cognome");
-				try {
-					cognome = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("Inserisci il tuo nome");
-				try {
-					nome = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("Inserisci la tua password");
-				try {
-					password = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				//gestisciCorsa.login(cognome, nome, password);
-					
-				if (answer == 'y') {
-					DipendenteConsoleBoundary.showDipendenteConsoleBoundary();
-				}
-				else {
-					ClienteConsoleBoundary.showClienteConsoleBoundary();
-				}
-			}
-			case 1: {
-				System.out.println("Inserisci il tuo cognome");
-				try {
-					cognome = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("Inserisci il tuo nome");
-				try {
-					nome = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("Inserisci la tua password");
-				try {
-					password = inputReader.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		System.out.println("Inserisci il tuo cognome");
+		try {
+			cognome = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
+		System.out.println("Inserisci il tuo nome");
+		try {
+			nome = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+				
+		System.out.println("Inserisci la tua password");
+		try {
+			password = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-
+		if (flag == 1) {
+			if (gestisciCorsa.loginDipendente(cognome, nome, password) > 0) {
+				DipendenteConsoleBoundary.showDipendenteConsoleBoundary();
+			}
+		}
+		else {
+			if (gestisciCorsa.loginCliente(cognome, nome, password) > 0) {
+				ClienteConsoleBoundary.showClienteConsoleBoundary();
+			}
+		}
 	}
 
 	public static void logout() {

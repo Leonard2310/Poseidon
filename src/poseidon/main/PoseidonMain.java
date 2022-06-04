@@ -15,12 +15,12 @@ public class PoseidonMain {
 		Scanner input = new Scanner(System.in);
 		int option = 0;
 		int flag = 0;
+		char answer = 'n';
 		do {
 			System.out.println("Seleziona operazione: \n" +
 					"\t1) Login\n" +
-					"\t2) Logout\n" +
-					"\t3) Ricerca Corsa\n" +
-					"\t4) Esci");
+					"\t2) Ricerca Corsa\n" +
+					"\t3) Esci");
 			System.out.flush();
 			
 			try {
@@ -32,14 +32,25 @@ public class PoseidonMain {
 			}
 			
 			switch (option) {
-				case 1: { ApplicationConsoleBoundary.login(flag); break; }
-				case 2: { ApplicationConsoleBoundary.logout(); break; }
-				case 3: { 
+				case 1: { 
+					System.out.println("Sei un dipendente (y/n)?");
+					try {
+						answer = inputReader.readLine().charAt(0);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					if (answer == 'y') flag = 1;
+					
+					ApplicationConsoleBoundary.login(flag); 
+					break; 
+				}
+				
+				case 2: { 
 					ApplicationConsoleBoundary.ricercaCorsa(); 
 					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse presenti [y/n]:");
 					char choice = input.next().charAt(0);
 					if(choice == 'y') {
-						flag = 1;
 						ApplicationConsoleBoundary.login(flag);
 						System.out.println("Inserisci il codice della corsa scelta: \t");
 						try {
@@ -55,7 +66,8 @@ public class PoseidonMain {
 						break;
 					}
 				}
-				case 4: {
+				
+				case 3: {
 					System.out.println("Arrivederci!\n");
 					break; 
 				}
@@ -63,7 +75,9 @@ public class PoseidonMain {
 					System.out.println("Carattere inserito non riconosciuto!\n");
 				}
 			}
-		} while (option != 4);
+		} while (option != 3);
+		
+		input.close();
 	}
 	
 
