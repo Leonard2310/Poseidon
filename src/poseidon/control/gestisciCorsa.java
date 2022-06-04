@@ -1,5 +1,9 @@
 package poseidon.control;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -147,13 +151,103 @@ public class gestisciCorsa {
 		
 	}
 
-	public static Biglietto emissioneBiglietto() {
-
-		// TODO: FRANCESCO
+	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto) {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito
+		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo biglietto e la
+		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene restituito un riferimento null
+		
+		Biglietto biglietto = null;
+		LocalDate data = null;
+		LocalTime ora = null;
+		int esito = 0;
+		int codiceCliente = 0;
+		CronologiaAcquisti c = null;
+		List<Biglietto> lista = null;
+		int codiceBiglietto = 0;
+		
+		try {
+			lista = BigliettoDAO.readallBiglietto();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		codiceBiglietto = lista.get(lista.size()-1).getCodiceBiglietto() + 1;
+		
+		data = LocalDate.now();
+		ora = LocalTime.now();
+		
+		if (tipoBiglietto.equals("veicolo")) {
+			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
+		}
+		else if (tipoBiglietto.equals("passeggero")) {
+			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+		}
+		else {
+			System.out.println("Il tipo di biglietto inserito non è valido.");
+			return null;
+		}
+						
+		try {
+			BigliettoDAO.creaBiglietto(biglietto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		//esito = Stampante.stampa();
+		if (esito != 0) {
+			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
+								"\nRiprovare tra 10 minuti");
+		}
+		
+		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+		System.out.println("Inserisci il codice del cliente che ha acquistato il biglietto");
+		try {
+			codiceCliente = Integer.parseInt(inputReader.readLine());
+		} catch (NumberFormatException e) {
+			codiceCliente = 0;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(codiceCliente > 0) {
+			try {
+				c = CronologiaDAO.readCronologia(codiceCliente);
+				c.setBiglietto(biglietto);
+				CronologiaDAO.updateCronologia(c);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("Il codice cliente inserito non è valido.");
+		}
+		
+		return biglietto;
 	}
 
-	public static int verificaAcquisti() {
-		// TODO: FRANCESCO
+	public static CronologiaAcquisti verificaAcquisti() {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
+		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
+		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
+		
+		List<CronologiaAcquisti> lista = null;
+		try {
+			lista = CronologiaDAO.readallCronologia();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (lista == null) return null;
+		
+		for (CronologiaAcquisti c : lista) {
+			if (c.getBiglietto().getCodiceBiglietto() == 0) {
+				return c;
+			}
+		}
+		
+		return null;
 	}
 
 	public static void modificaCorsa() {
@@ -164,4 +258,5 @@ public class gestisciCorsa {
 
 	}
 
+	protected static java.io.BufferedReader inputReader;
 }
