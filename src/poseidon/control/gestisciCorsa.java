@@ -12,6 +12,7 @@ import poseidon.entity.*;
 import poseidon.DAO.*;
 
 import poseidon.external.SistemaDiPagamento;
+import poseidon.external.Stampante;
 
 
 public class gestisciCorsa {
@@ -194,7 +195,7 @@ public class gestisciCorsa {
 			return null;
 		}
 		
-		//esito = Stampante.stampa();
+		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
 			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
 								"\nRiprovare tra 10 minuti");
