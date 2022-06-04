@@ -42,26 +42,26 @@ GRANT ALL ON TABLES TO poseidon WITH GRANT OPTION;
 
 CREATE TABLE public.biglietto
 (
-    "codiceBiglietto" integer NOT NULL,
+    codicebiglietto integer NOT NULL,
     data date NOT NULL,
     ora time without time zone NOT NULL,
-    "codiceCorsa" integer NOT NULL,
-    "codiceImpiegato" integer NOT NULL,
+    codicecorsa integer NOT NULL,
+    codiceimpiegato integer NOT NULL,
     tipo character varying NOT NULL,
     targa character varying DEFAULT NULL,
-    CONSTRAINT biglietto_pkey PRIMARY KEY ("codiceBiglietto")
+    CONSTRAINT biglietto_pkey PRIMARY KEY (codicebiglietto)
 )
 
  
 
 CREATE TABLE public.corsa
 (
-    "codiceCorsa" integer NOT NULL,
-    "orarioPartenza" time without time zone NOT NULL,
-    "orarioArrivo" time without time zone NOT NULL,
-    "portoPartenza" character varying NOT NULL,
-    "portoArrivo" character varying NOT NULL,
-    CONSTRAINT corsa_pkey PRIMARY KEY ("codiceCorsa")
+    codicecorsa integer NOT NULL,
+    orariopartenza time without time zone NOT NULL,
+    orarioarrivo time without time zone NOT NULL,
+    portopartenza character varying NOT NULL,
+    portoarrivo character varying NOT NULL,
+    CONSTRAINT corsa_pkey PRIMARY KEY (codicecorsa)
 );
 
  
@@ -77,11 +77,11 @@ CREATE TABLE public.porto
 CREATE TABLE public.nave
 (
     nome character varying NOT NULL,
-    "capienzaAutoveicoli" integer DEFAULT 0,
-    "capienzaPassegeri" integer DEFAULT 0,
+    capienzaautoveicoli integer DEFAULT 0,
+    capienzapassegeri integer DEFAULT 0,
     prezzo double precision DEFAULT 0.0,
     categoria character varying NOT NULL,
-    "codiceCorsa" integer NOT NULL,
+    codicecorsa integer NOT NULL,
     CONSTRAINT nave_pkey PRIMARY KEY (nome)
 );
 
@@ -89,40 +89,40 @@ CREATE TABLE public.nave
 
 CREATE TABLE public.cronologiaacquisti
 (
-    "codiceCliente" integer NOT NULL,
-    "codiceCorsa" integer NOT NULL,
-    "orarioPartenza" time without time zone NOT NULL,
-    "orarioArrivo" time without time zone NOT NULL,
-    "portoPartenza" character varying NOT NULL,
-    "portoArrivo" character varying NOT NULL,
-    "codiceBiglietto" integer DEFAULT NULL,
+    codicecliente integer NOT NULL,
+    codicecorsa integer NOT NULL,
+    orariopartenza time without time zone NOT NULL,
+    orarioarrivo time without time zone NOT NULL,
+    portopartenza character varying NOT NULL,
+    portoarrivo character varying NOT NULL,
+    codicebiglietto integer DEFAULT NULL,
     data date DEFAULT NULL,
     ora time without time zone DEFAULT NULL,
-    "codiceImpiegato" integer DEFAULT NULL,
+    codiceimpiegato integer DEFAULT NULL,
     ricevuta integer NOT NULL,
-    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY ("codiceCliente")
+    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente)
 );
 
  
 
 CREATE TABLE public.dipendente
 (
-    "codiceImpiegato" integer NOT NULL,
+    codiceimpiegato integer NOT NULL,
     cognome character varying NOT NULL,
     nome character varying NOT NULL,
     password character varying NOT NULL,
-    CONSTRAINT dipendente_pkey PRIMARY KEY ("codiceImpiegato")
+    CONSTRAINT dipendente_pkey PRIMARY KEY (codiceimpiegato)
 );
 
  
 
 CREATE TABLE public.cliente
 (
-    "codiceCliente" integer NOT NULL,
+    codicecliente integer NOT NULL,
     cognome character varying NOT NULL,
     nome character varying NOT NULL,
     password character varying NOT NULL,
-    CONSTRAINT cliente_pkey PRIMARY KEY ("codiceCliente")
+    CONSTRAINT cliente_pkey PRIMARY KEY (codicecliente)
 );
 
  
@@ -130,23 +130,23 @@ CREATE TABLE public.cliente
  
 
 ALTER TABLE IF EXISTS public.biglietto
-    ADD CONSTRAINT biglietto_dipendente_fkey FOREIGN KEY ("codiceImpiegato")
-    REFERENCES public.dipendente ("codiceImpiegato") MATCH SIMPLE
+    ADD CONSTRAINT biglietto_dipendente_fkey FOREIGN KEY (codiceimpiegato)
+    REFERENCES public.dipendente (codiceimpiegato) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE NO ACTION;
 
  
 
 ALTER TABLE IF EXISTS public.biglietto
-    ADD CONSTRAINT biglietto_corsa_fkey FOREIGN KEY ("codiceCorsa")
-    REFERENCES public.corsa ("codiceCorsa") MATCH SIMPLE
+    ADD CONSTRAINT biglietto_corsa_fkey FOREIGN KEY (codicecorsa)
+    REFERENCES public.corsa (codicecorsa) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
  
 
 ALTER TABLE IF EXISTS public.corsa
-    ADD CONSTRAINT corsa_portopar_fkey FOREIGN KEY ("portoPartenza")
+    ADD CONSTRAINT corsa_portopar_fkey FOREIGN KEY (portopartenza)
     REFERENCES public.porto (citta) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -154,7 +154,7 @@ ALTER TABLE IF EXISTS public.corsa
  
 
 ALTER TABLE IF EXISTS public.corsa
-    ADD CONSTRAINT corsa_portoarr_fkey FOREIGN KEY ("portoArrivo")
+    ADD CONSTRAINT corsa_portoarr_fkey FOREIGN KEY (portoarrivo)
     REFERENCES public.porto (citta) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
@@ -162,15 +162,15 @@ ALTER TABLE IF EXISTS public.corsa
  
 
 ALTER TABLE IF EXISTS public.cronologiaacquisti
-    ADD CONSTRAINT crono_biglietto_fkey FOREIGN KEY ("codiceBiglietto")
-    REFERENCES public.biglietto ("codiceBiglietto") MATCH SIMPLE
+    ADD CONSTRAINT crono_biglietto_fkey FOREIGN KEY (codicebiglietto)
+    REFERENCES public.biglietto (codicebiglietto) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
  
 
 ALTER TABLE IF EXISTS public.cronologiaacquisti
-    ADD CONSTRAINT crono_corsa_fkey FOREIGN KEY ("codiceCorsa")
-    REFERENCES public.corsa ("codiceCorsa") MATCH SIMPLE
+    ADD CONSTRAINT crono_corsa_fkey FOREIGN KEY (codicecorsa)
+    REFERENCES public.corsa (codicecorsa) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
