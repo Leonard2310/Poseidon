@@ -165,14 +165,16 @@ public class gestisciCorsa {
 		int codiceCliente = 0;
 		CronologiaAcquisti c = null;
 		List<Biglietto> lista = null;
-		int codiceBiglietto = 0;
+		int codiceBiglietto = 1;
 		
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		codiceBiglietto = lista.get(lista.size()-1).getCodiceBiglietto() + 1;
+		if (lista.size() > 0) {
+			codiceBiglietto = lista.get(lista.size()-1).getCodiceBiglietto() + 1;
+		}
 		
 		data = LocalDate.now();
 		ora = LocalTime.now();
