@@ -5,14 +5,17 @@ import java.io.IOException;
 import poseidon.control.*;
 
 public class ApplicationConsoleBoundary {
-	public static void login(int flag) {
-		// PRECONDITIONS: 
-		// POSTCONDITIONS:
+	public static int login(int flag) {
+		// PRECONDITIONS: l'utente ha premuto il pulsante per l'autenticazione
+		// POSTCONDITIONS: se le informazioni inserite dall'utente sono corrette, viene visualizzato un messaggio
+		// di successo con il suo codice e viene restituito valore 0; altrimenti, viene visualizzato un messaggio
+		// di errore viene restituito valore 1;
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		String nome = null;
 		String cognome = null;
-		String password = null;		
+		String password = null;	
+		int codice  = 0;
 				
 		System.out.println("Inserisci il tuo cognome");
 		try {
@@ -36,13 +39,27 @@ public class ApplicationConsoleBoundary {
 		}
 		
 		if (flag == 1) {
-			if (gestisciCorsa.loginDipendente(cognome, nome, password) > 0) {
-				DipendenteConsoleBoundary.showDipendenteConsoleBoundary();
+			codice = gestisciCorsa.loginDipendente(cognome, nome, password);
+			if (codice > 0) {
+				System.out.println("Dipendente " + codice + " autenticato con successo.");
+				return(0);
+			}
+			else
+			{
+				System.out.println("Autenticazione fallita.");	
+				return(1);
 			}
 		}
 		else {
-			if (gestisciCorsa.loginCliente(cognome, nome, password) > 0) {
-				ClienteConsoleBoundary.showClienteConsoleBoundary();
+			codice = gestisciCorsa.loginCliente(cognome, nome, password);
+			if (codice > 0) {
+				System.out.println("Cliente " + codice + " autenticato con successo.");
+				return(0);
+			}
+			else
+			{
+				System.out.println("Autenticazione fallita.");		
+				return(1);
 			}
 		}
 	}

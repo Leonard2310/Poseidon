@@ -14,7 +14,6 @@ public class PoseidonMain {
 		inputReader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner input = new Scanner(System.in);
 		int option = 0;
-		int flag = 0;
 		char answer = 'n';
 		do {
 			System.out.println("Seleziona operazione: \n" +
@@ -40,9 +39,16 @@ public class PoseidonMain {
 						e.printStackTrace();
 					}
 					
-					if (answer == 'y') flag = 1;
-					
-					ApplicationConsoleBoundary.login(flag); 
+					if (answer == 'y') {
+						if (ApplicationConsoleBoundary.login(1) == 0) { 
+							DipendenteConsoleBoundary.showDipendenteConsoleBoundary();
+						}
+					}
+					else {
+						if (ApplicationConsoleBoundary.login(0) == 0) { 
+							ClienteConsoleBoundary.showClienteConsoleBoundary();
+						}
+					}
 					break; 
 				}
 				
@@ -51,7 +57,7 @@ public class PoseidonMain {
 					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse presenti [y/n]:");
 					char choice = input.next().charAt(0);
 					if(choice == 'y') {
-						ApplicationConsoleBoundary.login(flag);
+						ApplicationConsoleBoundary.login(0);
 						System.out.println("Inserisci il codice della corsa scelta: \t");
 						try {
 							int codiceCorsa = Integer.parseInt(inputReader.readLine());
