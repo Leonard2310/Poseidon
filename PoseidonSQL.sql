@@ -95,10 +95,10 @@ CREATE TABLE public.cronologiaacquisti
     "orarioArrivo" time without time zone NOT NULL,
     "portoPartenza" character varying NOT NULL,
     "portoArrivo" character varying NOT NULL,
-    "codiceBiglietto" integer NOT NULL,
-    data date NOT NULL,
-    ora time without time zone NOT NULL,
-    "codiceImpiegato" integer NOT NULL,
+    "codiceBiglietto" integer DEFAULT NULL,
+    data date DEFAULT NULL,
+    ora time without time zone DEFAULT NULL,
+    "codiceImpiegato" integer DEFAULT NULL,
     ricevuta integer NOT NULL,
     CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY ("codiceCliente")
 );
