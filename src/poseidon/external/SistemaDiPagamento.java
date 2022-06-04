@@ -2,11 +2,11 @@ package poseidon.external;
 
 public class SistemaDiPagamento {
 
-	public int generateRicevuta() {
+	public static int generateRicevuta() {
 		
 		// TODO: Leonardo
 		
-		int ricevuta= 0;
+		int ricevuta = (int) Math.random();
 		
 		return ricevuta;
 	}

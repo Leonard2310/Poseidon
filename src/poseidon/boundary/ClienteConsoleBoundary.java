@@ -1,11 +1,15 @@
 package poseidon.boundary;
 
+import java.io.DataInput;
 import java.io.IOException;
+import java.util.*;
+
+import poseidon.control.gestisciCorsa;
 
 public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary() {
-		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che può effettuare
-		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state mostrate a schermo
+		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che puï¿½ effettuare
+		// POSTCONDITIONS: le operazioni che il cliente puï¿½ effettuare sono state mostrate a schermo
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		int option = 0;
@@ -25,7 +29,7 @@ public class ClienteConsoleBoundary {
 			}
 			
 			switch (option) {
-				case 1: { acquistaBiglietto(); break; }
+				case 1: { acquistaBiglietto(option); break; }
 				case 2: { visualizzaCronologiaAcquisti(); break; }
 				case 3: { ApplicationConsoleBoundary.logout(); break; }
 				default: { System.out.println("Carattere inserito non riconosciuto!\n"); }
@@ -33,8 +37,29 @@ public class ClienteConsoleBoundary {
 		} while (option != 3);
 	}
 	
-	public static void acquistaBiglietto() {
+	public static void acquistaBiglietto(int codiceCorsa) {
 		//TODO: Leonardo
+		System.out.println("Inserisci il codice cliente: ");
+		try {
+			int codiceCliente = Integer.parseInt(inputReader.readLine());
+			
+			try (Scanner input = new Scanner(System.in)) {
+				System.out.println("Inserisci le tue informazioni anagrafiche: ");
+				System.out.println("Nome: \t");
+				String nome = input.nextLine();
+				System.out.println("Cognome: \t");
+				String cognome = input.nextLine();
+				
+				System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
+				String tipoBiglietto = input.nextLine();
+				
+				gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa);
+			}
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	public static void visualizzaCronologiaAcquisti() {
