@@ -1,10 +1,11 @@
 package poseidon.external;
 
 public class SistemaDiPagamento {
+	
+	// SISTEMA ESTERNO NON IMPLEMENTATO
 
 	public static int generateRicevuta() {
-		
-		// TODO: Leonardo
+		// TODO: Leonardo --> test
 		
 		int ricevuta = (int) Math.random();
 		

@@ -18,40 +18,41 @@ import poseidon.DAO.*;
 import poseidon.external.SistemaDiPagamento;
 import poseidon.external.Stampante;
 
-
 public class gestisciCorsa {
 
 	// UTENTE
 
 	public static int loginCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene trovato nel database,
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene
+		// trovato nel database,
 		// viene restituito il suo codice; altrimenti, viene restituito valore -1
-		
+
 		List<Cliente> lista_clienti = null;
 		try {
 			lista_clienti = ClienteDAO.readallCliente();
-			
+
 			for (Cliente c : lista_clienti) {
 				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password))
 					return c.getCodiceCliente();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 
 		return -1;
 	}
-	
+
 	public static int loginDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene trovato nel database,
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene
+		// trovato nel database,
 		// viene restituito il suo codice; altrimenti, viene restituito valore -1
-			
+
 		List<Dipendente> lista_dipendenti;
 		try {
 			lista_dipendenti = DipendenteDAO.readallDipendente();
-			
+
 			for (Dipendente d : lista_dipendenti) {
 				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password))
 					return d.getCodiceImpiegato();
@@ -59,33 +60,35 @@ public class gestisciCorsa {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return -1;
 	}
-	
+
 	public static int registraCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
-		
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non
+		// viene trovato nel database,
+		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
+		// valore -1
+
 		List<Cliente> lista_clienti = null;
 		int codiceCliente = 10001;
-		
+
 		try {
 			lista_clienti = ClienteDAO.readallCliente();
-			
+
 			for (Cliente c : lista_clienti) {
 				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password)) {
-					System.out.println("Errore: cliente già esistente.");
+					System.out.println("Errore: cliente giï¿½ esistente.");
 					return -1;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 		if (lista_clienti.size() > 0)
-			codiceCliente = lista_clienti.get(lista_clienti.size()-1).getCodiceCliente() + 1;
+			codiceCliente = lista_clienti.get(lista_clienti.size() - 1).getCodiceCliente() + 1;
 
 		Cliente c = new Cliente(cognome, nome, password, codiceCliente);
 		try {
@@ -93,33 +96,35 @@ public class gestisciCorsa {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return c.getCodiceCliente();
 	}
-	
+
 	public static int registraDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
-			
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non
+		// viene trovato nel database,
+		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
+		// valore -1
+
 		List<Dipendente> lista_dipendenti = null;
 		int codiceImpiegato = 10001;
-		
+
 		try {
 			lista_dipendenti = DipendenteDAO.readallDipendente();
-			
+
 			for (Dipendente d : lista_dipendenti) {
 				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password)) {
-					System.out.println("Errore: cliente già esistente.");
+					System.out.println("Errore: cliente giï¿½ esistente.");
 					return -1;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if (lista_dipendenti.size() > 0) 
-			codiceImpiegato = lista_dipendenti.get(lista_dipendenti.size()-1).getCodiceImpiegato() + 1;
+
+		if (lista_dipendenti.size() > 0)
+			codiceImpiegato = lista_dipendenti.get(lista_dipendenti.size() - 1).getCodiceImpiegato() + 1;
 
 		Dipendente d = new Dipendente(cognome, nome, password, codiceImpiegato);
 		try {
@@ -127,7 +132,7 @@ public class gestisciCorsa {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return d.getCodiceImpiegato();
 	}
 
@@ -137,48 +142,66 @@ public class gestisciCorsa {
 		return true;
 	}
 
-	public static List<Corsa> ricercaCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
-			String portoArrivo, int prezzo) {
+	public static List<Corsa> ricercaCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo,
+			String portoPartenza, String portoArrivo, double prezzo) {
 		// FUNZIONE NON IMPLEMENTATA
-		
+
 		List<Corsa> listaCorsa = new ArrayList<Corsa>();
 		Corsa corsa = null;
-		
-		if(codiceCorsa != 0) {
-			corsa = CorsaDAO.readCorsa(codiceCorsa);
+
+		if (codiceCorsa != 0) {
+			try {
+				corsa = CorsaDAO.readCorsa(codiceCorsa);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			listaCorsa.add(corsa);
 			return listaCorsa;
-		}
-		else if((orarioPartenza != null || orarioArrivo != null) && (portoPartenza != null || portoArrivo != null)) {
-			listaCorsa = CorsaDAO.readallCorsa();
-			List<Corsa> listaCorsaFiltri = new ArrayList<Corsa>();
-	        for (int i = 0; i < listaCorsa.size(); i++) {
+		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null) {
 
-	        	listaCorsa.get()
-	        }
-	        return listaCorsaFiltri;
-			
-		}
-		else {
-			listaCorsa = CorsaDAO.readallCorsa();
+			try {
+				listaCorsa = CorsaDAO.readallCorsa();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			for (Corsa c : listaCorsa) {
+				if (c.getOrarioArrivo() == orarioArrivo && c.getOrarioPartenza() == orarioPartenza
+						&& c.getPortoPartenza() == portoPartenza && c.getPortoArrivo() == portoArrivo) {
+					listaCorsa.add(c);
+				}
+			}
+
+			return listaCorsa;
+		} else {
+			System.out.println("Nessuna corsa per i filtri specificati");
+			try {
+				listaCorsa = CorsaDAO.readallCorsa();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			return listaCorsa;
 		}
-		
 
+		// TODO: PREZZO
 
-		return listaCorsa;
 	}
 
 	// CLIENTE
 
-	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
+	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente, int codiceCorsa,
+			int ricevuta) {
 		// FUNZIONE NON IMPLEMENTATA
-		
+
 		List<CronologiaAcquisti> listaCronologia = new ArrayList<CronologiaAcquisti>();
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(codiceCliente);
-		
+		CronologiaAcquisti c = null;
+		try {
+			c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		listaCronologia.add(c);
-		
+
 		return listaCronologia;
 	}
 
@@ -186,54 +209,57 @@ public class gestisciCorsa {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
-		Corsa corsa;
-		
-		corsa = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
-		
+		try {
+			Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		int bool_ricevuta[] = null;
+
+		String tipoBiglietto = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
+
 		int disponibilita = calcolaDisponibilitÃ (codiceCorsa, tipoBiglietto);
 		if (disponibilita > 0) {
 			System.out.println("La corsa Ã¨ disponibile");
-			System.out.println("Il prezzo Ã¨ ");		// corsa.getprezzo() ??
-			int bool_ricevuta[];
-			bool_ricevuta= elaborazioneAcquisto();
-			if(bool_ricevuta[0] == 0) {
+			System.out.println("Il prezzo Ã¨ "); // corsa.getprezzo() ??
+
+			bool_ricevuta = elaborazioneAcquisto();
+			if (bool_ricevuta[0] == 0) {
 				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, bool_ricevuta[1]);
 				return bool_ricevuta[1];
-			}
-			else {
+			} else {
 				System.out.println("Elaborazione d'acquisto fallita");
-				break;
 			}
-
-		}
-		else {
+		} else {
 			System.out.println("Assenza di posti disponibili");
-			break;
 		}
 		// TODO: Leonardo
+		return bool_ricevuta[1];
 	}
 
+	@SuppressWarnings("null")
 	public static int[] elaborazioneAcquisto() {
-		// PRECONDIZIONE: 
+		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
-		
+		int bool_ricevuta[] = null;
+
 		try (Scanner input = new Scanner(System.in)) {
 			System.out.println("Scegli la tipologia di pagamento: \t");
+			@SuppressWarnings("unused")
 			String tipologiaPagamento = input.nextLine();
-			
-			int bool_ricevuta[]; 
+
+
 			bool_ricevuta[1] = SistemaDiPagamento.generateRicevuta();
-			System.out.println("Il codice ricevuta Ã¨: " +bool_ricevuta[1]);
-			if(bool_ricevuta[1] !=  0) {
+			System.out.println("Il codice ricevuta Ã¨: " + bool_ricevuta[1]);
+			if (bool_ricevuta[1] != 0) {
 				bool_ricevuta[0] = 0;
 
-			}
-			else {
+			} else {
 				bool_ricevuta[0] = 1;
 			}
 			return bool_ricevuta;
 		}
-		
+
 	}
 
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta) {
@@ -254,42 +280,49 @@ public class gestisciCorsa {
 		return disponibilita;
 	}
 
-	public static Corsa inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
+	public static void inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
+		String corsa = null;
 
-		Corsa corsa;
-		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Scegli la tipologia di biglietto: \t");
 		String tipologiaBiglietto = input.nextLine();
-		
+
 		// TODO: LEONARDO, come accedo alla corsa? (sql?)
 
-
-		return corsa;
 	}
-	
+
 	public static boolean readPrezzo() {
+		return false;
 		// FUNZIONE NON IMPLEMENTATA
-		
+
 	}
 
 	// DIPENDENTE
 
-	public static Corsa inserimentoCorsa(String portoArrivo, String portoPartenza,) {
-		
+	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
+			String portoArrivo) {
+		Corsa corsa = null;
+
+		int codiceCorsa = (int) Math.random();
+
 		// TODO: DAIANA SCEMA
-		
+		return corsa;
+
 	}
 
-	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto) {
+	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa,
+			String tipoBiglietto) {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito
-		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo biglietto e la
-		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene restituito un riferimento null
-		
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene
+		// restituito
+		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo
+		// biglietto e la
+		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene
+		// restituito un riferimento null
+
 		Biglietto biglietto = null;
 		LocalDate data = null;
 		LocalTime ora = null;
@@ -301,7 +334,7 @@ public class gestisciCorsa {
 		int codiceBiglietto = 1;
 		char risposta = 'n';
 		Corsa corsa = null;
-		
+
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e1) {
@@ -312,34 +345,32 @@ public class gestisciCorsa {
 				codiceBiglietto = b.getCodiceBiglietto() + 1;
 			}
 		}
-		
+
 		data = LocalDate.now();
 		ora = LocalTime.now();
-		
+
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
-		}
-		else if (tipoBiglietto.equals("passeggero")) {
+		} else if (tipoBiglietto.equals("passeggero")) {
 			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
-		}
-		else {
-			System.out.println("Il tipo di biglietto inserito non è valido.");
+		} else {
+			System.out.println("Il tipo di biglietto inserito non Ã¨ valido.");
 			return null;
 		}
-						
+
 		try {
 			BigliettoDAO.creaBiglietto(biglietto);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
-								"\nRiprovare tra 10 minuti");
+			System.out.println(
+					"Al momento non Ã¨ possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
-		
+
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		System.out.println("Inserisci il codice del cliente che ha acquistato il biglietto");
 		try {
@@ -349,15 +380,15 @@ public class gestisciCorsa {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Generare una nuova ricevuta d'acquisto? [y/n]");
 		try {
 			risposta = inputReader.readLine().charAt(0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		if(risposta == 'n') {
+
+		if (risposta == 'n') {
 			System.out.println("Inserisci la ricevuta d'acquisto");
 			try {
 				ricevuta = Integer.parseInt(inputReader.readLine());
@@ -366,22 +397,20 @@ public class gestisciCorsa {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
 				c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
 				if (c != null) {
 					c.setBiglietto(biglietto);
 					CronologiaDAO.updateCronologia(c);
-				}
-				else {
+				} else {
 					System.out.println("L'acquisto selezionato non esiste.");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		else if (risposta == 'y') {
-			//ricevuta = generazioneRicevuta();
+		} else if (risposta == 'y') {
+			// ricevuta = generazioneRicevuta();
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
 				if (corsa != null) {
@@ -391,35 +420,37 @@ public class gestisciCorsa {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			System.out.println("Errore: carattere inserito non valido.");
 		}
-		
+
 		return biglietto;
 	}
 
 	public static CronologiaAcquisti verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
-		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
+		// POSTCONDITIONS: se ci sono acquisti per i quali non ï¿½ ancora stato emesso un
+		// biglietto,
+		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti
+		// contenente i dati
 		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
-		
+
 		List<CronologiaAcquisti> lista = null;
 		try {
 			lista = CronologiaDAO.readallCronologia();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if (lista == null) return null;
-		
+
+		if (lista == null)
+			return null;
+
 		for (CronologiaAcquisti c : lista) {
 			if (c.getBiglietto().getCodiceBiglietto() == 0) {
 				return c;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -428,8 +459,9 @@ public class gestisciCorsa {
 	}
 
 	public static boolean cancellaCorsa() {
+		return false;
 		// FUNZIONE NON IMPLEMENTATA
 	}
-	
+
 	protected static java.io.BufferedReader inputReader;
 }
