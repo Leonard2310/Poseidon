@@ -24,19 +24,111 @@ public class gestisciCorsa {
 	// UTENTE
 
 	public static int loginCliente(String cognome, String nome, String password) {
-		// FUNZIONE NON IMPLEMENTATA
+		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene trovato nel database,
+		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+		
+		List<Cliente> lista_clienti = null;
+		try {
+			lista_clienti = ClienteDAO.readallCliente();
+			
+			for (Cliente c : lista_clienti) {
+				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password))
+					return c.getCodiceCliente();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 
-		int codiceCliente = 1;
-
-		return codiceCliente;
+		return -1;
 	}
 	
 	public static int loginDipendente(String cognome, String nome, String password) {
-		// FUNZIONE NON IMPLEMENTATA
+		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene trovato nel database,
+		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+			
+		List<Dipendente> lista_dipendenti;
+		try {
+			lista_dipendenti = DipendenteDAO.readallDipendente();
+			
+			for (Dipendente d : lista_dipendenti) {
+				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password))
+					return d.getCodiceImpiegato();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+	}
+	
+	public static int registraCliente(String cognome, String nome, String password) {
+		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non viene trovato nel database,
+		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
+		
+		List<Cliente> lista_clienti = null;
+		int codiceCliente = 10001;
+		
+		try {
+			lista_clienti = ClienteDAO.readallCliente();
+			
+			for (Cliente c : lista_clienti) {
+				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password)) {
+					System.out.println("Errore: cliente già esistente.");
+					return -1;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+		if (lista_clienti.size() > 0)
+			codiceCliente = lista_clienti.get(lista_clienti.size()-1).getCodiceCliente() + 1;
 
-		int codiceDipendente = 1;
+		Cliente c = new Cliente(cognome, nome, password, codiceCliente);
+		try {
+			ClienteDAO.creaCliente(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return c.getCodiceCliente();
+	}
+	
+	public static int registraDipendente(String cognome, String nome, String password) {
+		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non viene trovato nel database,
+		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
+			
+		List<Dipendente> lista_dipendenti = null;
+		int codiceImpiegato = 10001;
+		
+		try {
+			lista_dipendenti = DipendenteDAO.readallDipendente();
+			
+			for (Dipendente d : lista_dipendenti) {
+				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password)) {
+					System.out.println("Errore: cliente già esistente.");
+					return -1;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (lista_dipendenti.size() > 0) 
+			codiceImpiegato = lista_dipendenti.get(lista_dipendenti.size()-1).getCodiceImpiegato() + 1;
 
-		return codiceDipendente;
+		Dipendente d = new Dipendente(cognome, nome, password, codiceImpiegato);
+		try {
+			DipendenteDAO.creaDipendente(d);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return d.getCodiceImpiegato();
 	}
 
 	public static boolean logout() {

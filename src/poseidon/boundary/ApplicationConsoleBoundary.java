@@ -63,6 +63,68 @@ public class ApplicationConsoleBoundary {
 			}
 		}
 	}
+	
+	public static void registra(char flag) {
+		// PRECONDITIONS: il flag passato in ingresso è uguale a "y" o a "n"
+		// POSTCONDITIONS: se la registrazione del nuovo utente è andata a buon fine, viene visualizzato un messaggio
+		// di successo; altrimenti, viene visualizzato un messaggio di fallimento
+		
+		String cognome = null;
+		String nome = null;
+		String password_1 = null;
+		String password_2 = null;
+		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+		int codice = 0;
+		
+		do {
+			System.out.println("Inserisci il tuo cognome");
+			try {
+				cognome = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("Inserisci il tuo nome");
+			try {
+				nome = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+					
+			System.out.println("Inserisci una password");
+			try {
+				password_1 = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("Inserisci nuovamente la password");
+			try {
+				password_2 = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if (!password_1.equals(password_2)) {
+				System.out.println("Le password inserite non corrispondono, riprova.");
+			}
+			
+		} while (!password_1.equals(password_2));
+		
+		if (flag == 'y') {
+			codice = gestisciCorsa.registraDipendente(cognome, nome, password_1);
+		} 
+		else {
+			codice = gestisciCorsa.registraCliente(cognome, nome, password_2);
+		}
+		
+		if (codice > 0) {
+			System.out.println("Benvenuto nella nostra famiglia. Il codice che ti è stato assegnato è " + codice);
+		}
+		else {
+			System.out.println("Errore di registrazione.");
+		}
+	}
 
 	public static void logout() {
 		// FUNZIONE NON IMPLEMENTATA
