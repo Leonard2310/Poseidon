@@ -49,7 +49,7 @@ CREATE TABLE public.biglietto
     codiceimpiegato integer NOT NULL,
     tipo character varying NOT NULL,
     targa character varying DEFAULT NULL,
-    CONSTRAINT biglietto_pkey PRIMARY KEY (codicebiglietto)
+    CONSTRAINT biglietto_pkey PRIMARY KEY (codicebiglietto, codicecorsa)
 )
 
  
@@ -100,7 +100,7 @@ CREATE TABLE public.cronologiaacquisti
     ora time without time zone DEFAULT NULL,
     codiceimpiegato integer DEFAULT NULL,
     ricevuta integer NOT NULL,
-    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente)
+    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente, codicecorsa, codicebiglietto)
 );
 
  
@@ -162,8 +162,8 @@ ALTER TABLE IF EXISTS public.corsa
  
 
 ALTER TABLE IF EXISTS public.cronologiaacquisti
-    ADD CONSTRAINT crono_biglietto_fkey FOREIGN KEY (codicebiglietto)
-    REFERENCES public.biglietto (codicebiglietto) MATCH SIMPLE
+    ADD CONSTRAINT crono_biglietto_fkey FOREIGN KEY (codicebiglietto, codicecorsa)
+    REFERENCES public.biglietto (codicebiglietto, codicecorsa) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
@@ -174,3 +174,13 @@ ALTER TABLE IF EXISTS public.cronologiaacquisti
     REFERENCES public.corsa (codicecorsa) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
+
+
+
+insert into dipendente values (1001, 'Catello', 'Leonardo', 'acquisto');
+insert into dipendente values (1002, 'Cipollaro', 'Daiana', 'inserimento');
+insert into dipendente values (1003, 'Di Serio', 'Francesco', 'emissione');
+
+insert into cliente values (10001, 'Catello', 'Leonardo', 'acquisto');
+insert into cliente values (10002, 'Cipollaro', 'Daiana', 'inserimento');
+insert into cliente values (10003, 'Di Serio', 'Francesco', 'emissione');
