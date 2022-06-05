@@ -79,9 +79,16 @@ public class BigliettoDAO {
 			if (r.getTime("ora") != null) 
 				ora = r.getTime("ora").toLocalTime();				
 			int codiceCorsa = r.getInt("codicecorsa");
-			int codiceImpiegato = r.getInt("codiceimpiegato");			
+			int codiceImpiegato = r.getInt("codiceimpiegato");		
 			
-			b = new Biglietto(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			if (r.getString("tipobiglietto").equals("veicolo")) {
+				String targa = r.getString("targa");
+				b = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
+			}
+			else {
+				b = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			}
+			
 			lista.add(b);
 		}
 		
@@ -91,4 +98,32 @@ public class BigliettoDAO {
 		return lista;
 	}
 	
+	public static void deleteBiglietto(int codiceBiglietto, int codiceCorsa) throws SQLException{
+		// PRECONDITIONS: i parametri in input sono > 0
+		// POSTCONDITIONS: se trovato, il biglietto è stato correttamente eliminato dalla tabella BIGLIETTO;
+		// altrimenti, il DB non è stato modificato
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.prepareStatement("DELETE FROM BIGLIETTO WHERE "
+													+ "codicebiglietto = ? AND codicecorsa = ?");
+			
+			statement.setInt(1, codiceBiglietto);
+			statement.setInt(2, codiceCorsa);
+			statement.executeUpdate();
+			
+			
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+		
+		DBManager.getInstance().closeConnection();
+		
+	}
 }
