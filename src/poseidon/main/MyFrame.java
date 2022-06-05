@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -73,7 +72,7 @@ public class MyFrame extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == button) {
-			LaunchMenu launchMenu = new LaunchMenu();
+			new LaunchMenu();
 			button.setEnabled(false);
 		}
 	}

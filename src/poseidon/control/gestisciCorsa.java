@@ -1,14 +1,10 @@
 package poseidon.control;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -205,8 +201,7 @@ public class gestisciCorsa {
 		return listaCronologia;
 	}
 
-	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
-			int codiceCorsa) {
+	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -265,12 +260,12 @@ public class gestisciCorsa {
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta, Corsa corsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
-		
+
 		Biglietto b = new Biglietto(0, null, null, 0, 0);
 
 		CronologiaAcquisti c = new CronologiaAcquisti(codiceCliente, corsa, b, ricevuta);
 		try {
-			CronologiaDAO.creaCronologia(c) ;
+			CronologiaDAO.creaCronologia(c);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -280,13 +275,13 @@ public class gestisciCorsa {
 	public static int calcolaDisponibilitÃ (int codiceCorsa, String tipoBiglietto) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
-		
+
 		List<Nave> lista_nave = new ArrayList<Nave>();
 		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
-		
+
 		int capienza = 0;
 		int count = 0;
-		
+
 		try {
 			lista_nave = NaveDAO.readallNave();
 		} catch (SQLException e) {
@@ -296,25 +291,28 @@ public class gestisciCorsa {
 			if (codiceCorsa == n.getCodiceCorsa()) {
 				if (tipoBiglietto.equals("passeggeri")) {
 					capienza = n.getCapienzaPassegeri();
-				}
-				else if (tipoBiglietto.equals("veicoli")) {
+				} else if (tipoBiglietto.equals("veicoli")) {
 					capienza = n.getCapienzaAutoveicoli();
 				}
 			}
 		}
-		
+
 		try {
 			lista_biglietto = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		for (Biglietto b : lista_biglietto) {
-			if(codiceCorsa == b.getCodiceCorsa()) {
-				if (){
-					// TODO: LEONARDO (biglietto --> francesco)
-					
+			if (codiceCorsa == b.getCodiceCorsa()) {
+				if (tipoBiglietto.equals("veicoli")) {
+					if ((b instanceof BigliettoVeicolo) == true) { // TODO: Leonardo testare
+						count += 1;
+					}
+				} else if (tipoBiglietto.equals("passeggeri")) {
+					if ((b instanceof BigliettoPasseggero) == true) { // TODO: Leonardo testare
+						count += 1;
+					}
 				}
-				count += 1;
 			}
 		}
 
@@ -361,12 +359,16 @@ public class gestisciCorsa {
 
 	}
 
-	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto) {
+	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa,
+			String tipoBiglietto) {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito
-		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo biglietto e la
-		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene restituito un riferimento null
-		
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene
+		// restituito
+		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo
+		// biglietto e la
+		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene
+		// restituito un riferimento null
+
 		Biglietto biglietto = null;
 		LocalDate data = null;
 		LocalTime ora = null;
@@ -378,7 +380,7 @@ public class gestisciCorsa {
 		int codiceBiglietto = 1;
 		char risposta = 'n';
 		Corsa corsa = null;
-		
+
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e1) {
@@ -389,34 +391,32 @@ public class gestisciCorsa {
 				codiceBiglietto = b.getCodiceBiglietto() + 1;
 			}
 		}
-		
+
 		data = LocalDate.now();
 		ora = LocalTime.now();
-		
+
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
-		}
-		else if (tipoBiglietto.equals("passeggero")) {
+		} else if (tipoBiglietto.equals("passeggero")) {
 			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
-		}
-		else {
-			System.out.println("Il tipo di biglietto inserito non è valido.");
+		} else {
+			System.out.println("Il tipo di biglietto inserito non Ã¨ valido.");
 			return null;
 		}
-						
+
 		try {
 			BigliettoDAO.creaBiglietto(biglietto);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
-								"\nRiprovare tra 10 minuti");
+			System.out.println(
+					"Al momento non ï¿½ possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
-		
+
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		System.out.println("Inserisci il codice del cliente che ha acquistato il biglietto");
 		try {
@@ -426,7 +426,7 @@ public class gestisciCorsa {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (codiceCliente <= 0) {
 			System.out.println("Errore: il codice cliente deve essere > 0.");
 			try {
@@ -436,15 +436,15 @@ public class gestisciCorsa {
 			}
 			return null;
 		}
-		
+
 		System.out.println("Generare una nuova ricevuta d'acquisto? [y/n]");
 		try {
 			risposta = inputReader.readLine().charAt(0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		if(risposta == 'n') {
+
+		if (risposta == 'n') {
 			System.out.println("Inserisci la ricevuta d'acquisto");
 			try {
 				ricevuta = Integer.parseInt(inputReader.readLine());
@@ -453,7 +453,7 @@ public class gestisciCorsa {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			if (ricevuta <= 0) {
 				System.out.println("Errore: la ricevuta deve essere > 0.");
 				try {
@@ -463,22 +463,20 @@ public class gestisciCorsa {
 				}
 				return null;
 			}
-			
+
 			try {
 				c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
 				if (c != null) {
 					c.setBiglietto(biglietto);
 					CronologiaDAO.updateCronologia(c);
-				}
-				else {
+				} else {
 					System.out.println("L'acquisto selezionato non esiste.");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		else if (risposta == 'y') {
-			//ricevuta = generazioneRicevuta();
+		} else if (risposta == 'y') {
+			// ricevuta = generazioneRicevuta();
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
 				if (corsa != null) {
@@ -488,11 +486,10 @@ public class gestisciCorsa {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			System.out.println("Errore: carattere inserito non valido.");
 		}
-		
+
 		return biglietto;
 	}
 
