@@ -203,17 +203,22 @@ public class gestisciCorsa {
 		LocalTime ora = null;
 		int esito = 0;
 		int codiceCliente = 0;
+		int ricevuta = 0;
 		CronologiaAcquisti c = null;
 		List<Biglietto> lista = null;
 		int codiceBiglietto = 1;
+		char risposta = 'n';
+		Corsa corsa = null;
 		
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		if (lista.size() > 0) {
-			codiceBiglietto = lista.get(lista.size()-1).getCodiceBiglietto() + 1;
+		for (Biglietto b : lista) {
+			if (b.getCodiceCorsa() == codiceCorsa) {
+				codiceBiglietto = b.getCodiceBiglietto() + 1;
+			}
 		}
 		
 		data = LocalDate.now();
@@ -226,7 +231,7 @@ public class gestisciCorsa {
 			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
 		}
 		else {
-			System.out.println("Il tipo di biglietto inserito non ï¿½ valido.");
+			System.out.println("Il tipo di biglietto inserito non è valido.");
 			return null;
 		}
 						
@@ -239,7 +244,7 @@ public class gestisciCorsa {
 		
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non ï¿½ possibile effettuare la stampa del biglietto." +
+			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
 								"\nRiprovare tra 10 minuti");
 		}
 		
@@ -253,17 +258,50 @@ public class gestisciCorsa {
 			e.printStackTrace();
 		}
 		
-		if(codiceCliente > 0) {
+		System.out.println("Generare una nuova ricevuta d'acquisto? [y/n]");
+		try {
+			risposta = inputReader.readLine().charAt(0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(risposta == 'n') {
+			System.out.println("Inserisci la ricevuta d'acquisto");
 			try {
-				c = CronologiaDAO.readCronologia(codiceCliente);
-				c.setBiglietto(biglietto);
-				CronologiaDAO.updateCronologia(c);
+				ricevuta = Integer.parseInt(inputReader.readLine());
+			} catch (NumberFormatException e) {
+				ricevuta = 0;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
+				if (c != null) {
+					c.setBiglietto(biglietto);
+					CronologiaDAO.updateCronologia(c);
+				}
+				else {
+					System.out.println("L'acquisto selezionato non esiste.");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else if (risposta == 'y') {
+			//ricevuta = generaRicevuta();
+			try {
+				//corsa = CorsaDAO.readCorsa(codiceCorsa);
+				if (corsa != null) {
+					c = new CronologiaAcquisti(codiceCliente, corsa, biglietto, ricevuta);
+					CronologiaDAO.creaCronologia(c);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		else {
-			System.out.println("Il codice cliente inserito non ï¿½ valido.");
+			System.out.println("Errore: carattere inserito non valido.");
 		}
 		
 		return biglietto;
@@ -271,7 +309,7 @@ public class gestisciCorsa {
 
 	public static CronologiaAcquisti verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non ï¿½ ancora stato emesso un biglietto,
+		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
 		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
 		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
 		
