@@ -184,24 +184,28 @@ public class gestisciCorsa {
 
 	// CLIENTE
 
-	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente, int codiceCorsa,
-			int ricevuta) {
+	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
 		// FUNZIONE NON IMPLEMENTATA
 
-		List<CronologiaAcquisti> listaCronologia = new ArrayList<CronologiaAcquisti>();
-		CronologiaAcquisti c = null;
+		List<CronologiaAcquisti> lista = new ArrayList<CronologiaAcquisti>();
+		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
+		
 		try {
-			c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
+			lista = CronologiaDAO.readallCronologia();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		for (CronologiaAcquisti c : lista) {
+			if (codiceCliente == c.getCodiceCliente()) {
+				lista_cronologia.add(c);
+			}
+		}
 
-		listaCronologia.add(c);
-
-		return listaCronologia;
+		return lista_cronologia;
 	}
 
-	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa) {
+	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
+			int codiceCorsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -257,7 +261,8 @@ public class gestisciCorsa {
 
 	}
 
-	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta, Corsa corsa) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta,
+			Corsa corsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -414,7 +419,7 @@ public class gestisciCorsa {
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
 			System.out.println(
-					"Al momento non � possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
+					"Al momento non è possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));

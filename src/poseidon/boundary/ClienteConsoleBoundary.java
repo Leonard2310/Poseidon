@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import poseidon.control.gestisciCorsa;
+import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary() {
@@ -74,6 +75,26 @@ public class ClienteConsoleBoundary {
 	
 	public static void visualizzaCronologiaAcquisti() {
 		// FUNZIONE NON IMPLEMENTATA
+		
+		int codiceCliente = 0;
+		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
+		
+		System.out.println("Inserisci il tuo codice cliente: ");
+		try {
+			codiceCliente = Integer.parseInt(inputReader.readLine());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		lista_cronologia = gestisciCorsa.visualizzazioneCronologiaAcquisti(codiceCliente);
+		
+		for (CronologiaAcquisti c : lista_cronologia) {
+			System.out.println("Corsa: " + c.getCorsa());
+			System.out.println("Biglietto: " + c.getBiglietto());
+			System.out.println("Ricevuta: " + c.getRicevuta());
+			System.out.println("\n-----------------\n");
+		}
+
 	}
 	
 	
