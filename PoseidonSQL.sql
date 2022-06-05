@@ -100,7 +100,7 @@ CREATE TABLE public.cronologiaacquisti
     ora time without time zone DEFAULT NULL,
     codiceimpiegato integer DEFAULT NULL,
     ricevuta integer NOT NULL,
-    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente, codicecorsa, codicebiglietto)
+    CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente, codicecorsa, ricevuta)
 );
 
  
