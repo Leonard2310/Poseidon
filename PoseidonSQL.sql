@@ -61,6 +61,7 @@ CREATE TABLE public.corsa
     orarioarrivo time without time zone NOT NULL,
     portopartenza character varying NOT NULL,
     portoarrivo character varying NOT NULL,
+    prezzo double precision DEFAULT 0.0,
     CONSTRAINT corsa_pkey PRIMARY KEY (codicecorsa)
 );
 
@@ -79,7 +80,6 @@ CREATE TABLE public.nave
     nome character varying NOT NULL,
     capienzaautoveicoli integer DEFAULT 0,
     capienzapassegeri integer DEFAULT 0,
-    prezzo double precision DEFAULT 0.0,
     categoria character varying NOT NULL,
     codicecorsa integer NOT NULL,
     CONSTRAINT nave_pkey PRIMARY KEY (nome)
@@ -192,3 +192,8 @@ insert into dipendente values (1003, 'Di Serio', 'Francesco', 'emissione');
 insert into cliente values (10001, 'Catello', 'Leonardo', 'acquisto');
 insert into cliente values (10002, 'Cipollaro', 'Daiana', 'inserimento');
 insert into cliente values (10003, 'Di Serio', 'Francesco', 'emissione');
+
+insert into porto values ('Napoli');
+insert into porto values ('Ischia');
+insert into corsa values (101, '10:00', '11:00', 'Napoli', 'Ischia', 20.00);
+insert into corsa values (102, '16:00', '17:00', 'Ischia', 'Napoli', 20.00);
