@@ -8,8 +8,7 @@ public class Nave {
 	private String categoria;
 	private int codiceCorsa;
 	
-	public Nave(String nome, int capienzaAutoveicoli, int capienzaPassegeri, double prezzo, String categoria,
-			int codiceCorsa) {
+	public Nave(String nome, int capienzaAutoveicoli, int capienzaPassegeri, double prezzo, String categoria, int codiceCorsa) {
 		super();
 		this.nome = nome;
 		this.capienzaAutoveicoli = capienzaAutoveicoli;

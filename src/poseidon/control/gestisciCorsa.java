@@ -1,10 +1,14 @@
 package poseidon.control;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,14 +45,35 @@ public class gestisciCorsa {
 		return true;
 	}
 
-	public static List<Corsa> ricercaCorsa(int codiceCorsa) {
+	public static List<Corsa> ricercaCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
+			String portoArrivo, int prezzo) {
 		// FUNZIONE NON IMPLEMENTATA
 		
 		List<Corsa> listaCorsa = new ArrayList<Corsa>();
-		Corsa c = CorsaDAO.readCorsa(codiceCorsa);
+		Corsa corsa = null;
 		
-		listaCorsa.add(c);
+		if(codiceCorsa != 0) {
+			corsa = CorsaDAO.readCorsa(codiceCorsa);
+			listaCorsa.add(corsa);
+			return listaCorsa;
+		}
+		else if((orarioPartenza != null || orarioArrivo != null) && (portoPartenza != null || portoArrivo != null)) {
+			listaCorsa = CorsaDAO.readallCorsa();
+			List<Corsa> listaCorsaFiltri = new ArrayList<Corsa>();
+	        for (int i = 0; i < listaCorsa.size(); i++) {
+
+	        	listaCorsa.get()
+	        }
+	        return listaCorsaFiltri;
+			
+		}
+		else {
+			listaCorsa = CorsaDAO.readallCorsa();
+			return listaCorsa;
+		}
 		
+
+
 		return listaCorsa;
 	}
 
@@ -66,6 +91,8 @@ public class gestisciCorsa {
 	}
 
 	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa) {
+		// PRECONDIZIONE:
+		// POSTCONDIZIONE:
 
 		Corsa corsa;
 		
@@ -95,7 +122,9 @@ public class gestisciCorsa {
 	}
 
 	public static int[] elaborazioneAcquisto() {
-		// TODO Auto-generated method stub
+		// PRECONDIZIONE: 
+		// POSTCONDIZIONE:
+		
 		try (Scanner input = new Scanner(System.in)) {
 			System.out.println("Scegli la tipologia di pagamento: \t");
 			String tipologiaPagamento = input.nextLine();
@@ -116,11 +145,15 @@ public class gestisciCorsa {
 	}
 
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta) {
+		// PRECONDIZIONE:
+		// POSTCONDIZIONE:
 
 		// TODO: Leonardo, come modifico la cronologia? (sql?)
 	}
 
 	public static int calcolaDisponibilitÃ (int codiceCorsa, String tipoBiglietto) {
+		// PRECONDIZIONE:
+		// POSTCONDIZIONE:
 
 		// TODO: Leonardo, come accedo alle informazioni di corsa? (sql?)
 
@@ -130,6 +163,8 @@ public class gestisciCorsa {
 	}
 
 	public static Corsa inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
+		// PRECONDIZIONE:
+		// POSTCONDIZIONE:
 
 
 		Corsa corsa;
@@ -142,6 +177,11 @@ public class gestisciCorsa {
 
 
 		return corsa;
+	}
+	
+	public static boolean readPrezzo() {
+		// FUNZIONE NON IMPLEMENTATA
+		
 	}
 
 	// DIPENDENTE
@@ -186,7 +226,7 @@ public class gestisciCorsa {
 			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
 		}
 		else {
-			System.out.println("Il tipo di biglietto inserito non è valido.");
+			System.out.println("Il tipo di biglietto inserito non ï¿½ valido.");
 			return null;
 		}
 						
@@ -199,7 +239,7 @@ public class gestisciCorsa {
 		
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." +
+			System.out.println("Al momento non ï¿½ possibile effettuare la stampa del biglietto." +
 								"\nRiprovare tra 10 minuti");
 		}
 		
@@ -223,7 +263,7 @@ public class gestisciCorsa {
 			}
 		}
 		else {
-			System.out.println("Il codice cliente inserito non è valido.");
+			System.out.println("Il codice cliente inserito non ï¿½ valido.");
 		}
 		
 		return biglietto;
@@ -231,7 +271,7 @@ public class gestisciCorsa {
 
 	public static CronologiaAcquisti verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
+		// POSTCONDITIONS: se ci sono acquisti per i quali non ï¿½ ancora stato emesso un biglietto,
 		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
 		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
 		
@@ -254,12 +294,12 @@ public class gestisciCorsa {
 	}
 
 	public static void modificaCorsa() {
-
+		// FUNZIONE NON IMPLEMENTATA
 	}
 
 	public static boolean cancellaCorsa() {
-
+		// FUNZIONE NON IMPLEMENTATA
 	}
-
+	
 	protected static java.io.BufferedReader inputReader;
 }
