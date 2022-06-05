@@ -73,6 +73,10 @@ public class DipendenteConsoleBoundary {
 			if (tipoBiglietto.equals("veicolo")) {
 				System.out.println("Inserisci la targa dell'autoveicolo");
 				targa = inputReader.readLine();
+				if (targa.equals("")) {
+					System.out.println("Errore: necessario inserire la targa.");
+					return;
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
