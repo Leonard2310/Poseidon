@@ -177,6 +177,14 @@ ALTER TABLE IF EXISTS public.cronologiaacquisti
 
 
 
+ALTER TABLE IF EXISTS public.cronologiaacquisti
+    ADD CONSTRAINT crono_cliente_fkey FOREIGN KEY (codicecliente)
+    REFERENCES public.cliente (codicecliente) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
+
 insert into dipendente values (1001, 'Catello', 'Leonardo', 'acquisto');
 insert into dipendente values (1002, 'Cipollaro', 'Daiana', 'inserimento');
 insert into dipendente values (1003, 'Di Serio', 'Francesco', 'emissione');
