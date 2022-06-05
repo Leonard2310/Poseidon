@@ -209,23 +209,23 @@ public class gestisciCorsa {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
-		try {
-			Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Corsa corsa = null;
 		int bool_ricevuta[] = null;
 
-		String tipoBiglietto = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
-
+		double prezzo_finale = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
 		int disponibilita = calcolaDisponibilità(codiceCorsa, tipoBiglietto);
+		
 		if (disponibilita > 0) {
 			System.out.println("La corsa è disponibile");
-			System.out.println("Il prezzo è "); // corsa.getprezzo() ??
-
+			System.out.println("Il prezzo è " + prezzo_finale);
 			bool_ricevuta = elaborazioneAcquisto();
 			if (bool_ricevuta[0] == 0) {
-				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, bool_ricevuta[1]);
+				try {
+					corsa = CorsaDAO.readCorsa(codiceCorsa);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, bool_ricevuta[1], corsa);
 				return bool_ricevuta[1];
 			} else {
 				System.out.println("Elaborazione d'acquisto fallita");
@@ -248,7 +248,6 @@ public class gestisciCorsa {
 			@SuppressWarnings("unused")
 			String tipologiaPagamento = input.nextLine();
 
-
 			bool_ricevuta[1] = SistemaDiPagamento.generateRicevuta();
 			System.out.println("Il codice ricevuta è: " + bool_ricevuta[1]);
 			if (bool_ricevuta[1] != 0) {
@@ -262,7 +261,7 @@ public class gestisciCorsa {
 
 	}
 
-	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta, Corsa corsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -280,25 +279,41 @@ public class gestisciCorsa {
 		return disponibilita;
 	}
 
-	public static void inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
+	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
-		String corsa = null;
+		Corsa corsa = null;
+		boolean answer = false;
+		double prezzo_finale = 0.00;
+		
+		try (Scanner input = new Scanner(System.in)) {
+			try {
+				corsa = CorsaDAO.readCorsa(codiceCorsa);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		Scanner input = new Scanner(System.in);
-		System.out.println("Scegli la tipologia di biglietto: \t");
-		String tipologiaBiglietto = input.nextLine();
 
-		// TODO: LEONARDO, come accedo alla corsa? (sql?)
+			System.out.println("Scegli la tipologia di biglietto: [passeggero/veicolo]");
+			String tipologiaBiglietto = input.nextLine();
+			do {
+				if (tipologiaBiglietto == "passseggero") {
+					prezzo_finale = corsa.getPrezzo();
+					answer = true;
+				} else if (tipologiaBiglietto == "veicolo") {
+					prezzo_finale = 50 + corsa.getPrezzo();
+					answer = true;
+				} else {
+					answer = false;
+				}
 
+			} while (answer == false);
+		}
+
+		return prezzo_finale;
 	}
 
-	public static boolean readPrezzo() {
-		return false;
-		// FUNZIONE NON IMPLEMENTATA
-
-	}
 
 	// DIPENDENTE
 

@@ -8,9 +8,9 @@ import java.time.*;
 public class CronologiaDAO {
 
 	public static void creaCronologia(CronologiaAcquisti c) throws SQLException{
-		// PRECONDITIONS: il parametro in input è un riferimento ad un oggetto valido 
+		// PRECONDITIONS: il parametro in input ï¿½ un riferimento ad un oggetto valido 
 		// della classe CronologiaAcquisti
-		// POSTCONDITIONS: la cronologia è stato correttamente inserita all'interno della tabella CRONOLOGIAACQUISTI
+		// POSTCONDITIONS: la cronologia ï¿½ stato correttamente inserita all'interno della tabella CRONOLOGIAACQUISTI
 		
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -47,7 +47,7 @@ public class CronologiaDAO {
 		// PRECONDITIONS: il codiceCliente, il codiceCorsa e la ricevuta sono numeri > 0
 		// POSTCONDITIONS: viene restituito un riferimento ad un oggetto della classe CronologiaAcquisti
 		// corrispondente alla Cronologia avente il codiceCliente, il codiceCorsa e la ricevuta passati in ingresso;
-		// se la Cronologia non è stata trovata, viene restituito un riferimento null
+		// se la Cronologia non ï¿½ stata trovata, viene restituito un riferimento null
 		
 		CronologiaAcquisti c_a = null;
 		Connection connection = null;
@@ -69,7 +69,8 @@ public class CronologiaDAO {
 				orarioArrivo = r.getTime("orarioArrivo").toLocalTime();				
 			String portoPartenza = r.getString("portoPartenza");
 			String portoArrivo = r.getString("portoArrivo");
-			Corsa corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo);
+			double prezzo = r.getDouble("prezzo");
+			Corsa corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 			
 			int codiceBiglietto = r.getInt("codiceBiglietto");
 			LocalDate data = null;
@@ -118,7 +119,8 @@ public class CronologiaDAO {
 				orarioArrivo = r.getTime("orarioArrivo").toLocalTime();				
 			String portoPartenza = r.getString("portoPartenza");
 			String portoArrivo = r.getString("portoArrivo");
-			Corsa corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo);
+			double prezzo = r.getDouble("prezzo");
+			Corsa corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 			
 			int codiceBiglietto = r.getInt("codiceBiglietto");
 			LocalDate data = null;
@@ -143,9 +145,9 @@ public class CronologiaDAO {
 	}
 	
 	public static void updateCronologia(CronologiaAcquisti cronologia) throws SQLException {
-		// PRECONDITIONS: il parametro in input è un riferimento ad un oggetto valido 
+		// PRECONDITIONS: il parametro in input ï¿½ un riferimento ad un oggetto valido 
 		// della classe CronologiaAcquisti
-		// POSTCONDITIONS: l'istanza della tabella CRONOLOGIAACQUISTI è stata correttamente modificata
+		// POSTCONDITIONS: l'istanza della tabella CRONOLOGIAACQUISTI ï¿½ stata correttamente modificata
 		
 		Connection connection = null;
 		PreparedStatement s = null;

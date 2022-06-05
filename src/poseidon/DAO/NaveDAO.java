@@ -27,11 +27,10 @@ public class NaveDAO {
 			if (nome == r.getString("nome")) {
 				int capienzaAutoveicoli = r.getInt("capienzaAutoveicoli");
 				int capienzaPasseggeri = r.getInt("capienzaPasseggeri");
-				double prezzo = r.getDouble("prezzo");
 				int codiceCorsa = r.getInt("codiceCorsa");
 				String categoria = r.getString("categoria");
 
-				nave = new Nave(nome, capienzaAutoveicoli, capienzaPasseggeri, prezzo, categoria, codiceCorsa);
+				nave = new Nave(nome, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
 			}
 		}
 

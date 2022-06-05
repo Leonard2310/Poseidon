@@ -8,15 +8,17 @@ public class Corsa {
 	private LocalTime orarioArrivo;
 	private String portoPartenza;
 	private String portoArrivo;
+	private double prezzo;
 	
 	public Corsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
-			String portoArrivo) {
+			String portoArrivo, double prezzo) {
 		super();
 		this.codiceCorsa = codiceCorsa;
 		this.orarioPartenza = orarioPartenza;
 		this.orarioArrivo = orarioArrivo;
 		this.portoPartenza = portoPartenza;
 		this.portoArrivo = portoArrivo;
+		this.prezzo = prezzo;
 	}
 
 	public int getCodiceCorsa() {
@@ -57,6 +59,14 @@ public class Corsa {
 
 	public void setPortoArrivo(String portoArrivo) {
 		this.portoArrivo = portoArrivo;
+	}
+	
+	public double getPrezzo() {
+		return prezzo;
+	}
+
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
 	}
 	
 }

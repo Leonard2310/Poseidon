@@ -38,8 +38,9 @@ public class CorsaDAO {
 				orarioArrivo = r.getTime("orarioArrivo").toLocalTime();
 			String portoPartenza = r.getString("portoArrivo");
 			String portoArrivo = r.getString("portoArrivo");
-
-			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo);
+			double prezzo = r.getDouble("prezzo");
+			
+			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 			lista_corsa.add(corsa);
 		}
 
@@ -74,8 +75,9 @@ public class CorsaDAO {
 					orarioArrivo = r.getTime("orarioArrivo").toLocalTime();
 				String portoPartenza = r.getString("portoPartenza");
 				String portoArrivo = r.getString("portoArrivo");
-
-				corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo);
+				double prezzo = r.getDouble("prezzo");
+				
+				corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 			}
 		}
 

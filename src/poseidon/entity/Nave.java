@@ -4,16 +4,14 @@ public class Nave {
 	private String nome;
 	private int capienzaAutoveicoli;
 	private int capienzaPassegeri;
-	private double prezzo;
 	private String categoria;
 	private int codiceCorsa;
 	
-	public Nave(String nome, int capienzaAutoveicoli, int capienzaPassegeri, double prezzo, String categoria, int codiceCorsa) {
+	public Nave(String nome, int capienzaAutoveicoli, int capienzaPassegeri, String categoria, int codiceCorsa) {
 		super();
 		this.nome = nome;
 		this.capienzaAutoveicoli = capienzaAutoveicoli;
 		this.capienzaPassegeri = capienzaPassegeri;
-		this.prezzo = prezzo;
 		this.categoria = categoria;
 		this.codiceCorsa = codiceCorsa;
 	}
@@ -40,14 +38,6 @@ public class Nave {
 
 	public void setCapienzaPassegeri(int capienzaPassegeri) {
 		this.capienzaPassegeri = capienzaPassegeri;
-	}
-
-	public double getPrezzo() {
-		return prezzo;
-	}
-
-	public void setPrezzo(double prezzo) {
-		this.prezzo = prezzo;
 	}
 
 	public String getCategoria() {
