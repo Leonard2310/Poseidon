@@ -16,13 +16,16 @@ import poseidon.external.Stampante;
 
 public class gestisciCorsa {
 
-	// UTENTE
+	/*
+	 * 
+	 ************	UTENTE	************
+	 *
+	 */
 
 	public static int loginCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene
-		// trovato nel database,
-		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene trovato nel database,
+		// 		viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Cliente> lista_clienti = null;
 		try {
@@ -41,9 +44,8 @@ public class gestisciCorsa {
 
 	public static int loginDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene
-		// trovato nel database,
-		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene trovato nel database,
+		// 		viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti;
 		try {
@@ -62,10 +64,8 @@ public class gestisciCorsa {
 
 	public static int registraCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non
-		// viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
-		// valore -1
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non viene trovato nel database,
+		// 		viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Cliente> lista_clienti = null;
 		int codiceCliente = 10001;
@@ -98,10 +98,8 @@ public class gestisciCorsa {
 
 	public static int registraDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non
-		// viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
-		// valore -1
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non viene trovato nel database,
+		// 		viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti = null;
 		int codiceImpiegato = 10001;
@@ -133,14 +131,14 @@ public class gestisciCorsa {
 	}
 
 	public static boolean logout() {
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 
 		return true;
 	}
 
 	public static List<Corsa> ricercaCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo,
 			String portoPartenza, String portoArrivo, double prezzo) {
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 
 		List<Corsa> listaCorsa = new ArrayList<Corsa>();
 		Corsa corsa = null;
@@ -177,15 +175,16 @@ public class gestisciCorsa {
 			}
 			return listaCorsa;
 		}
-
-		// TODO: PREZZO
-
 	}
 
-	// CLIENTE
+	/*
+	 * 
+	 ************	CLIENTE	************
+	 *
+	 */
 
 	public static List<CronologiaAcquisti> visualizzazioneCronologiaAcquisti(int codiceCliente) {
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 
 		List<CronologiaAcquisti> lista = new ArrayList<CronologiaAcquisti>();
 		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
@@ -204,8 +203,7 @@ public class gestisciCorsa {
 		return lista_cronologia;
 	}
 
-	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
-			int codiceCorsa) {
+	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -241,6 +239,7 @@ public class gestisciCorsa {
 	public static int[] elaborazioneAcquisto() {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
+		
 		int bool_ricevuta[] = null;
 
 		try (Scanner input = new Scanner(System.in)) {
@@ -261,8 +260,7 @@ public class gestisciCorsa {
 
 	}
 
-	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta,
-			Corsa corsa) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta, Corsa corsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -351,10 +349,13 @@ public class gestisciCorsa {
 		return prezzo_finale;
 	}
 
-	// DIPENDENTE
+	/*
+	 * 
+	 ************	DIPENDENTE	************
+	 *
+	 */
 
-	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
-			String portoArrivo) {
+	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo) {
 		Corsa corsa = null;
 
 		// int codiceCorsa = (int) Math.random();
@@ -367,12 +368,9 @@ public class gestisciCorsa {
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa,
 			String tipoBiglietto) {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene
-		// restituito
-		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo
-		// biglietto e la
-		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene
-		// restituito un riferimento null
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito
+		// 		un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo biglietto e la
+		// 		cronologia acquisti del cliente viene aggiornata; altrimenti, viene restituito un riferimento null
 
 		Biglietto biglietto = null;
 		LocalDate data = null;
@@ -500,11 +498,9 @@ public class gestisciCorsa {
 
 	public static CronologiaAcquisti verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non � ancora stato emesso un
-		// biglietto,
-		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti
-		// contenente i dati
-		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
+		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
+		// 		viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
+		// 		del nuovo acquisto; altrimenti, viene restituito un riferimento null
 
 		List<CronologiaAcquisti> lista = null;
 		try {
@@ -526,12 +522,12 @@ public class gestisciCorsa {
 	}
 
 	public static void modificaCorsa() {
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 	}
 
 	public static boolean cancellaCorsa() {
 		return false;
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 	}
 
 	protected static java.io.BufferedReader inputReader;

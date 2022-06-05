@@ -11,11 +11,9 @@ import poseidon.entity.*;
 public class ApplicationConsoleBoundary {
 	public static int login(int flag) {
 		// PRECONDITIONS: l'utente ha premuto il pulsante per l'autenticazione
-		// POSTCONDITIONS: se le informazioni inserite dall'utente sono corrette, viene
-		// visualizzato un messaggio
-		// di successo con il suo codice e viene restituito valore 0; altrimenti, viene
-		// visualizzato un messaggio
-		// di errore viene restituito valore 1;
+		// POSTCONDITIONS: se le informazioni inserite dall'utente sono corrette, viene visualizzato un messaggio
+		// 	di successo con il suo codice e viene restituito valore 0; altrimenti, viene visualizzato un messaggio
+		// 	di errore viene restituito valore 1;
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		String nome = null;
@@ -66,10 +64,9 @@ public class ApplicationConsoleBoundary {
 	}
 
 	public static void registra(char flag) {
-		// PRECONDITIONS: il flag passato in ingresso � uguale a "y" o a "n"
-		// POSTCONDITIONS: se la registrazione del nuovo utente � andata a buon fine,
-		// viene visualizzato un messaggio
-		// di successo; altrimenti, viene visualizzato un messaggio di fallimento
+		// PRECONDITIONS: il flag passato in ingresso è uguale a "y" o a "n"
+		// POSTCONDITIONS: se la registrazione del nuovo utente è andata a buon fine, viene visualizzato un messaggio
+		// 		di successo; altrimenti, viene visualizzato un messaggio di fallimento
 
 		String cognome = null;
 		String nome = null;
@@ -127,12 +124,12 @@ public class ApplicationConsoleBoundary {
 	}
 
 	public static void logout() {
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
 	}
 
 	public static void ricercaCorsa() {
-		// TODO: DA ERRORE NELL'ESECUZIONE (PREZZO)
-		// FUNZIONE NON IMPLEMENTATA
+		// FUNZIONE NON RICHIESTA
+		
 		String answer = null;
 		int codiceCorsa = 0;
 		String portoPartenza = null;
