@@ -1,6 +1,5 @@
 package poseidon.boundary;
 
-import java.io.DataInput;
 import java.io.IOException;
 import java.util.*;
 
@@ -52,6 +51,17 @@ public class ClienteConsoleBoundary {
 				
 				System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
 				String tipoBiglietto = input.nextLine();
+				boolean answer = false;
+				do {
+					if (tipoBiglietto.equals("veicolo")) {
+						answer = true;
+					} else if (tipoBiglietto.equals("veicolo")) {
+						answer = true;
+					} else {
+						answer = false;
+					}
+
+				} while (answer == false);
 				
 				gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa);
 			}

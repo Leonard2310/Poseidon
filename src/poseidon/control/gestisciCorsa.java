@@ -205,7 +205,8 @@ public class gestisciCorsa {
 		return listaCronologia;
 	}
 
-	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa) {
+	public static int acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
+			int codiceCorsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -214,7 +215,7 @@ public class gestisciCorsa {
 
 		double prezzo_finale = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
 		int disponibilita = calcolaDisponibilità(codiceCorsa, tipoBiglietto);
-		
+
 		if (disponibilita > 0) {
 			System.out.println("La corsa è disponibile");
 			System.out.println("Il prezzo è " + prezzo_finale);
@@ -237,7 +238,7 @@ public class gestisciCorsa {
 		return bool_ricevuta[1];
 	}
 
-	@SuppressWarnings("null")
+	@SuppressWarnings("null") // TODO: LEONARDO CONTROLLARE
 	public static int[] elaborazioneAcquisto() {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
@@ -264,17 +265,60 @@ public class gestisciCorsa {
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, int ricevuta, Corsa corsa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
+		
+		Biglietto b = new Biglietto(0, null, null, 0, 0);
 
-		// TODO: Leonardo, come modifico la cronologia? (sql?)
+		CronologiaAcquisti c = new CronologiaAcquisti(codiceCliente, corsa, b, ricevuta);
+		try {
+			CronologiaDAO.creaCronologia(c) ;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static int calcolaDisponibilità(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
+		
+		List<Nave> lista_nave = new ArrayList<Nave>();
+		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
+		
+		int capienza = 0;
+		int count = 0;
+		
+		try {
+			lista_nave = NaveDAO.readallNave();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (Nave n : lista_nave) {
+			if (codiceCorsa == n.getCodiceCorsa()) {
+				if (tipoBiglietto.equals("passeggeri")) {
+					capienza = n.getCapienzaPassegeri();
+				}
+				else if (tipoBiglietto.equals("veicoli")) {
+					capienza = n.getCapienzaAutoveicoli();
+				}
+			}
+		}
+		
+		try {
+			lista_biglietto = BigliettoDAO.readallBiglietto();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (Biglietto b : lista_biglietto) {
+			if(codiceCorsa == b.getCodiceCorsa()) {
+				if (){
+					// TODO: LEONARDO (biglietto --> francesco)
+					
+				}
+				count += 1;
+			}
+		}
 
-		// TODO: Leonardo, come accedo alle informazioni di corsa? (sql?)
-
-		int disponibilita = 10;
+		int disponibilita = capienza - count;
 
 		return disponibilita;
 	}
@@ -284,9 +328,8 @@ public class gestisciCorsa {
 		// POSTCONDIZIONE:
 
 		Corsa corsa = null;
-		boolean answer = false;
 		double prezzo_finale = 0.00;
-		
+
 		try (Scanner input = new Scanner(System.in)) {
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
@@ -294,26 +337,16 @@ public class gestisciCorsa {
 				e.printStackTrace();
 			}
 
+			if (tipoBiglietto.equals("veicolo")) {
+				prezzo_finale = corsa.getPrezzo();
+			} else {
+				prezzo_finale = 50 + corsa.getPrezzo();
 
-			System.out.println("Scegli la tipologia di biglietto: [passeggero/veicolo]");
-			String tipologiaBiglietto = input.nextLine();
-			do {
-				if (tipologiaBiglietto == "passseggero") {
-					prezzo_finale = corsa.getPrezzo();
-					answer = true;
-				} else if (tipologiaBiglietto == "veicolo") {
-					prezzo_finale = 50 + corsa.getPrezzo();
-					answer = true;
-				} else {
-					answer = false;
-				}
-
-			} while (answer == false);
+			}
 		}
 
 		return prezzo_finale;
 	}
-
 
 	// DIPENDENTE
 
@@ -321,7 +354,7 @@ public class gestisciCorsa {
 			String portoArrivo) {
 		Corsa corsa = null;
 
-		int codiceCorsa = (int) Math.random();
+		// int codiceCorsa = (int) Math.random();
 
 		// TODO: DAIANA SCEMA
 		return corsa;

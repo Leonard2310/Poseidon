@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import poseidon.entity.Nave;
 
 public class NaveDAO {
-	
+
 	public static Nave readNave(String nome) throws SQLException {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella NAVE
@@ -38,6 +40,38 @@ public class NaveDAO {
 		DBManager.getInstance().closeConnection();
 
 		return nave;
+	}
+
+	public static List<Nave> readallNave() throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella NAVE
+
+		List<Nave> lista_nave = new ArrayList<Nave>();
+		Nave nave = null;
+		Connection connection = null;
+		Statement s = null;
+		ResultSet r = null;
+
+		connection = DBManager.getInstance().getConnection();
+		s = connection.createStatement();
+
+		r = s.executeQuery("SELECT * FROM CORSA");
+
+		while (r.next()) {
+			String nome = r.getString("nome");
+			int capienzaAutoveicoli = r.getInt("capienzaAutoveicoli");
+			int capienzaPasseggeri = r.getInt("capienzaPasseggeri");
+			int codiceCorsa = r.getInt("codiceCorsa");
+			String categoria = r.getString("categoria");
+
+			nave = new Nave(nome, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
+			lista_nave.add(nave);
+		}
+
+		s.close();
+		DBManager.getInstance().closeConnection();
+
+		return lista_nave;
 	}
 
 }
