@@ -381,9 +381,9 @@ public class gestisciCorsa {
 			}
 		}
 		else if (risposta == 'y') {
-			//ricevuta = generaRicevuta();
+			//ricevuta = generazioneRicevuta();
 			try {
-				//corsa = CorsaDAO.readCorsa(codiceCorsa);
+				corsa = CorsaDAO.readCorsa(codiceCorsa);
 				if (corsa != null) {
 					c = new CronologiaAcquisti(codiceCliente, corsa, biglietto, ricevuta);
 					CronologiaDAO.creaCronologia(c);
