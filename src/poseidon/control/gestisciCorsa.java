@@ -225,7 +225,7 @@ public class gestisciCorsa {
 			System.out.println("Il prezzo è " + prezzo_finale);
 			bool_pagamento = elaborazioneAcquisto(codiceCliente, codiceCorsa, tipoBiglietto);
 			if (bool_pagamento == true) {
-				ricevuta = SistemaDiPagamento.generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
+				ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 
 				try {
 					corsa = CorsaDAO.readCorsa(codiceCorsa);
@@ -241,6 +241,32 @@ public class gestisciCorsa {
 			System.out.println("Assenza di posti disponibili");
 		}
 		// TODO: Leonardo
+		return ricevuta;
+	}
+	
+	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
+
+		String vocabolarioAlfaNumerico;
+		StringBuilder builder;
+		String ricevuta = null;
+
+		int i = 3; 						// Grandezza stringa alfanumerica randomica
+		vocabolarioAlfaNumerico = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"; // Vocabolario alfanumerico
+		builder = new StringBuilder(i); // String buffer
+
+		for (int m = 0; m < i; m++) {
+			int myindex = (int) (vocabolarioAlfaNumerico.length() * Math.random());
+
+			builder.append(vocabolarioAlfaNumerico.charAt(myindex));
+			builder.toString();
+		}
+
+		if (tipoBiglietto.equals("passeggero")) {
+			ricevuta = codiceCliente + "P" + codiceCorsa + builder;
+		} else if (tipoBiglietto.equals("veicolo")){
+			ricevuta = codiceCliente + "V" + codiceCorsa + builder;
+		}
+		
 		return ricevuta;
 	}
 
@@ -292,9 +318,9 @@ public class gestisciCorsa {
 		}
 		for (Nave n : lista_nave) {
 			if (codiceCorsa == n.getCodiceCorsa()) {
-				if (tipoBiglietto.equals("passeggeri")) {
+				if (tipoBiglietto.equals("passeggero")) {
 					capienza = n.getCapienzaPassegeri();
-				} else if (tipoBiglietto.equals("veicoli")) {
+				} else if (tipoBiglietto.equals("veicolo")) {
 					capienza = n.getCapienzaAutoveicoli();
 				}
 			}
@@ -307,11 +333,11 @@ public class gestisciCorsa {
 		}
 		for (Biglietto b : lista_biglietto) {
 			if (codiceCorsa == b.getCodiceCorsa()) {
-				if (tipoBiglietto.equals("veicoli")) {
+				if (tipoBiglietto.equals("veicolo")) {
 					if ((b instanceof BigliettoVeicolo) == true) { // TODO: Leonardo testare
 						count += 1;
 					}
-				} else if (tipoBiglietto.equals("passeggeri")) {
+				} else if (tipoBiglietto.equals("passeggero")) {
 					if ((b instanceof BigliettoPasseggero) == true) { // TODO: Leonardo testare
 						count += 1;
 					}
@@ -549,7 +575,7 @@ public class gestisciCorsa {
 				e.printStackTrace();
 			}
 		} else if (flag == 'y') {
-			// ricevuta = generazioneRicevuta();
+			ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
 				if (corsa != null) {

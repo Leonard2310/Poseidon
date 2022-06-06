@@ -100,7 +100,7 @@ CREATE TABLE public.cronologiaacquisti
     codiceimpiegato integer DEFAULT NULL,
     tipo character varying NOT NULL,
     targa character varying DEFAULT NULL,
-    ricevuta integer NOT NULL,
+    ricevuta character varying NOT NULL,
     CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente, codicecorsa, ricevuta)
 );
 

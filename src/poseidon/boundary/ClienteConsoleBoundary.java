@@ -10,7 +10,7 @@ public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary(int codiceCliente) {
 		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le
 		// operazioni che pu� effettuare
-		// POSTCONDITIONS: le operazioni che il cliente pu� effettuare sono state
+		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state
 		// mostrate a schermo
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
@@ -30,7 +30,17 @@ public class ClienteConsoleBoundary {
 
 			switch (option) {
 			case 1: {
-				acquistaBiglietto(option, codiceCliente);
+
+				System.out.println("Inserisci il codice della corsa scelta: \t");
+				
+				try {
+					int codiceCorsa = Integer.parseInt(inputReader.readLine());
+					acquistaBiglietto(codiceCorsa, codiceCliente);
+				} catch (NumberFormatException e) {
+					option = 0;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			}
 			case 2: {
