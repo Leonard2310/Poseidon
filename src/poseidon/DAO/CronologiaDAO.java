@@ -19,7 +19,7 @@ public class CronologiaDAO {
 
 		try { 
 			statement = connection.prepareStatement("INSERT INTO CRONOLOGIAACQUISTI VALUES"
-													+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+													+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			statement.setInt(1,  c.getCodiceCliente());
 			statement.setInt(2, c.getCorsa().getCodiceCorsa());
@@ -32,6 +32,15 @@ public class CronologiaDAO {
 			statement.setDate(9, java.sql.Date.valueOf(c.getBiglietto().getData()));
 			statement.setTime(10, java.sql.Time.valueOf(c.getBiglietto().getOra()));
 			statement.setInt(11, c.getBiglietto().getCodiceImpiegato());
+			if(c.getBiglietto() instanceof BigliettoVeicolo) {
+				BigliettoVeicolo v = (BigliettoVeicolo)c.getBiglietto();
+				statement.setString(12, "veicolo");
+				statement.setString(13, v.getTarga());				
+			}
+			else {
+				statement.setString(12, "passeggero");
+				statement.setNull(13, java.sql.Types.VARCHAR);	
+			}
 			statement.setInt(12, c.getRicevuta());
 			
 			statement.executeUpdate();
@@ -52,14 +61,17 @@ public class CronologiaDAO {
 		
 		CronologiaAcquisti c_a = null;
 		Connection connection = null;
-		Statement s = null;
+		PreparedStatement s = null;
 		ResultSet r = null;
 		
 		connection = DBManager.getInstance().getConnection();
-		s = connection.createStatement();
+		s = connection.prepareStatement("SELECT * FROM CRONOLOGIAACQUISTI WHERE CODICECLIENTE = ?," 
+										+ " CODICECORSA = ?, RICEVUTA = ?");
+		s.setInt(1,  codiceCliente);
+		s.setInt(2, codiceCorsa);
+		s.setInt(3,  ricevuta);
 		
-		r = s.executeQuery("SELECT * FROM CRONOLOGIAACQUISTI WHERE CODICECLIENTE = " + codiceCliente
-							+ " AND CODICECORSA = " + codiceCorsa + " AND RICEVUTA = " + ricevuta);
+		r = s.executeQuery();
 		
 		if (r.next()) {		
 			LocalTime orarioPartenza = null;
@@ -80,8 +92,15 @@ public class CronologiaDAO {
 			LocalTime ora = null;
 			if (r.getDate("Ora") != null)
 				ora = r.getTime("Ora").toLocalTime();
-			int codiceImpiegato = r.getInt("codiceImpiegato");			
-			Biglietto biglietto = new Biglietto(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			int codiceImpiegato = r.getInt("codiceImpiegato");	
+			Biglietto biglietto = null;
+			if (r.getString("tipo").equals("veicolo")) {
+				String targa = r.getString("targa");
+				biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
+			}
+			else {
+				biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			}
 			
 			c_a = new CronologiaAcquisti(codiceCliente, corsa, biglietto, ricevuta);
 		}
@@ -130,8 +149,15 @@ public class CronologiaDAO {
 			LocalTime ora = null;
 			if (r.getDate("Ora") != null)
 				ora = r.getTime("Ora").toLocalTime();
-			int codiceImpiegato = r.getInt("codiceImpiegato");			
-			Biglietto biglietto = new Biglietto(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			int codiceImpiegato = r.getInt("codiceImpiegato");	
+			Biglietto biglietto = null;
+			if (r.getString("tipo").equals("veicolo")) {
+				String targa = r.getString("targa");
+				biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
+			}
+			else {
+				biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			}
 			
 			int ricevuta = r.getInt("ricevuta");
 			
@@ -162,7 +188,9 @@ public class CronologiaDAO {
 										+ " codicebiglietto = ?,"
 										+ " data = ?,"
 										+ " ora = ?,"
-										+ " codiceimpiegato = ?"
+										+ " codiceimpiegato = ?,"
+										+ " tipo = ?,"
+										+ " targa = ?"
 										+ " WHERE codicecliente = ? AND"
 										+ " ricevuta = ? AND"
 										+ " codicecorsa = ?");
@@ -176,9 +204,18 @@ public class CronologiaDAO {
 		s.setDate(7, java.sql.Date.valueOf(cronologia.getBiglietto().getData()));
 		s.setTime(8, java.sql.Time.valueOf(cronologia.getBiglietto().getOra()));
 		s.setInt(9, cronologia.getBiglietto().getCodiceImpiegato());
-		s.setInt(10, cronologia.getCodiceCliente());
-		s.setInt(11, cronologia.getRicevuta());
-		s.setInt(12, cronologia.getCorsa().getCodiceCorsa());
+		if(cronologia.getBiglietto() instanceof BigliettoVeicolo) {
+			BigliettoVeicolo v = (BigliettoVeicolo)cronologia.getBiglietto();
+			s.setString(10, "veicolo");
+			s.setString(11, v.getTarga());				
+		}
+		else {
+			s.setString(10, "passeggero");
+			s.setNull(11, java.sql.Types.VARCHAR);	
+		}
+		s.setInt(12, cronologia.getCodiceCliente());
+		s.setInt(13, cronologia.getRicevuta());
+		s.setInt(14, cronologia.getCorsa().getCodiceCorsa());
 		
 		s.executeUpdate();
 		
