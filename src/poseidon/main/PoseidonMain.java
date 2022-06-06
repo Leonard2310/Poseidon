@@ -18,6 +18,8 @@ public class PoseidonMain {
 		Scanner input = new Scanner(System.in);
 		int option = 0;
 		char answer = 'n';
+		int codice = -1;
+		
 		do {
 			System.out.println("Seleziona operazione: \n" +
 					"\t1) Login\n" +
@@ -44,13 +46,15 @@ public class PoseidonMain {
 					}
 					
 					if (answer == 'y') {
-						if (ApplicationConsoleBoundary.login(1) == 0) { 
-							DipendenteConsoleBoundary.showDipendenteConsoleBoundary();
+						codice = ApplicationConsoleBoundary.login(1);
+						if (codice > 0) { 
+							DipendenteConsoleBoundary.showDipendenteConsoleBoundary(codice);
 						}
 					}
 					else {
-						if (ApplicationConsoleBoundary.login(0) == 0) { 
-							ClienteConsoleBoundary.showClienteConsoleBoundary();
+						codice = ApplicationConsoleBoundary.login(0);
+						if (codice > 0) { 
+							ClienteConsoleBoundary.showClienteConsoleBoundary(codice);
 						}
 					}
 					break; 
@@ -78,11 +82,11 @@ public class PoseidonMain {
 					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse presenti [y/n]:");
 					char choice = input.next().charAt(0);
 					if(choice == 'y') {
-						ApplicationConsoleBoundary.login(0);
+						codice = ApplicationConsoleBoundary.login(0);
 						System.out.println("Inserisci il codice della corsa scelta: \t");
 						try {
 							int codiceCorsa = Integer.parseInt(inputReader.readLine());
-							ClienteConsoleBoundary.acquistaBiglietto(codiceCorsa);
+							ClienteConsoleBoundary.acquistaBiglietto(codiceCorsa, codice);
 						} catch (NumberFormatException e) {
 							option = 0;
 						} catch (IOException e) {

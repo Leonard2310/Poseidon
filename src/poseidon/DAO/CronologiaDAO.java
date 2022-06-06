@@ -19,7 +19,7 @@ public class CronologiaDAO {
 
 		try { 
 			statement = connection.prepareStatement("INSERT INTO CRONOLOGIAACQUISTI VALUES"
-													+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+													+ " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			statement.setInt(1,  c.getCodiceCliente());
 			statement.setInt(2, c.getCorsa().getCodiceCorsa());
@@ -27,11 +27,12 @@ public class CronologiaDAO {
 			statement.setTime(4, java.sql.Time.valueOf(c.getCorsa().getOrarioArrivo()));
 			statement.setString(5, c.getCorsa().getPortoPartenza());
 			statement.setString(6, c.getCorsa().getPortoArrivo());
-			statement.setInt(7,  c.getBiglietto().getCodiceBiglietto());
-			statement.setDate(8, java.sql.Date.valueOf(c.getBiglietto().getData()));
-			statement.setTime(9, java.sql.Time.valueOf(c.getBiglietto().getOra()));
-			statement.setInt(10, c.getBiglietto().getCodiceImpiegato());
-			statement.setInt(11, c.getRicevuta());
+			statement.setDouble(7, c.getCorsa().getPrezzo());
+			statement.setInt(8,  c.getBiglietto().getCodiceBiglietto());
+			statement.setDate(9, java.sql.Date.valueOf(c.getBiglietto().getData()));
+			statement.setTime(10, java.sql.Time.valueOf(c.getBiglietto().getOra()));
+			statement.setInt(11, c.getBiglietto().getCodiceImpiegato());
+			statement.setInt(12, c.getRicevuta());
 			
 			statement.executeUpdate();
 		} finally {
@@ -157,6 +158,7 @@ public class CronologiaDAO {
 										+ " orarioarrivo = ?,"
 										+ " portopartenza = ?,"
 										+ " portoarrivo = ?,"
+										+ " prezzo = ?,"
 										+ " codicebiglietto = ?,"
 										+ " data = ?,"
 										+ " ora = ?,"
@@ -169,13 +171,14 @@ public class CronologiaDAO {
 		s.setTime(2, java.sql.Time.valueOf(cronologia.getCorsa().getOrarioArrivo()));
 		s.setString(3, cronologia.getCorsa().getPortoPartenza());
 		s.setString(4, cronologia.getCorsa().getPortoArrivo());
-		s.setInt(5, cronologia.getBiglietto().getCodiceBiglietto());
-		s.setDate(6, java.sql.Date.valueOf(cronologia.getBiglietto().getData()));
-		s.setTime(7, java.sql.Time.valueOf(cronologia.getBiglietto().getOra()));
-		s.setInt(8, cronologia.getBiglietto().getCodiceImpiegato());
-		s.setInt(9, cronologia.getCodiceCliente());
-		s.setInt(10, cronologia.getRicevuta());
-		s.setInt(11, cronologia.getCorsa().getCodiceCorsa());
+		s.setDouble(5, cronologia.getCorsa().getPrezzo());
+		s.setInt(6, cronologia.getBiglietto().getCodiceBiglietto());
+		s.setDate(7, java.sql.Date.valueOf(cronologia.getBiglietto().getData()));
+		s.setTime(8, java.sql.Time.valueOf(cronologia.getBiglietto().getOra()));
+		s.setInt(9, cronologia.getBiglietto().getCodiceImpiegato());
+		s.setInt(10, cronologia.getCodiceCliente());
+		s.setInt(11, cronologia.getRicevuta());
+		s.setInt(12, cronologia.getCorsa().getCodiceCorsa());
 		
 		s.executeUpdate();
 		

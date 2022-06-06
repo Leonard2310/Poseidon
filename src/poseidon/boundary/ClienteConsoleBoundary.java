@@ -7,7 +7,7 @@ import poseidon.control.gestisciCorsa;
 import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
-	public static void showClienteConsoleBoundary() {
+	public static void showClienteConsoleBoundary(int codiceCliente) {
 		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che pu� effettuare
 		// POSTCONDITIONS: le operazioni che il cliente pu� effettuare sono state mostrate a schermo
 		
@@ -29,15 +29,15 @@ public class ClienteConsoleBoundary {
 			}
 			
 			switch (option) {
-				case 1: { acquistaBiglietto(option); break; }
-				case 2: { visualizzaCronologiaAcquisti(); break; }
+				case 1: { acquistaBiglietto(option, codiceCliente); break; }
+				case 2: { visualizzaCronologiaAcquisti(codiceCliente); break; }
 				case 3: { ApplicationConsoleBoundary.logout(); break; }
 				default: { System.out.println("Carattere inserito non riconosciuto!\n"); }
 			}
 		} while (option != 3);
 	}
 	
-	public static void acquistaBiglietto(int codiceCorsa) {
+	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {
 		//TODO: Leonardo
 		System.out.println("Inserisci il codice cliente: ");
 		try {
@@ -73,18 +73,10 @@ public class ClienteConsoleBoundary {
 
 	}
 	
-	public static void visualizzaCronologiaAcquisti() {
+	public static void visualizzaCronologiaAcquisti(int codiceCliente) {
 		// FUNZIONE NON IMPLEMENTATA
 		
-		int codiceCliente = 0;
 		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
-		
-		System.out.println("Inserisci il tuo codice cliente: ");
-		try {
-			codiceCliente = Integer.parseInt(inputReader.readLine());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		lista_cronologia = gestisciCorsa.visualizzazioneCronologiaAcquisti(codiceCliente);
 		
