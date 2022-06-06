@@ -1,16 +1,49 @@
 package poseidon.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import poseidon.entity.Biglietto;
+import poseidon.entity.BigliettoPasseggero;
+import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.Nave;
 
 public class NaveDAO {
+	
+	public static void creaNave(Nave n) throws SQLException {
+		// PRECONDITION: il parametro di input e' un riferimento ad un oggetto valido della classe Nave
+		// POSTCONDITION: la nave viene inserita nella tabella NAVE
+			
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		connection = DBManager.getInstance().getConnection();
 
+		try { 
+			statement = connection.prepareStatement("INSERT INTO NAVE VALUES (?, ?, ?, ?, ?)");
+			
+			statement.setString(1, n.getNome());
+			statement.setInt(2, n.getCodiceCorsa());
+			statement.setString(3, n.getCategoria());
+			statement.setInt(4,n.getCapienzaAutoveicoli());
+			statement.setInt(5, n.getCapienzaPassegeri());
+ 			
+			statement.executeUpdate();
+		
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+		
+		DBManager.getInstance().closeConnection();
+	}
+	
 	public static Nave readNave(String nome) throws SQLException {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella NAVE

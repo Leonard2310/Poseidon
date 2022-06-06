@@ -1,10 +1,18 @@
 package poseidon.control;
 
+<<<<<<< Updated upstream
+=======
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+>>>>>>> Stashed changes
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import poseidon.entity.*;
@@ -354,16 +362,80 @@ public class gestisciCorsa {
 	 *
 	 */
 
-	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo) {
+	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo, Double prezzo, String nomeNave) {
+		// PRECONDIZIONE: -
+		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene restituito 
+		//		un riferimento all'oggetto della classe Corsa contenente i dati della nuova corsa.
+		// 		Altrimenti viene restituita l'istanza = null. 
+
 		Corsa corsa = null;
+		Nave nave = null;
+		int codiceCorsa = -1;
 
-		// int codiceCorsa = (int) Math.random();
+		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata corsa)
+		try {
+			nave = NaveDAO.readNave(nomeNave);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
-		// TODO: DAIANA SCEMA
+		if(nave.getNome() != nomeNave) {
+			codiceCorsa = (int) Math.random();
+			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
+			
+			try {
+				CorsaDAO.creaCorsa(corsa);
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+		} else {
+			System.out.println("La nave inserita e' gia' esistente.");
+			return null;
+		}
+		
+		
 		return corsa;
+	}
+	
+	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli, int codiceCorsa) {
+		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
+		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito 
+		//		un riferimento all'oggetto della classe Nave contenente i dati della nuova nave.
+		// 		Altrimenti viene restituita l'istanza = null. 
 
+		Nave nave = null;
+		
+		nave = new Nave(nomeNave, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
+		
+		try {
+			NaveDAO.creaNave(nave);
+		} catch(SQLException e1) {
+				e1.printStackTrace();
+		}
+		
+		return nave;
 	}
 
+	public static Porto inserimentoPorto(String citta) {
+		// PRECONDIZIONE: deve essere stata inserita con successo una nuova nave
+		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene restituito 
+		//		un riferimento all'oggetto della classe Porto contenente i dati del nuovo Porto.
+		// 		Altrimenti viene restituita l'istanza = null. 
+
+		Porto porto = null;
+			
+		porto = new Porto(citta);
+		
+		try {
+			PortoDAO.crea.Porto(porto);
+		} catch(SQLException e1) {
+				e1.printStackTrace();
+		}
+				
+		return porto;		
+	}
+	
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa,
 			String tipoBiglietto, int codiceCliente, char flag, int ricevuta) {
 		// PRECONDITIONS: -
