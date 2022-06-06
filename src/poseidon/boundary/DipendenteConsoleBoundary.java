@@ -187,11 +187,11 @@ public class DipendenteConsoleBoundary {
 
 	public static void emissioneBiglietto(int codiceImpiegato) {
 		// PRECONDITIONS: il dipendente ha scelto di emettere un biglietto
-		// POSTCONDITIONS: se il biglietto � stato emesso correttamente, viene
+		// POSTCONDITIONS: se il biglietto è stato emesso correttamente, viene
 		// visualizzato un messaggio
 		// che indica il codice del biglietto emesso; altrimenti, viene visualizzato un
 		// messaggio che indica
-		// che il biglietto non � stato emesso
+		// che il biglietto non è stato emesso
 
 		Biglietto biglietto = null;
 		int codiceCorsa = 0;

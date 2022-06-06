@@ -12,7 +12,7 @@ public class PoseidonMain {
 
 	public static void main(String[] args) {
 		
-		new MyFrame();
+		//new MyFrame();
 		
 		inputReader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner input = new Scanner(System.in);
@@ -79,7 +79,7 @@ public class PoseidonMain {
 				
 				case 3: { 
 					ApplicationConsoleBoundary.ricercaCorsa(); 
-					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse presenti [y/n]:");
+					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse [y/n]:");
 					char choice = input.next().charAt(0);
 					if(choice == 'y') {
 						do {
