@@ -160,13 +160,6 @@ ALTER TABLE IF EXISTS public.corsa
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
- 
-
-ALTER TABLE IF EXISTS public.cronologiaacquisti
-    ADD CONSTRAINT crono_biglietto_fkey FOREIGN KEY (codicebiglietto, codicecorsa)
-    REFERENCES public.biglietto (codicebiglietto, codicecorsa) MATCH SIMPLE
-    ON UPDATE CASCADE
-    ON DELETE CASCADE;
 
  
 
