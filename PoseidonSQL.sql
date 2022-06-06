@@ -95,6 +95,7 @@ CREATE TABLE public.cronologiaacquisti
     orarioarrivo time without time zone NOT NULL,
     portopartenza character varying NOT NULL,
     portoarrivo character varying NOT NULL,
+    prezzo double precision NOT NULL,
     codicebiglietto integer DEFAULT NULL,
     data date DEFAULT NULL,
     ora time without time zone DEFAULT NULL,
