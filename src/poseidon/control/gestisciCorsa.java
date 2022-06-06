@@ -455,15 +455,28 @@ public class gestisciCorsa {
 		// Altrimenti viene restituita l'istanza = null.
 
 		Porto porto = null;
-
-		porto = new Porto(citta);
-
+		
+		
 		try {
-			PortoDAO.creaPorto(porto);
+			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 
+		if (porto == null) {
+			porto = new Porto(citta);
+			
+			try {
+				PortoDAO.creaPorto(porto);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+			}
+		} else {
+			System.out.println("Il porto inserito e' gia' esistente.");
+			return null;
+		}
+			
 		return porto;
 	}
 
