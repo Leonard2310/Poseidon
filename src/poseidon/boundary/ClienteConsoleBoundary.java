@@ -60,21 +60,27 @@ public class ClienteConsoleBoundary {
 
 	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {
 		// TODO: Leonardo
+		String nome = null;
+		String cognome = null;
+		String tipoBiglietto = null;
+		String targa = null;
 		
 		try (Scanner input = new Scanner(System.in)) {
 			System.out.println("Inserisci le informazioni anagrafiche: ");
 			System.out.print("Nome: \t");
-			String nome = input.nextLine();
+			nome = input.nextLine();
 			System.out.print("Cognome: \t");
-			String cognome = input.nextLine();
+			cognome = input.nextLine();
 
 			System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
-			String tipoBiglietto = input.nextLine();
+			tipoBiglietto = input.nextLine();
 			boolean answer = false;
 			do {
 				if (tipoBiglietto.equals("passeggero")) {
 					answer = true;
 				} else if (tipoBiglietto.equals("veicolo")) {
+					System.out.print("Targa: \t");
+					targa = input.nextLine();
 					answer = true;
 				} else {
 					answer = false;
@@ -82,7 +88,7 @@ public class ClienteConsoleBoundary {
 
 			} while (answer == false);
 
-			gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa);
+			gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa, targa);
 		}
 	}
 

@@ -78,6 +78,8 @@ public class PoseidonMain {
 				}
 				
 				case 3: { 
+					int codiceCorsa;
+					
 					ApplicationConsoleBoundary.ricercaCorsa(); 
 					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse [y/n]:");
 					char choice = input.next().charAt(0);
@@ -89,7 +91,7 @@ public class PoseidonMain {
 						System.out.println("Inserisci il codice della corsa scelta: \t");
 						
 						try {
-							int codiceCorsa = Integer.parseInt(inputReader.readLine());
+							codiceCorsa = Integer.parseInt(inputReader.readLine());
 							ClienteConsoleBoundary.acquistaBiglietto(codiceCorsa, codice);
 						} catch (NumberFormatException e) {
 							option = 0;

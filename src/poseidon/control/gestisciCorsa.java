@@ -209,7 +209,7 @@ public class gestisciCorsa {
 	}
 
 	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
-			int codiceCorsa) {
+			int codiceCorsa, String targa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 
@@ -232,7 +232,7 @@ public class gestisciCorsa {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, ricevuta, corsa);
+				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, ricevuta, corsa, tipoBiglietto, targa);
 				return ricevuta;
 			} else {
 				System.out.println("Elaborazione d'acquisto fallita");
@@ -285,12 +285,17 @@ public class gestisciCorsa {
 		return bool_pagamento;
 	}
 
-	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, String ricevuta,
-			Corsa corsa) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
-
-		Biglietto b = new Biglietto(0, null, null, 0, 0);
+		
+		Biglietto b = new Biglietto(0, null, null, 0, 0); 
+		
+		if(tipoBiglietto.equals("passeggero")) {
+			b = new BigliettoPasseggero(0, null, null, 0, 0);
+		} else if (tipoBiglietto.equals("veicolo")) {
+			b = new BigliettoVeicolo(0, null, null, 0, 0, targa);
+		}
 
 		CronologiaAcquisti c = new CronologiaAcquisti(codiceCliente, corsa, b, ricevuta);
 		try {
@@ -381,8 +386,7 @@ public class gestisciCorsa {
 	 *
 	 */
 
-	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza,
-			String portoArrivo, Double prezzo, String nomeNave) {
+	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo, Double prezzo, String nomeNave) {
 		// PRECONDIZIONE: -
 		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene
 		// restituito
@@ -451,15 +455,28 @@ public class gestisciCorsa {
 		// Altrimenti viene restituita l'istanza = null.
 
 		Porto porto = null;
-
-		porto = new Porto(citta);
-
+		
+		
 		try {
-			PortoDAO.creaPorto(porto);
+			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 
+		if (porto == null) {
+			porto = new Porto(citta);
+			
+			try {
+				PortoDAO.creaPorto(porto);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return null;
+			}
+		} else {
+			System.out.println("Il porto inserito e' gia' esistente.");
+			return null;
+		}
+			
 		return porto;
 	}
 
