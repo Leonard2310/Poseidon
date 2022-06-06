@@ -4,9 +4,9 @@ public class CronologiaAcquisti {
 	private int codiceCliente;
 	private Corsa corsa;
 	private Biglietto biglietto;
-	private int ricevuta;
+	private String ricevuta;
 	
-	public CronologiaAcquisti(int codiceCliente, Corsa corsa, Biglietto biglietto, int ricevuta) {
+	public CronologiaAcquisti(int codiceCliente, Corsa corsa, Biglietto biglietto, String ricevuta) {
 		super();
 		this.codiceCliente = codiceCliente;
 		this.corsa = corsa;
@@ -38,11 +38,11 @@ public class CronologiaAcquisti {
 		this.biglietto = biglietto;
 	}
 
-	public int getRicevuta() {
+	public String getRicevuta() {
 		return ricevuta;
 	}
 
-	public void setRicevuta(int ricevuta) {
+	public void setRicevuta(String ricevuta) {
 		this.ricevuta = ricevuta;
 	}
 	

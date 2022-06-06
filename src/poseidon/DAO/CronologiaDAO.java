@@ -41,7 +41,7 @@ public class CronologiaDAO {
 				statement.setString(12, "passeggero");
 				statement.setNull(13, java.sql.Types.VARCHAR);	
 			}
-			statement.setInt(12, c.getRicevuta());
+			statement.setString(12, c.getRicevuta());
 			
 			statement.executeUpdate();
 		} finally {
@@ -53,7 +53,7 @@ public class CronologiaDAO {
 		DBManager.getInstance().closeConnection();	
 	}
 	
-	public static CronologiaAcquisti readCronologia(int codiceCliente, int codiceCorsa, int ricevuta) throws SQLException {
+	public static CronologiaAcquisti readCronologia(int codiceCliente, int codiceCorsa, String ricevuta) throws SQLException {
 		// PRECONDITIONS: il codiceCliente, il codiceCorsa e la ricevuta sono numeri > 0
 		// POSTCONDITIONS: viene restituito un riferimento ad un oggetto della classe CronologiaAcquisti
 		// corrispondente alla Cronologia avente il codiceCliente, il codiceCorsa e la ricevuta passati in ingresso;
@@ -69,7 +69,7 @@ public class CronologiaDAO {
 										+ " CODICECORSA = ?, RICEVUTA = ?");
 		s.setInt(1,  codiceCliente);
 		s.setInt(2, codiceCorsa);
-		s.setInt(3,  ricevuta);
+		s.setString(3,  ricevuta);
 		
 		r = s.executeQuery();
 		
@@ -159,7 +159,7 @@ public class CronologiaDAO {
 				biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
 			}
 			
-			int ricevuta = r.getInt("ricevuta");
+			String ricevuta = r.getString("ricevuta");
 			
 			c_a = new CronologiaAcquisti(codiceCliente, corsa, biglietto, ricevuta);
 			lista.add(c_a);
@@ -214,7 +214,7 @@ public class CronologiaDAO {
 			s.setNull(11, java.sql.Types.VARCHAR);	
 		}
 		s.setInt(12, cronologia.getCodiceCliente());
-		s.setInt(13, cronologia.getRicevuta());
+		s.setString(13, cronologia.getRicevuta());
 		s.setInt(14, cronologia.getCorsa().getCodiceCorsa());
 		
 		s.executeUpdate();

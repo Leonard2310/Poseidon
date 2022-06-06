@@ -199,7 +199,7 @@ public class DipendenteConsoleBoundary {
 		String targa = null;
 		int codiceCliente = 0;
 		char risposta = 'n';
-		int ricevuta = 0;
+		String ricevuta = null;
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		try {
@@ -235,9 +235,9 @@ public class DipendenteConsoleBoundary {
 			if (risposta == 'n') {
 				System.out.println("Inserisci la ricevuta d'acquisto");
 				try {
-					ricevuta = Integer.parseInt(inputReader.readLine());
+					ricevuta = inputReader.readLine();
 				} catch (NumberFormatException e) {
-					ricevuta = 0;
+					ricevuta = null;
 				}
 			}
 		} catch (IOException e) {
