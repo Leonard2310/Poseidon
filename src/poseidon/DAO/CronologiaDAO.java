@@ -41,7 +41,7 @@ public class CronologiaDAO {
 				statement.setString(12, "passeggero");
 				statement.setNull(13, java.sql.Types.VARCHAR);	
 			}
-			statement.setInt(12, c.getRicevuta());
+			statement.setInt(14, c.getRicevuta());
 			
 			statement.executeUpdate();
 		} finally {
