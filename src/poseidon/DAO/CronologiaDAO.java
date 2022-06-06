@@ -65,8 +65,8 @@ public class CronologiaDAO {
 		ResultSet r = null;
 		
 		connection = DBManager.getInstance().getConnection();
-		s = connection.prepareStatement("SELECT * FROM CRONOLOGIAACQUISTI WHERE CODICECLIENTE = ?," 
-										+ " CODICECORSA = ?, RICEVUTA = ?");
+		s = connection.prepareStatement("SELECT * FROM CRONOLOGIAACQUISTI WHERE CODICECLIENTE = ? AND" 
+										+ " CODICECORSA = ? AND RICEVUTA = ?");
 		s.setInt(1,  codiceCliente);
 		s.setInt(2, codiceCorsa);
 		s.setString(3,  ricevuta);
