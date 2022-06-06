@@ -92,7 +92,7 @@ public class DipendenteConsoleBoundary {
 		}
 		LocalTime orarioPartenza = LocalTime.parse(orarioPartenzaInput);
 		
-		System.out.println("Inseririre data e orario di arrivo (hh:mm)");		
+		System.out.println("Inserire data e orario di arrivo (hh:mm)");		
 		try { 
 			orarioArrivoInput = inputReader.readLine();
 		} catch (IOException e) {
