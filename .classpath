@@ -8,5 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/l.catello/Library/Mobile Documents/com~apple~CloudDocs/Università/Ingegneria del Software/postgresql-42.3.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Daiana/Downloads/postgresql-42.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/franc/Desktop/Francesco/università/terzo anno/secondo semestre/ingegneria del software/JAVA/postgresql-42.3.5.jar"/>
+
 	<classpathentry kind="output" path="bin"/>
 </classpath>

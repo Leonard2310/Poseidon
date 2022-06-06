@@ -98,6 +98,8 @@ CREATE TABLE public.cronologiaacquisti
     data date DEFAULT NULL,
     ora time without time zone DEFAULT NULL,
     codiceimpiegato integer DEFAULT NULL,
+    tipo character varying NOT NULL,
+    targa character varying DEFAULT NULL,
     ricevuta integer NOT NULL,
     CONSTRAINT cronologiaacquisti_pkey PRIMARY KEY (codicecliente, codicecorsa, ricevuta)
 );

@@ -53,17 +53,15 @@ public class NaveDAO {
 		connection = DBManager.getInstance().getConnection();
 		s = connection.createStatement();
 
-		r = s.executeQuery("SELECT * FROM CORSA");
+		r = s.executeQuery("SELECT * FROM NAVE WHERE nome = " + nome);
 
-		while (r.next()) {
-			if (nome == r.getString("nome")) {
-				int capienzaAutoveicoli = r.getInt("capienzaAutoveicoli");
-				int capienzaPasseggeri = r.getInt("capienzaPasseggeri");
-				int codiceCorsa = r.getInt("codiceCorsa");
-				String categoria = r.getString("categoria");
+		if (r.next()) {
+			int capienzaAutoveicoli = r.getInt("capienzaAutoveicoli");
+			int capienzaPasseggeri = r.getInt("capienzaPasseggeri");
+			int codiceCorsa = r.getInt("codiceCorsa");
+			String categoria = r.getString("categoria");
 
-				nave = new Nave(nome, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
-			}
+			nave = new Nave(nome, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
 		}
 
 		s.close();
@@ -85,7 +83,7 @@ public class NaveDAO {
 		connection = DBManager.getInstance().getConnection();
 		s = connection.createStatement();
 
-		r = s.executeQuery("SELECT * FROM CORSA");
+		r = s.executeQuery("SELECT * FROM NAVE");
 
 		while (r.next()) {
 			String nome = r.getString("nome");
