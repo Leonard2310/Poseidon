@@ -29,8 +29,18 @@ public class CronologiaDAO {
 			statement.setString(6, c.getCorsa().getPortoArrivo());
 			statement.setDouble(7, c.getCorsa().getPrezzo());
 			statement.setInt(8,  c.getBiglietto().getCodiceBiglietto());
-			statement.setDate(9, java.sql.Date.valueOf(c.getBiglietto().getData()));
-			statement.setTime(10, java.sql.Time.valueOf(c.getBiglietto().getOra()));
+			if (c.getBiglietto().getData() != null) {
+				statement.setDate(9, java.sql.Date.valueOf(c.getBiglietto().getData()));
+			}
+			else {
+				statement.setNull(9, java.sql.Types.DATE);
+			}
+			if (c.getBiglietto().getData() != null) {
+				statement.setTime(10, java.sql.Time.valueOf(c.getBiglietto().getOra()));
+			}
+			else {
+				statement.setNull(10, java.sql.Types.TIME);
+			}
 			statement.setInt(11, c.getBiglietto().getCodiceImpiegato());
 			if(c.getBiglietto() instanceof BigliettoVeicolo) {
 				BigliettoVeicolo v = (BigliettoVeicolo)c.getBiglietto();
