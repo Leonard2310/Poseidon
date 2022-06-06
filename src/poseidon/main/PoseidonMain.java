@@ -22,7 +22,7 @@ public class PoseidonMain {
 		
 		do {
 			System.out.println("Seleziona operazione: \n" +
-					"\t1) Login\n" +
+					"\t1) login\n" +
 					"\t2) Registrati\n" +
 					"\t3) Ricerca Corsa\n" +
 					"\t4) Esci");

@@ -371,7 +371,7 @@ public class gestisciCorsa {
 			e1.printStackTrace();
 		}
 
-		if(nave.getNome() != nomeNave) {
+		if(nave == null) {
 			codiceCorsa = (int) Math.random();
 			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 			

@@ -24,11 +24,11 @@ public class NaveDAO {
 		try { 
 			statement = connection.prepareStatement("INSERT INTO NAVE VALUES (?, ?, ?, ?, ?)");
 			
-			statement.setString(1, n.getNome());
-			statement.setInt(2, n.getCodiceCorsa());
-			statement.setString(3, n.getCategoria());
-			statement.setInt(4,n.getCapienzaAutoveicoli());
-			statement.setInt(5, n.getCapienzaPassegeri());
+			statement.setString(1, n.getNome());			
+			statement.setInt(2,n.getCapienzaAutoveicoli());
+			statement.setInt(3, n.getCapienzaPassegeri());
+			statement.setString(4, n.getCategoria());
+			statement.setInt(5, n.getCodiceCorsa());
  			
 			statement.executeUpdate();
 		
@@ -47,13 +47,14 @@ public class NaveDAO {
 
 		Nave nave = null;
 		Connection connection = null;
-		Statement s = null;
+		PreparedStatement s = null;
 		ResultSet r = null;
 
 		connection = DBManager.getInstance().getConnection();
-		s = connection.createStatement();
+		s = connection.prepareStatement("SELECT * FROM NAVE WHERE nome = ?" );
+		s.setString(1, nome);
 
-		r = s.executeQuery("SELECT * FROM NAVE WHERE nome = " + nome);
+		r = s.executeQuery();
 
 		if (r.next()) {
 			int capienzaAutoveicoli = r.getInt("capienzaAutoveicoli");
