@@ -2,6 +2,7 @@ package poseidon.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import poseidon.entity.*;
@@ -31,6 +32,33 @@ public class PortoDAO {
 		}		
 		
 		DBManager.getInstance().closeConnection();
+	}
+	
+	public static Porto readPorto(String citta) throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella PORTO
+
+		Porto porto = null;
+		Connection connection = null;
+		PreparedStatement s = null;
+		ResultSet r = null;
+
+		connection = DBManager.getInstance().getConnection();
+		s = connection.prepareStatement("SELECT * FROM PORTO WHERE citta = ?" );
+		s.setString(1, citta);
+
+		r = s.executeQuery();
+
+		if (r.next()) {
+			citta = r.getString("citta");
+
+			porto = new Porto(citta);
+		}
+
+		s.close();
+		DBManager.getInstance().closeConnection();
+
+		return porto;
 	}
 	
 }

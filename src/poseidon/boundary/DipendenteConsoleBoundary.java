@@ -84,105 +84,103 @@ public class DipendenteConsoleBoundary {
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		
-		System.out.println("Inseririre data e orario di partenza (hh:mm)");		
-		try { 
-			orarioPartenzaInput = inputReader.readLine();
+		try {
+			System.out.println("Inserire la citta' del porto");
+			citta = inputReader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		LocalTime orarioPartenza = LocalTime.parse(orarioPartenzaInput);
 		
-		System.out.println("Inserire data e orario di arrivo (hh:mm)");		
-		try { 
-			orarioArrivoInput = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		LocalTime orarioArrivo = LocalTime.parse(orarioArrivoInput);
-		
-		System.out.println("Inserire il porto di partenza");
-		try { 
-			portoPartenza = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		porto = gestisciCorsa.inserimentoPorto(citta);
 
-		System.out.println("Inserire il porto di arrivo");
-		try { 
-			portoArrivo = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (porto != null) {
+			System.out.println("Porto inserito correttamente");
 		
-		System.out.println("Inserire il nome della nave");
-		try { 
-			nomeNave = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("Inserire il prezzo della corsa");
-		try { 
-			prezzo = Double.parseDouble(inputReader.readLine());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			System.out.println("Inserire data e orario di partenza (hh:mm)");		
+			try { 
+				orarioPartenzaInput = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			LocalTime orarioPartenza = LocalTime.parse(orarioPartenzaInput);
+			
+			System.out.println("Inserire data e orario di arrivo (hh:mm)");		
+			try { 
+				orarioArrivoInput = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			LocalTime orarioArrivo = LocalTime.parse(orarioArrivoInput);
+			
+			System.out.println("Inserire il porto di partenza");
+			try { 
+				portoPartenza = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
-		corsa = gestisciCorsa.inserimentoCorsa(orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo, nomeNave);
-		
-		if (corsa != null) {
-			System.out.println("Corsa inserita correttamente con codice = "
-								+ corsa.getCodiceCorsa());
-			try {
-				System.out.println("Inserire la categoria della nave (aliscafo/traghetto)");
-				categoria = inputReader.readLine();
-				
-				if(categoria.equals("aliscafo")) {
-					System.out.println("Inserisci la capienza dei passeggeri");
-					capienzaPasseggeri = Integer.parseInt(inputReader.readLine());
-				} else if(categoria.equals("traghetto")) {
-					System.out.println("Inserisci la capienza dei passeggeri");
-					capienzaPasseggeri = Integer.parseInt(inputReader.readLine());
-					System.out.println("Inserisci la capienza degli autoveicoli");
-					capienzaAutoveicoli = Integer.parseInt(inputReader.readLine());
-
-				} else {
-					System.out.println("Errore: valore inserito non valido!");
-					return;
-				}
+			System.out.println("Inserire il porto di arrivo");
+			try { 
+				portoArrivo = inputReader.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			nave = gestisciCorsa.inserimentoNave(nomeNave, categoria, capienzaPasseggeri, capienzaAutoveicoli, corsa.getCodiceCorsa());
+			System.out.println("Inserire il nome della nave che effettuera' la corsa");
+			try { 
+				nomeNave = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
-			if (nave != null) {
-				System.out.println("Nave inserita correttamente");
+			System.out.println("Inserire il prezzo della corsa");
+			try { 
+				prezzo = Double.parseDouble(inputReader.readLine());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			corsa = gestisciCorsa.inserimentoCorsa(orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo, nomeNave);
+			
+			if (corsa != null) {
+				System.out.println("Corsa inserita correttamente con codice = "
+									+ corsa.getCodiceCorsa());
 				
 				try {
-					System.out.println("Inserire la citta' del porto");
-					citta = inputReader.readLine();
+					System.out.println("Inserire la categoria della nave (aliscafo/traghetto)");
+					categoria = inputReader.readLine();
+					
+					if(categoria.equals("aliscafo")) {
+						System.out.println("Inserisci la capienza dei passeggeri");
+						capienzaPasseggeri = Integer.parseInt(inputReader.readLine());
+					} 
+					else if(categoria.equals("traghetto")) {
+						System.out.println("Inserisci la capienza dei passeggeri");
+						capienzaPasseggeri = Integer.parseInt(inputReader.readLine());
+						System.out.println("Inserisci la capienza degli autoveicoli");
+						capienzaAutoveicoli = Integer.parseInt(inputReader.readLine());
+					} 
+					else {
+						System.out.println("Errore: valore inserito non valido!");
+						return;
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				
-				porto = gestisciCorsa.inserimentoPorto(citta);
+				nave = gestisciCorsa.inserimentoNave(nomeNave, categoria, capienzaPasseggeri, capienzaAutoveicoli, corsa.getCodiceCorsa());
 				
-				if (porto != null) {
-					System.out.println("Porto inserito correttamente");
+				if (nave != null) {
+					System.out.println("Nave inserita correttamente");
 				} else {
-					System.out.println("Si e' verificato un errore nell'inserimento del porto");
-
-				}	
-			} else {
-				System.out.println("Si e' verificato un errore nell'inserimento della nave");
-			}
-				
+					System.out.println("Si e' verificato un errore nell'inserimento della nave");
+				}
+			}else {
+				System.out.println("Si e' verificato un errore nell'inserimento della corsa");
+			}	
+		} else {
+			System.out.println("Si e' verificato un errore nell'inserimento del porto");
 		}
-		else {
-			System.out.println("Impossibile inserire la Corsa.");
-		}
-		
 	}
 
 	public static void emissioneBiglietto(int codiceImpiegato) {
