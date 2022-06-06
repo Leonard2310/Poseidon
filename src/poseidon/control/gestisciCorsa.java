@@ -562,7 +562,7 @@ public class gestisciCorsa {
 				e.printStackTrace();
 			}
 		} else if (flag == 'y') {
-			// ricevuta = generazioneRicevuta();
+			ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
 				if (corsa != null) {
