@@ -8,9 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import poseidon.entity.Biglietto;
-import poseidon.entity.BigliettoPasseggero;
-import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.Nave;
 
 public class NaveDAO {

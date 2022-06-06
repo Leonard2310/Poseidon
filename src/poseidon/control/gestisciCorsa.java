@@ -1,18 +1,10 @@
 package poseidon.control;
 
-<<<<<<< Updated upstream
-=======
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
->>>>>>> Stashed changes
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 import poseidon.entity.*;
@@ -116,7 +108,7 @@ public class gestisciCorsa {
 
 			for (Dipendente d : lista_dipendenti) {
 				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password)) {
-					System.out.println("Errore: cliente giï¿½ esistente.");
+					System.out.println("Errore: cliente giÃ  esistente.");
 					return -1;
 				}
 			}
@@ -428,7 +420,7 @@ public class gestisciCorsa {
 		porto = new Porto(citta);
 		
 		try {
-			PortoDAO.crea.Porto(porto);
+			PortoDAO.creaPorto(porto);
 		} catch(SQLException e1) {
 				e1.printStackTrace();
 		}
@@ -464,7 +456,7 @@ public class gestisciCorsa {
 		}
 	
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Il tipo di biglietto inserito non è valido.");
+			System.out.println("Il tipo di biglietto inserito non ï¿½ valido.");
 			return null;
 		}
 		
@@ -516,7 +508,7 @@ public class gestisciCorsa {
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
 			System.out.println(
-					"Al momento non è possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
+					"Al momento non ï¿½ possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
 

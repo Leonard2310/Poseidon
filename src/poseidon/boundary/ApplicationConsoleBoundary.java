@@ -146,7 +146,7 @@ public class ApplicationConsoleBoundary {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (answer == "filtri") {
+		if (answer.equals("filtri")) {
 			System.out.println("Inserisci il porto di partenza");
 			try {
 				portoPartenza = inputReader.readLine();
@@ -187,15 +187,21 @@ public class ApplicationConsoleBoundary {
 			}
 
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista dei codici delle corse è: ");
+			System.out.println("La lista delle corse con tali filtri sono:: ");
 			for (Corsa c : listaCorsa) {
-				System.out.println(+c.getCodiceCorsa());
+				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
+				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
+				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
+				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
 
-		else if (answer == "codice") {
+		else if (answer.equals("codice")) {
 			
-			System.out.println("Inserisci il codice della corsa");
+			System.out.print("Inserisci il codice della corsa: \t");
 			try {
 				codiceCorsa = Integer.parseInt(inputReader.readLine());
 			} catch (IOException e) {
@@ -203,17 +209,30 @@ public class ApplicationConsoleBoundary {
 			}
 			
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista dei codici delle corse è: ");
+			System.out.println("La corsa con tale codice è: \t");
 			for (Corsa c : listaCorsa) {
-				System.out.println(+c.getCodiceCorsa());
+				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
+				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
+				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
+				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
 		
 		else {
 			listaCorsa= gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista dei codici delle corse è: ");
+			System.out.println("ERRORE INSERIMENTO");
+			System.out.println("La lista di tutte le corse disponibili è la seguente: ");
 			for (Corsa c : listaCorsa) {
-				System.out.println(+c.getCodiceCorsa());
+				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
+				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
+				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
+				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
 	}

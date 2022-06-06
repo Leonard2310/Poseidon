@@ -9,9 +9,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import poseidon.entity.Biglietto;
-import poseidon.entity.BigliettoPasseggero;
-import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.Corsa;
 
 public class CorsaDAO {
