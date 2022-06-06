@@ -208,14 +208,44 @@ public class gestisciCorsa {
 		return lista_cronologia;
 	}
 
-	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto,
-			int codiceCorsa, String targa) {
+	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa, String targa) {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
-
+		
 		Corsa corsa = new Corsa(codiceCorsa, null, null, null, null, 0.00);
 		boolean bool_pagamento = false;
 		String ricevuta = null;
+		
+		// CONTROLLO INPUT
+		if (codiceCliente <= 0) {
+			System.out.println("Errore: il codice cliente deve essere > 0.");
+			return null;
+		}
+		
+		if (nome.equals("") || nome == null) {
+			System.out.println("Errore: necessario inserire il nome.");
+			return null;
+		}
+		
+		if (cognome.equals("") || cognome == null) {
+			System.out.println("Errore: necessario inserire il cognome.");
+			return null;
+		}
+		
+		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
+			System.out.println("Il tipo di biglietto inserito non è valido.");
+			return null;
+		}
+
+		if (codiceCorsa <= 0) {
+			System.out.println("Errore: il codice corsa deve essere > 0.");
+			return null;
+		}
+
+		if (tipoBiglietto.equals("veicolo") && (targa == null || targa.equals(""))) {
+			System.out.println("Errore: necessario inserire la targa.");
+			return null;
+		}
 
 		double prezzo_finale = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
 		int disponibilita = calcolaDisponibilita(codiceCorsa, tipoBiglietto);
