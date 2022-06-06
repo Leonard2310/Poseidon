@@ -225,7 +225,7 @@ public class gestisciCorsa {
 			System.out.println("Il prezzo è " + prezzo_finale);
 			bool_pagamento = elaborazioneAcquisto(codiceCliente, codiceCorsa, tipoBiglietto);
 			if (bool_pagamento == true) {
-				ricevuta = SistemaDiPagamento.generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
+				ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 
 				try {
 					corsa = CorsaDAO.readCorsa(codiceCorsa);
@@ -241,6 +241,32 @@ public class gestisciCorsa {
 			System.out.println("Assenza di posti disponibili");
 		}
 		// TODO: Leonardo
+		return ricevuta;
+	}
+	
+	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
+
+		String vocabolarioAlfaNumerico;
+		StringBuilder builder;
+		String ricevuta = null;
+
+		int i = 3; 						// Grandezza stringa alfanumerica randomica
+		vocabolarioAlfaNumerico = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"; // Vocabolario alfanumerico
+		builder = new StringBuilder(i); // String buffer
+
+		for (int m = 0; m < i; m++) {
+			int myindex = (int) (vocabolarioAlfaNumerico.length() * Math.random());
+
+			builder.append(vocabolarioAlfaNumerico.charAt(myindex));
+			builder.toString();
+		}
+
+		if (tipoBiglietto.equals("passeggeri")) {
+			ricevuta = codiceCliente + "P" + codiceCorsa + builder;
+		} else if (tipoBiglietto.equals("veicoli")){
+			ricevuta = codiceCliente + "V" + codiceCorsa + builder;
+		}
+		
 		return ricevuta;
 	}
 
