@@ -81,7 +81,7 @@ public class BigliettoDAO {
 			int codiceCorsa = r.getInt("codicecorsa");
 			int codiceImpiegato = r.getInt("codiceimpiegato");		
 			
-			if (r.getString("tipobiglietto").equals("veicolo")) {
+			if (r.getString("tipo").equals("veicolo")) {
 				String targa = r.getString("targa");
 				b = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
 			}
