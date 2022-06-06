@@ -50,7 +50,7 @@ CREATE TABLE public.biglietto
     tipo character varying NOT NULL,
     targa character varying DEFAULT NULL,
     CONSTRAINT biglietto_pkey PRIMARY KEY (codicebiglietto, codicecorsa)
-)
+);
 
  
 

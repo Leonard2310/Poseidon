@@ -187,7 +187,10 @@ public class ApplicationConsoleBoundary {
 			}
 
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista delle corse è: \n" + listaCorsa);
+			System.out.println("La lista dei codici delle corse è: ");
+			for (Corsa c : listaCorsa) {
+				System.out.println(+c.getCodiceCorsa());
+			}
 		}
 
 		else if (answer == "codice") {
@@ -200,12 +203,18 @@ public class ApplicationConsoleBoundary {
 			}
 			
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista delle corse è: \n" + listaCorsa);
+			System.out.println("La lista dei codici delle corse è: ");
+			for (Corsa c : listaCorsa) {
+				System.out.println(+c.getCodiceCorsa());
+			}
 		}
 		
 		else {
 			listaCorsa= gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("La lista delle corse è: \n" + listaCorsa);
+			System.out.println("La lista dei codici delle corse è: ");
+			for (Corsa c : listaCorsa) {
+				System.out.println(+c.getCodiceCorsa());
+			}
 		}
 	}
 

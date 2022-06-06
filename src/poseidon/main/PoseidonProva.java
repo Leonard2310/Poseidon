@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import poseidon.boundary.*;
 
-public class PoseidonMain {
+public class PoseidonProva {
 
 	public static void main(String[] args) {
 		
@@ -82,12 +82,8 @@ public class PoseidonMain {
 					System.out.println("Sei un cliente e vuoi procedere con l'acquisto di una delle corse presenti [y/n]:");
 					char choice = input.next().charAt(0);
 					if(choice == 'y') {
-						do {
-							codice = ApplicationConsoleBoundary.login(0);
-						} while(codice == -1);
-
+						codice = ApplicationConsoleBoundary.login(0);
 						System.out.println("Inserisci il codice della corsa scelta: \t");
-						
 						try {
 							int codiceCorsa = Integer.parseInt(inputReader.readLine());
 							ClienteConsoleBoundary.acquistaBiglietto(codiceCorsa, codice);

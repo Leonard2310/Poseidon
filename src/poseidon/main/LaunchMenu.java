@@ -1,25 +1,47 @@
 package poseidon.main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class LaunchMenu {
+public class LaunchMenu extends MyFrame {
+	
+	private static final long serialVersionUID = 1L;
 	
 	JFrame frame = new JFrame();
-	JLabel label = new JLabel();
+	JLabel label;
+	JTextField textField;
+	JButton button;
 	
 	@SuppressWarnings("unused") //TODO
 	LaunchMenu() {
 		
 		ImageIcon icon = new ImageIcon("icon.jpeg");
 		Border border = BorderFactory.createLineBorder(Color.BLUE,4);  
+		
+		// TEXTFIELD
+		textField = new JTextField();
+		textField.setPreferredSize(new Dimension(250, 40));
+		textField.setFont(new Font("Consolas", Font.BOLD, 15));
+		textField.setForeground(Color.blue);
+		textField.setBackground(Color.gray);
+		textField.setCaretColor(Color.blue);
+		textField.setText("username");
+		
+		// BUTTON
+		button = new JButton("Submit");
+		button.addActionListener(this);
 		
 		// LABEL
 		JLabel label = new JLabel();
@@ -40,13 +62,15 @@ public class LaunchMenu {
 		frame.setTitle("POSEIDON");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setSize(440,380);
+		//frame.setSize(440,380);
 		//frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setIconImage(icon.getImage());
 
-		frame.add(label);
-		//frame.pack();
+		//frame.add(label);
+		frame.add(button);
+		frame.add(textField);
+		frame.pack();
 		
 		// NOTIFICA DI ERRORE
 		JOptionPane.showMessageDialog(null,  "Carattere inserito non riconosciuto!", "ERRORE - POSEIDON", JOptionPane.WARNING_MESSAGE);
@@ -61,6 +85,16 @@ public class LaunchMenu {
 		
 		// NOTIFICA DI CONFERMA
 		int answer = JOptionPane.showConfirmDialog(null,  "Sei sicuro di voler uscire?", "POSEIDON", JOptionPane.YES_NO_OPTION);
+		
+		
+	}
+	
+	public void actionperformed(ActionEvent e) {
+		if(e.getSource() == button) {
+			System.out.println("Benvenuto "+textField.getText());
+			button.setEnabled(false);
+			textField.setEditable(false);
+		}
 		
 	}
 	
