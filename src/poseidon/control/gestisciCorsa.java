@@ -552,7 +552,7 @@ public class gestisciCorsa {
 		}
 
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Il tipo di biglietto inserito non ï¿½ valido.");
+			System.out.println("Errore: il tipo di biglietto inserito non è valido.");
 			return null;
 		}
 
