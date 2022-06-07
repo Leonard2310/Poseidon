@@ -150,8 +150,7 @@ public class gestisciCorsa {
 			}
 			listaCorsa.add(corsa);
 			return listaCorsa;
-		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null) {
-
+		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null && prezzo != 0.00) {
 			try {
 				listaCorsa = CorsaDAO.readallCorsa();
 			} catch (SQLException e1) {
@@ -159,7 +158,7 @@ public class gestisciCorsa {
 			}
 			for (Corsa c : listaCorsa) {
 				if (c.getOrarioArrivo() == orarioArrivo && c.getOrarioPartenza() == orarioPartenza
-						&& c.getPortoPartenza() == portoPartenza && c.getPortoArrivo() == portoArrivo) {
+						&& c.getPortoPartenza() == portoPartenza && c.getPortoArrivo() == portoArrivo && c.getPrezzo() <= prezzo) {
 					listaCorsa.add(c);
 				}
 			}
