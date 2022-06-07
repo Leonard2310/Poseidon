@@ -566,9 +566,20 @@ public class gestisciCorsa {
 			return null;
 		}
 
-		if (flag == 'n' && ricevuta == null) {
-			System.out.println("Errore: necessario inserire la ricevuta.");
-			return null;
+		if (flag == 'n') {
+			if (ricevuta == null) {
+				System.out.println("Errore: necessario inserire la ricevuta.");
+				return null;
+			}
+			try {
+				if (CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta) == null) {
+					System.out.println("Errore: l'acquisto selezionato non esiste.");
+					return null;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 
 		try {
