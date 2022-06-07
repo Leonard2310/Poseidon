@@ -572,7 +572,7 @@ public class gestisciCorsa {
 		}
 
 		if (flag == 'n') {
-			if (ricevuta == null) {
+			if (ricevuta == null || ricevuta.equals("")) {
 				System.out.println("Errore: necessario inserire la ricevuta.");
 				return null;
 			}
