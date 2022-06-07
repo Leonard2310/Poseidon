@@ -629,6 +629,7 @@ public class gestisciCorsa {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return null;
 			}
 		} else if (flag == 'y') {
 			ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
@@ -644,6 +645,7 @@ public class gestisciCorsa {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
 
