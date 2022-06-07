@@ -76,10 +76,12 @@ public class ClienteConsoleBoundary {
 			System.out.print("Cognome: \t");
 			cognome = input.nextLine();
 
-			System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
-			tipoBiglietto = input.nextLine();
+
 			boolean answer = false;
 			do {
+				System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
+				tipoBiglietto = input.nextLine();
+				
 				if (tipoBiglietto.equals("passeggero")) {
 					answer = true;
 				} else if (tipoBiglietto.equals("veicolo")) {
@@ -87,6 +89,7 @@ public class ClienteConsoleBoundary {
 					targa = input.nextLine();
 					answer = true;
 				} else {
+					System.out.println("Errore: tipo non valido");
 					answer = false;
 				}
 

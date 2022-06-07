@@ -243,6 +243,11 @@ public class gestisciCorsa {
 			System.out.println("Errore: necessario inserire la targa.");
 			return null;
 		}
+		
+		if (tipologiaPagamento == null || tipologiaPagamento.equals("")) {
+			System.out.println("Errore: necessario inserire la tipologia del pagamento.");
+			return null;
+		}
 
 		double prezzo_finale = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
 		int disponibilita = calcolaDisponibilita(codiceCorsa, tipoBiglietto);
@@ -261,7 +266,7 @@ public class gestisciCorsa {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				aggiuntaAcquistoCronologia(codiceCliente, nome, cognome, ricevuta, corsa, tipoBiglietto, targa);
+				aggiuntaAcquistoCronologia(codiceCliente, ricevuta, corsa, tipoBiglietto, targa);
 				return ricevuta;
 			} else {
 				System.out.println("Elaborazione d'acquisto fallita");
@@ -305,7 +310,7 @@ public class gestisciCorsa {
 		return ricevuta;
 	}
 
-	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
+	public static void aggiuntaAcquistoCronologia(int codiceCliente, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
 		/*
 		 * PRECONDITIONS: -
 		 * POSTCONDITIONS: viene aggiunto l'acquisto in cronologia mediante il codice cliente, l'istanza della corsa la ricevuta e, 
