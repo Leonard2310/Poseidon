@@ -232,4 +232,54 @@ public class CronologiaDAO {
 		s.close();
 		DBManager.getInstance().closeConnection();
 	}
+	
+	public static void deleteCronologia(int codiceCliente, int codiceCorsa, String ricevuta) throws SQLException {
+		// PRECONDITIONS: il codiceCliente e il codiceCorsa sono parametri > 0, la ricevuta è una
+		// valida stringa testuale
+		// POSTCONDITIONS: la cronologia è stato correttamente eliminata dalla tabella CRONOLOGIAACQUISTI,
+		// se presente; altrimenti, il database non è stato modificato
+				
+		Connection connection = null;
+		PreparedStatement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.prepareStatement("DELETE FROM CRONOLOGIAACQUISTI WHERE codicecliente = ?"
+													+ " AND ricevuta = ? AND codicecorsa = ?");
+					
+			statement.setInt(1,  codiceCliente);
+			statement.setString(2, ricevuta);
+			statement.setInt(3, codiceCorsa);
+	
+			statement.executeUpdate();
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+	}
+	
+	public static void deleteallCronologia() throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: la tabella CRONOLOGIAACQUISTI è stata correttamente svuotata
+				
+		Connection connection = null;
+		Statement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM CRONOLOGIAACQUISTI");
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+	}
 }
