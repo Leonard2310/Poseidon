@@ -202,7 +202,7 @@ public class gestisciCorsa {
 		return lista_cronologia;
 	}
 
-	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa, String targa) {
+	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa, String targa, String tipologiaPagamento) {
 		/*
 		 * PRECONDITIONS: -
 		 * POSTCONDITIONS: se c'è disponibilità nella corsa selezionata e l'elaborazione dell'acquisto avviene con successo
@@ -251,7 +251,9 @@ public class gestisciCorsa {
 		if (disponibilita > 0) {
 			System.out.println("La corsa è disponibile");
 			System.out.println("Il prezzo è " + prezzo_finale);
-			bool_pagamento = elaborazioneAcquisto(codiceCliente, codiceCorsa, tipoBiglietto);
+			
+			bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
+			
 			if (bool_pagamento == true) {
 				ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 
@@ -302,23 +304,6 @@ public class gestisciCorsa {
 		}
 		
 		return ricevuta;
-	}
-
-	public static boolean elaborazioneAcquisto(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
-		/*
-		 * PRECONDITIONS: -
-		 * POSTCONDITIONS: avviene una chiamata all'elaborazione ac
-		 */ 
-
-		boolean bool_pagamento;
-
-		try (Scanner input = new Scanner(System.in)) {
-			System.out.println("Scegli la tipologia di pagamento: \t");
-			String tipologiaPagamento = input.nextLine();
-
-			bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
-		}
-		return bool_pagamento;
 	}
 
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {

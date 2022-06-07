@@ -67,6 +67,7 @@ public class ClienteConsoleBoundary {
 		String cognome = null;
 		String tipoBiglietto = null;
 		String targa = null;
+		String tipologiaPagamento = null;
 		
 		try (Scanner input = new Scanner(System.in)) {
 			System.out.println("Inserisci le informazioni anagrafiche: ");
@@ -90,8 +91,11 @@ public class ClienteConsoleBoundary {
 				}
 
 			} while (answer == false);
+			
+			System.out.println("Scegli la tipologia di pagamento: \t");
+			tipologiaPagamento = input.nextLine();
 
-			gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa, targa);
+			gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa, targa, tipologiaPagamento);
 		}
 	}
 
