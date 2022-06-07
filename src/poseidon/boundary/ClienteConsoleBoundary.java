@@ -57,7 +57,12 @@ public class ClienteConsoleBoundary {
 	}
 
 	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {
-		// TODO: Leonardo
+		/*
+		 * PRECONDITIONS: chiamata ad acquista biglietto mediante menù.
+		 * POSTCONDITIONS: viene effettuata una chiamata alla funzione per l'acquisto del biglietto passando come parametri
+		 * 	di ingresso i valori indicati in input dall'utente.
+		 */ 
+		
 		String nome = null;
 		String cognome = null;
 		String tipoBiglietto = null;

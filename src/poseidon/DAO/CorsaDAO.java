@@ -45,8 +45,7 @@ public class CorsaDAO {
 	
 	public static List<Corsa> readallCorsa() throws SQLException {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: viene restituita una lista contenente tutte le istanze della
-		// tabella CORSA
+		// POSTCONDITIONS: viene restituita una lista contenente tutte le istanze della tabella CORSA
 
 		List<Corsa> lista_corsa = new ArrayList<Corsa>();
 		Corsa corsa = null;

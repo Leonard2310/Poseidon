@@ -17,9 +17,9 @@ import poseidon.entity.BigliettoVeicolo;
 public class BigliettoDAO {
 
 	public static void creaBiglietto(Biglietto b) throws SQLException{
-		// PRECONDITIONS: il parametro in input è un riferimento ad un oggetto valido 
+		// PRECONDITIONS: il parametro in input Ã¨ un riferimento ad un oggetto valido 
 		// della classe Biglietto
-		// POSTCONDITIONS: il biglietto è stato correttamente inserito all'interno della tabella BIGLIETTO
+		// POSTCONDITIONS: il biglietto Ã¨ stato correttamente inserito all'interno della tabella BIGLIETTO
 		
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -100,8 +100,8 @@ public class BigliettoDAO {
 	
 	public static void deleteBiglietto(int codiceBiglietto, int codiceCorsa) throws SQLException{
 		// PRECONDITIONS: i parametri in input sono > 0
-		// POSTCONDITIONS: se trovato, il biglietto è stato correttamente eliminato dalla tabella BIGLIETTO;
-		// altrimenti, il DB non è stato modificato
+		// POSTCONDITIONS: se trovato, il biglietto ï¿½ stato correttamente eliminato dalla tabella BIGLIETTO;
+		// altrimenti, il DB non ï¿½ stato modificato
 		
 		Connection connection = null;
 		PreparedStatement statement = null;

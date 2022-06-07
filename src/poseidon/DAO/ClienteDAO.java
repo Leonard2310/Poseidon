@@ -13,9 +13,8 @@ import poseidon.entity.Cliente;
 public class ClienteDAO {
 
 	public static void creaCliente(Cliente c) throws SQLException{
-		// PRECONDITIONS: il parametro in input è un riferimento ad un oggetto valido 
-		// della classe Cliente
-		// POSTCONDITIONS: il cliente è stato correttamente inserito all'interno della tabella CLIENTE
+		// PRECONDITIONS: il parametro in input Ã¨ un riferimento ad un oggetto valido  della classe Cliente
+		// POSTCONDITIONS: il cliente Ã¨ stato correttamente inserito all'interno della tabella CLIENTE
 		
 		Connection connection = null;
 		PreparedStatement statement = null;

@@ -203,8 +203,12 @@ public class gestisciCorsa {
 	}
 
 	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa, String targa) {
-		// PRECONDIZIONE:
-		// POSTCONDIZIONE:
+		/*
+		 * PRECONDITIONS: -
+		 * POSTCONDITIONS: se c'è disponibilità nella corsa selezionata e l'elaborazione dell'acquisto avviene con successo
+		 * 	viene restituita una ricevuta e viene aggiunto l'acquisto in cronologia, 
+		 *  in caso contrario viene restituita una stringa null.
+		 */  
 		
 		Corsa corsa = new Corsa(codiceCorsa, null, null, null, null, 0.00);
 		boolean bool_pagamento = false;
@@ -260,16 +264,22 @@ public class gestisciCorsa {
 				return ricevuta;
 			} else {
 				System.out.println("Elaborazione d'acquisto fallita");
+				return null;
 			}
 		} else {
 			System.out.println("Assenza di posti disponibili");
+			return null;
 		}
-		// TODO: Leonardo
-		return ricevuta;
+
 	}
 	
 	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
-
+		/*
+		 * PRECONDITIONS: -
+		 * POSTCONDITIONS: viene generata una stringa formata dal codice cliente, dal codice della corsa che si sta acquistando,
+		 * 	da un riferimento alla tipologia del biglietto e da tre caratteri alfanumerici casuali.
+		 */ 
+		
 		String vocabolarioAlfaNumerico;
 		StringBuilder builder;
 		String ricevuta = null;
@@ -295,8 +305,10 @@ public class gestisciCorsa {
 	}
 
 	public static boolean elaborazioneAcquisto(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
-		// PRECONDIZIONE:
-		// POSTCONDIZIONE:
+		/*
+		 * PRECONDITIONS: -
+		 * POSTCONDITIONS: avviene una chiamata all'elaborazione ac
+		 */ 
 
 		boolean bool_pagamento;
 
@@ -310,8 +322,11 @@ public class gestisciCorsa {
 	}
 
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String nome, String cognome, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
-		// PRECONDIZIONE:
-		// POSTCONDIZIONE:
+		/*
+		 * PRECONDITIONS: -
+		 * POSTCONDITIONS: viene aggiunto l'acquisto in cronologia mediante il codice cliente, l'istanza della corsa la ricevuta e, 
+		 * 	nel caso dell'acquisto di un biglietto con opzione veicolo, la targa.
+		 */ 
 		
 		Biglietto b = null;
 		
@@ -331,8 +346,11 @@ public class gestisciCorsa {
 	}
 
 	public static int calcolaDisponibilita(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDIZIONE:
-		// POSTCONDIZIONE:
+		/*
+		 * PRECONDITIONS: creazione delle Navi effettuata
+		 * POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati effettuando un
+		 * 	controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
+		 */ 
 
 		List<Nave> lista_nave = new ArrayList<Nave>();
 		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
@@ -380,8 +398,10 @@ public class gestisciCorsa {
 	}
 
 	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDIZIONE:
-		// POSTCONDIZIONE:
+		/*
+		 * PRECONDITIONS: -
+		 * POSTCONDITIONS: viene calcolato il prezzo finale in base alla tipologia scelta dall'utente
+		 */ 
 
 		Corsa corsa = null;
 		double prezzo_finale = 0.00;

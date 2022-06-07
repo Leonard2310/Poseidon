@@ -9,10 +9,8 @@ import poseidon.entity.*;
 
 public class DipendenteConsoleBoundary {
 	public static void showDipendenteConsoleBoundary(int codiceImpiegato) {
-		// PRECONDITIONS: il dipendente ha premuto il pulsante per visualizzare le
-		// operazioni che pu� effettuare
-		// POSTCONDITIONS: le operazioni che il dipendente pu� effettuare sono state
-		// mostrate a schermo
+		// PRECONDITIONS: il dipendente ha premuto il pulsante per visualizzare le operazioni che può effettuare
+		// POSTCONDITIONS: le operazioni che il dipendente pu� effettuare sono state mostrate a schermo
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		int option = 0;
@@ -253,15 +251,11 @@ public class DipendenteConsoleBoundary {
 	}
 
 	public static void verificaAcquisti(int codiceImpiegato) {
-		// PRECONDITIONS: il dipendente ha scelto di verificare se ci sono acquisti per
-		// i quali ancora non �
-		// stato emesso un biglietto
-		// POSTCONDITIONS: viene visualizzato un messaggio che indica la ricevuta, il
-		// codice della corsa
-		// e il codice del cliente che ha effettuato l'acquisto, in caso non sia stato
-		// ancora emesso
-		// il biglietto; altrimenti, viene visualizzato un messaggio che indica
-		// l'assenza di nuovi acquisti
+		// PRECONDITIONS: il dipendente ha scelto di verificare se ci sono acquisti per i quali ancora non è
+		//  stato emesso un biglietto
+		// POSTCONDITIONS: viene visualizzato un messaggio che indica la ricevuta, il codice della corsa
+		// 	e il codice del cliente che ha effettuato l'acquisto, in caso non sia stato ancora emesso
+		// 	il biglietto; altrimenti, viene visualizzato un messaggio che indica l'assenza di nuovi acquisti
 
 		List<CronologiaAcquisti> lista = null;
 
