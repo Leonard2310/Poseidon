@@ -126,4 +126,25 @@ public class BigliettoDAO {
 		DBManager.getInstance().closeConnection();
 		
 	}
+	
+	public static void deleteallBiglietto() throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: la tabella BIGLIETTO è stata correttamente svuotata
+				
+		Connection connection = null;
+		Statement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM BIGLIETTO");
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+	}
 }
