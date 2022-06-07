@@ -188,5 +188,8 @@ insert into cliente values (10003, 'Di Serio', 'Francesco', 'emissione');
 
 insert into porto values ('Napoli');
 insert into porto values ('Ischia');
+insert into porto values('Capri');
 insert into corsa values (101, '10:00', '11:00', 'Napoli', 'Ischia', 20.00);
 insert into corsa values (102, '16:00', '17:00', 'Ischia', 'Napoli', 20.00);
+insert into corsa values (103, '10:00', '11:00', 'Napoli', 'Capri', 30.00);
+insert into corsa values (104, '16:00', '17:00', 'Capri', 'Napoli', 30.00);
