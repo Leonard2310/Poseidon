@@ -8,10 +8,8 @@ import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary(int codiceCliente) {
-		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le
-		// operazioni che pu� effettuare
-		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state
-		// mostrate a schermo
+		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che può effettuare
+		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state mostrate a schermo
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		int option = 0;

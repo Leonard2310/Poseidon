@@ -23,9 +23,8 @@ public class gestisciCorsa {
 
 	public static int loginCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene
-		// trovato nel database,
-		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene trovato nel database,
+		// 	viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Cliente> lista_clienti = null;
 		try {
@@ -44,9 +43,8 @@ public class gestisciCorsa {
 
 	public static int loginDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene
-		// trovato nel database,
-		// viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene trovato nel database,
+		// 	viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti;
 		try {
@@ -65,10 +63,8 @@ public class gestisciCorsa {
 
 	public static int registraCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non
-		// viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
-		// valore -1
+		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso non viene trovato nel database,
+		// 	viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Cliente> lista_clienti = null;
 		int codiceCliente = 10001;
@@ -101,10 +97,8 @@ public class gestisciCorsa {
 
 	public static int registraDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
-		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non
-		// viene trovato nel database,
-		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito
-		// valore -1
+		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non viene trovato nel database,
+		// 	viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti = null;
 		int codiceImpiegato = 10001;
@@ -319,7 +313,7 @@ public class gestisciCorsa {
 		// PRECONDIZIONE:
 		// POSTCONDIZIONE:
 		
-		Biglietto b = new Biglietto(0, null, null, 0, 0); 
+		Biglietto b = null;
 		
 		if(tipoBiglietto.equals("passeggero")) {
 			b = new BigliettoPasseggero(0, null, null, 0, 0);
@@ -418,18 +412,15 @@ public class gestisciCorsa {
 
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo, Double prezzo, String nomeNave) {
 		// PRECONDIZIONE: -
-		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene
-		// restituito
-		// un riferimento all'oggetto della classe Corsa contenente i dati della nuova
-		// corsa.
-		// Altrimenti viene restituita l'istanza = null.
+		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene estituito
+		// 	un riferimento all'oggetto della classe Corsa contenente i dati della nuova corsa.
+		// 	Altrimenti viene restituita l'istanza = null.
 
 		Corsa corsa = null;
 		Nave nave = null;
 		int codiceCorsa = -1;
 
-		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata
-		// corsa)
+		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata corsa)
 		try {
 			nave = NaveDAO.readNave(nomeNave);
 		} catch (SQLException e1) {
@@ -457,11 +448,9 @@ public class gestisciCorsa {
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri,
 			int capienzaAutoveicoli, int codiceCorsa) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
-		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene
-		// restituito
-		// un riferimento all'oggetto della classe Nave contenente i dati della nuova
-		// nave.
-		// Altrimenti viene restituita l'istanza = null.
+		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito
+		// 	un riferimento all'oggetto della classe Nave contenente i dati della nuova nave.
+		// 	Altrimenti viene restituita l'istanza = null.
 
 		Nave nave = null;
 
@@ -478,11 +467,9 @@ public class gestisciCorsa {
 
 	public static Porto inserimentoPorto(String citta) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova nave
-		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene
-		// restituito
-		// un riferimento all'oggetto della classe Porto contenente i dati del nuovo
-		// Porto.
-		// Altrimenti viene restituita l'istanza = null.
+		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene restituito
+		// 	un riferimento all'oggetto della classe Porto contenente i dati del nuovo Porto.
+		// 	Altrimenti viene restituita l'istanza = null.
 
 		Porto porto = null;
 		
@@ -513,12 +500,9 @@ public class gestisciCorsa {
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
 			int codiceCliente, char flag, String ricevuta) {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene
-		// restituito
-		// un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo
-		// biglietto e la
-		// cronologia acquisti del cliente viene aggiornata; altrimenti, viene
-		// restituito un riferimento null
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito
+		// 	un riferimento all'oggetto della classe Biglietto contenente i dati del nuovo biglietto e la
+		// 	cronologia acquisti del cliente viene aggiornata; altrimenti, viene restituito un riferimento null
 
 		Biglietto biglietto = null;
 		LocalDate data = null;
@@ -591,7 +575,7 @@ public class gestisciCorsa {
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
 			System.out.println(
-					"Al momento non � possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
+					"Al momento non è possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
 		if (flag == 'n') {
@@ -630,11 +614,9 @@ public class gestisciCorsa {
 
 	public static List<CronologiaAcquisti> verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un
-		// biglietto,
-		// viene restituito un riferimento all'oggetto della classe CronologiaAcquisti
-		// contenente i dati
-		// del nuovo acquisto; altrimenti, viene restituito un riferimento null
+		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto,
+		// 	viene restituito un riferimento all'oggetto della classe CronologiaAcquisti contenente i dati
+		//  sdel nuovo acquisto; altrimenti, viene restituito un riferimento null
 
 		List<CronologiaAcquisti> lista = null;
 		List<CronologiaAcquisti> lista_result = new ArrayList<CronologiaAcquisti>();
