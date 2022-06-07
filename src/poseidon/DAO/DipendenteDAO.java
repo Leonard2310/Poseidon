@@ -71,4 +71,33 @@ public class DipendenteDAO {
 		
 		return lista;
 	}
+	
+	public static Dipendente readDipendente(int codiceImpiegato) throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella DIPENDENTE
+
+		Dipendente dipendente = null;
+		Connection connection = null;
+		PreparedStatement s = null;
+		ResultSet r = null;
+
+		connection = DBManager.getInstance().getConnection();
+		s = connection.prepareStatement("SELECT * FROM DIPENDENTE WHERE codiceimpiegato = ?");
+		s.setInt(1, codiceImpiegato);
+
+		r = s.executeQuery();
+
+		if (r.next()) {
+			String cognome = r.getString("cognome");
+			String nome = r.getString("nome");
+			String password = r.getString("password");
+			
+			dipendente = new Dipendente(cognome, nome, password, codiceImpiegato);
+		}
+
+		s.close();
+		DBManager.getInstance().closeConnection();
+
+		return dipendente;
+	}
 }

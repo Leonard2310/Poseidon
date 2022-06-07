@@ -88,28 +88,27 @@ public class CorsaDAO {
 
 		Corsa corsa = null;
 		Connection connection = null;
-		Statement s = null;
+		PreparedStatement s = null;
 		ResultSet r = null;
 
 		connection = DBManager.getInstance().getConnection();
-		s = connection.createStatement();
+		s = connection.prepareStatement("SELECT * FROM CORSA WHERE codicecorsa = ?");
+		s.setInt(1, codiceCorsa);
 
-		r = s.executeQuery("SELECT * FROM CORSA");
+		r = s.executeQuery();
 
-		while (r.next()) {
-			if (codiceCorsa == r.getInt("codiceCorsa")) {
-				LocalTime orarioPartenza = null;
-				if (r.getTime("orarioPartenza") != null)
-					orarioPartenza = r.getTime("orarioPartenza").toLocalTime();
-				LocalTime orarioArrivo = null;
-				if (r.getTime("orarioArrivo") != null)
-					orarioArrivo = r.getTime("orarioArrivo").toLocalTime();
-				String portoPartenza = r.getString("portoPartenza");
-				String portoArrivo = r.getString("portoArrivo");
-				double prezzo = r.getDouble("prezzo");
-				
-				corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			}
+		if (r.next()) {
+			LocalTime orarioPartenza = null;
+			if (r.getTime("orarioPartenza") != null)
+				orarioPartenza = r.getTime("orarioPartenza").toLocalTime();
+			LocalTime orarioArrivo = null;
+			if (r.getTime("orarioArrivo") != null)
+				orarioArrivo = r.getTime("orarioArrivo").toLocalTime();
+			String portoPartenza = r.getString("portoPartenza");
+			String portoArrivo = r.getString("portoArrivo");
+			double prezzo = r.getDouble("prezzo");
+			
+			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 		}
 
 		s.close();

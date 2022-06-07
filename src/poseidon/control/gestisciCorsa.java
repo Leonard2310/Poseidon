@@ -518,9 +518,27 @@ public class gestisciCorsa {
 			System.out.println("Errore: il codice impiegato deve essere > 0.");
 			return null;
 		}
+		try {
+			if (DipendenteDAO.readDipendente(codiceImpiegato) == null) {
+				System.out.println("Errore: l'impiegato selezionato non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 
 		if (codiceCorsa <= 0) {
 			System.out.println("Errore: il codice corsa deve essere > 0.");
+			return null;
+		}
+		try {
+			if (CorsaDAO.readCorsa(codiceCorsa) == null) {
+				System.out.println("Errore: la corsa selezionata non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 			return null;
 		}
 
@@ -538,9 +556,18 @@ public class gestisciCorsa {
 			System.out.println("Errore: il codice cliente deve essere > 0.");
 			return null;
 		}
+		try {
+			if (ClienteDAO.readCliente(codiceCliente) == null) {
+				System.out.println("Errore: il cliente selezionato non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 
 		if (flag == 'n' && ricevuta == null) {
-			System.out.println("Errore: la ricevuta deve essere > 0.");
+			System.out.println("Errore: necessario inserire la ricevuta.");
 			return null;
 		}
 
