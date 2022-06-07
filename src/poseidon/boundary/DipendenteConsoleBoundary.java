@@ -269,8 +269,15 @@ public class DipendenteConsoleBoundary {
 
 		if (lista != null && lista.size() > 0) {
 			for (CronologiaAcquisti c : lista) {
-				System.out.println("Trovato acquisto:  numero ricevuta = " + c.getRicevuta() + "  codice corsa = "
+				System.out.print("Trovato acquisto:  numero ricevuta = " + c.getRicevuta() + "  codice corsa = "
 						+ c.getCorsa().getCodiceCorsa() + "  codice cliente = " + c.getCodiceCliente());
+				if (c.getBiglietto() instanceof BigliettoVeicolo) {
+					BigliettoVeicolo v = (BigliettoVeicolo)c.getBiglietto();
+					System.out.println("  tipo = veicolo  targa = " + v.getTarga());
+				}
+				else {
+					System.out.println("  tipo = passeggero");
+				}
 			}
 		} else {
 			System.out.println("Non ci sono nuovi acquisti.");

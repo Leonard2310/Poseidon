@@ -71,4 +71,33 @@ public class ClienteDAO {
 		
 		return lista;
 	}
+	
+	public static Cliente readCliente(int codiceCliente) throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella CLIENTE
+
+		Cliente cliente = null;
+		Connection connection = null;
+		PreparedStatement s = null;
+		ResultSet r = null;
+
+		connection = DBManager.getInstance().getConnection();
+		s = connection.prepareStatement("SELECT * FROM CLIENTE WHERE codicecliente = ?");
+		s.setInt(1, codiceCliente);
+
+		r = s.executeQuery();
+
+		if (r.next()) {
+			String cognome = r.getString("cognome");
+			String nome = r.getString("nome");
+			String password = r.getString("password");
+			
+			cliente = new Cliente(cognome, nome, password, codiceCliente);
+		}
+
+		s.close();
+		DBManager.getInstance().closeConnection();
+
+		return cliente;
+	}
 }
