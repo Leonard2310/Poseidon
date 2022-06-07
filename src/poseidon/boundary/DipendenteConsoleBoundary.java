@@ -96,7 +96,7 @@ public class DipendenteConsoleBoundary {
 		if (porto != null) {
 			System.out.println("Porto inserito correttamente");
 		
-			System.out.println("Inserire data e orario di partenza (hh:mm)");		
+			System.out.println("Inserire l'orario di partenza (hh:mm)");		
 			try { 
 				orarioPartenzaInput = inputReader.readLine();
 			} catch (IOException e) {
@@ -104,7 +104,7 @@ public class DipendenteConsoleBoundary {
 			}
 			LocalTime orarioPartenza = LocalTime.parse(orarioPartenzaInput);
 			
-			System.out.println("Inserire data e orario di arrivo (hh:mm)");		
+			System.out.println("Inserire l'orario di arrivo (hh:mm)");		
 			try { 
 				orarioArrivoInput = inputReader.readLine();
 			} catch (IOException e) {
