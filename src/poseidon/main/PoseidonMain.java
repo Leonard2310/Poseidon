@@ -12,8 +12,6 @@ public class PoseidonMain {
 
 	public static void main(String[] args) {
 		
-		//new MyFrame();
-		
 		inputReader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner input = new Scanner(System.in);
 		int option = 0;
