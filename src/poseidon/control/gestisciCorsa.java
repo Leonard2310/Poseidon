@@ -614,6 +614,11 @@ public class gestisciCorsa {
 				return null;
 			}
 		}
+		
+		if (calcolaDisponibilita(codiceCorsa, tipoBiglietto) <= 0) {
+			System.out.println("Errore: non ci sono più biglietti disponibili di questo tipo per questa corsa.");
+			return null;
+		}
 
 		try {
 			lista = BigliettoDAO.readallBiglietto();
