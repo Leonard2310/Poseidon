@@ -307,11 +307,10 @@ public class DipendenteConsoleBoundary {
 	}
 
 	public static void verificaAcquisti(int codiceImpiegato) {
-		// PRECONDITIONS: il dipendente ha scelto di verificare se ci sono acquisti per i quali ancora non è
-		//  stato emesso un biglietto
+		// PRECONDITIONS: il dipendente ha scelto di verificare se ci sono acquisti per i quali ancora non è stato emesso un biglietto
 		// POSTCONDITIONS: viene visualizzato un messaggio che indica la ricevuta, il codice della corsa
-		// 	e il codice del cliente che ha effettuato l'acquisto, in caso non sia stato ancora emesso
-		// 	il biglietto; altrimenti, viene visualizzato un messaggio che indica l'assenza di nuovi acquisti
+		// 		e il codice del cliente che ha effettuato l'acquisto, in caso non sia stato ancora emesso
+		// 		il biglietto; altrimenti, viene visualizzato un messaggio che indica l'assenza di nuovi acquisti
 
 		List<CronologiaAcquisti> lista = null;
 

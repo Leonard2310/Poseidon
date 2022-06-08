@@ -12,10 +12,8 @@ import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary(int codiceCliente) {
-		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le
-		// operazioni che può effettuare
-		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state
-		// mostrate a schermo
+		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che può effettuare
+		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state mostrate a schermo
 
 		inputReader = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
@@ -65,11 +63,9 @@ public class ClienteConsoleBoundary {
 	}
 
 	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {
-		/*
-		 * PRECONDITIONS: chiamata ad acquista biglietto mediante menù. POSTCONDITIONS:
-		 * viene effettuata una chiamata alla funzione per l'acquisto del biglietto
-		 * passando come parametri di ingresso i valori indicati in input dall'utente.
-		 */
+		// PRECONDITIONS: chiamata ad acquista biglietto mediante menù. 
+		// POSTCONDITIONS: viene effettuata una chiamata alla funzione per l'acquisto del biglietto passando come parametri 
+		//		di ingresso i valori indicati in input dall'utente.
 
 		String nome = null;
 		String cognome = null;
