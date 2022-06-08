@@ -248,7 +248,7 @@ public class ApplicationConsoleBoundary {
 		
 		else {
 			listaCorsa= gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			System.out.println("ERRORE INSERIMENTO");
+			System.out.println("ERRORE INSERIMENTO\n");
 			System.out.println("La lista di tutte le corse disponibili è la seguente: ");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
