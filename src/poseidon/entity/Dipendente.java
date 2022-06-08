@@ -16,5 +16,11 @@ public class Dipendente extends Utente {
 	public void setCodiceImpiegato(int codiceImpiegato) {
 		this.codiceImpiegato = codiceImpiegato;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Dipendente d = (Dipendente)o;
+		return (super.equals(d) && this.codiceImpiegato == d.codiceImpiegato);
+	}
 
 }

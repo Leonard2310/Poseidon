@@ -46,4 +46,12 @@ public class CronologiaAcquisti {
 		this.ricevuta = ricevuta;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		CronologiaAcquisti c = (CronologiaAcquisti)o;
+		return (this.codiceCliente == c.codiceCliente &&
+				this.corsa.equals(c.corsa) &&
+				this.biglietto.equals(c.biglietto) &&
+				this.ricevuta.equals(c.ricevuta));
+	}	
 }

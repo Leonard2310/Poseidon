@@ -59,4 +59,38 @@ public class Biglietto {
 		this.codiceImpiegato = codiceImpiegato;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		Biglietto b = (Biglietto)o;
+		
+		if (this.data == null && this.ora == null) {
+			return (this.codiceBiglietto == b.codiceBiglietto &&
+					this.data == b.data &&
+					this.ora == b.ora &&
+					this.codiceCorsa == b.codiceCorsa &&
+					this.codiceImpiegato == b.codiceImpiegato);
+		}
+		else if (this.data == null) {
+			return (this.codiceBiglietto == b.codiceBiglietto &&
+					this.data == b.data &&
+					this.ora.equals(b.ora) &&
+					this.codiceCorsa == b.codiceCorsa &&
+					this.codiceImpiegato == b.codiceImpiegato);
+		}
+		else if (this.ora == null) {
+			return (this.codiceBiglietto == b.codiceBiglietto &&
+					this.data.equals(b.data) &&
+					this.ora == b.ora &&
+					this.codiceCorsa == b.codiceCorsa &&
+					this.codiceImpiegato == b.codiceImpiegato);
+		}
+		else {
+			return (this.codiceBiglietto == b.codiceBiglietto &&
+				this.data.equals(b.data) &&
+				this.ora.equals(b.ora) &&
+				this.codiceCorsa == b.codiceCorsa &&
+				this.codiceImpiegato == b.codiceImpiegato);
+		}
+	}
+	
 }

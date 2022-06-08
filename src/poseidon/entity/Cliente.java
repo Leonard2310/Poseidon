@@ -16,5 +16,11 @@ public class Cliente extends Utente {
 	public void setCodiceCliente(int codiceCliente) {
 		this.codiceCliente = codiceCliente;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Cliente c = (Cliente)o;
+		return (super.equals(c) && this.codiceCliente == c.codiceCliente);
+	}
 
 }

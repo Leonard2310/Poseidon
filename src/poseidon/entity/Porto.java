@@ -16,4 +16,10 @@ public class Porto {
 		this.citta = citta;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		Porto p = (Porto)o;
+		return (this.citta == p.citta);
+	}
+	
 }

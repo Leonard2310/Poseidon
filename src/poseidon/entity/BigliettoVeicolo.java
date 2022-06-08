@@ -19,5 +19,11 @@ public class BigliettoVeicolo extends Biglietto {
 	public void setTarga(String targa) {
 		this.targa = targa;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		BigliettoVeicolo b = (BigliettoVeicolo)o;
+		return (super.equals(b) && this.targa.equals(b.targa));
+	}
 
 }

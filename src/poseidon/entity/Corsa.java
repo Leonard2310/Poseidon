@@ -69,4 +69,40 @@ public class Corsa {
 		this.prezzo = prezzo;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		Corsa c = (Corsa)o;
+		
+		if (this.orarioPartenza == null && this.orarioArrivo == null) {
+			return (this.codiceCorsa == c.codiceCorsa &&
+					this.orarioPartenza == c.orarioPartenza &&
+					this.orarioArrivo == c.orarioArrivo &&
+					this.portoPartenza.equals(c.portoPartenza) &&
+					this.portoArrivo.equals(c.portoArrivo) &&
+					this.prezzo == c.prezzo);
+		}
+		else if (this.orarioPartenza == null) {
+			return (this.codiceCorsa == c.codiceCorsa &&
+					this.orarioPartenza == c.orarioPartenza &&
+					this.orarioArrivo.equals(c.orarioArrivo) &&
+					this.portoPartenza.equals(c.portoPartenza) &&
+					this.portoArrivo.equals(c.portoArrivo) &&
+					this.prezzo == c.prezzo);
+		}
+		else if (this.orarioArrivo == null) {
+			return (this.codiceCorsa == c.codiceCorsa &&
+					this.orarioPartenza.equals(c.orarioPartenza) &&
+					this.orarioArrivo == c.orarioArrivo &&
+					this.portoPartenza.equals(c.portoPartenza) &&
+					this.portoArrivo.equals(c.portoArrivo) &&
+					this.prezzo == c.prezzo);
+		}
+		return (this.codiceCorsa == c.codiceCorsa &&
+				this.orarioPartenza.equals(c.orarioPartenza) &&
+				this.orarioArrivo.equals(c.orarioArrivo) &&
+				this.portoPartenza.equals(c.portoPartenza) &&
+				this.portoArrivo.equals(c.portoArrivo) &&
+				this.prezzo == c.prezzo);
+	}
+	
 }

@@ -9,5 +9,11 @@ public class BigliettoPasseggero extends Biglietto {
 			int codiceImpiegato) {
 		super(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		BigliettoPasseggero b = (BigliettoPasseggero)o;
+		return (super.equals(b));
+	}
 
 }

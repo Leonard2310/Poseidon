@@ -35,5 +35,13 @@ public class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Utente u = (Utente)o;
+		return (this.nome.equals(u.nome) &&
+				this.cognome.equals(u.cognome) &&
+				this.password.equals(u.password));
+	}	
 
 }

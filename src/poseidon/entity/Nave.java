@@ -56,4 +56,14 @@ public class Nave {
 		this.codiceCorsa = codiceCorsa;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		Nave n = (Nave)o;
+		return (this.nome.equals(n.nome) &&
+				this.capienzaAutoveicoli == n.capienzaAutoveicoli &&
+				this.capienzaPassegeri == n.capienzaPassegeri &&
+				this.categoria.equals(n.categoria) &&
+				this.codiceCorsa == n.codiceCorsa);
+	}
+	
 }
