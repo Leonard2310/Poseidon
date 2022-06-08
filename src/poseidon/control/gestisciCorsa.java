@@ -210,7 +210,7 @@ public class gestisciCorsa {
 		 *  in caso contrario viene restituita una stringa null.
 		 */  
 		
-		Corsa corsa = new Corsa(codiceCorsa, null, null, null, null, 0.00);
+		Corsa corsa = new Corsa(codiceCorsa, null, null, null, null, 0.0);
 		boolean bool_pagamento = false;
 		String ricevuta = null;
 		

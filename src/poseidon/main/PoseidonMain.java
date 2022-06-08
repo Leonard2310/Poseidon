@@ -89,7 +89,7 @@ public class PoseidonMain {
 							codice = ApplicationConsoleBoundary.login(0);
 						} while(codice == -1);
 
-						System.out.println("Inserisci il codice della corsa scelta: \t");
+						System.out.print("Inserisci il codice della corsa scelta: ");
 						
 						try {
 							codiceCorsa = Integer.parseInt(inputReader.readLine());

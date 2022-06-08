@@ -8,8 +8,10 @@ import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
 	public static void showClienteConsoleBoundary(int codiceCliente) {
-		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le operazioni che può effettuare
-		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state mostrate a schermo
+		// PRECONDITIONS: il cliente ha premuto il pulsante per visualizzare le
+		// operazioni che può effettuare
+		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state
+		// mostrate a schermo
 
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		int option = 0;
@@ -29,8 +31,8 @@ public class ClienteConsoleBoundary {
 			switch (option) {
 			case 1: {
 
-				System.out.println("Inserisci il codice della corsa scelta: \t");
-				
+				System.out.print("Inserisci il codice della corsa scelta:  ");
+
 				try {
 					int codiceCorsa = Integer.parseInt(inputReader.readLine());
 					acquistaBiglietto(codiceCorsa, codiceCliente);
@@ -39,6 +41,7 @@ public class ClienteConsoleBoundary {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
 				break;
 			}
 			case 2: {
@@ -58,48 +61,65 @@ public class ClienteConsoleBoundary {
 
 	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {
 		/*
-		 * PRECONDITIONS: chiamata ad acquista biglietto mediante menù.
-		 * POSTCONDITIONS: viene effettuata una chiamata alla funzione per l'acquisto del biglietto passando come parametri
-		 * 	di ingresso i valori indicati in input dall'utente.
-		 */ 
-		
+		 * PRECONDITIONS: chiamata ad acquista biglietto mediante menù. POSTCONDITIONS:
+		 * viene effettuata una chiamata alla funzione per l'acquisto del biglietto
+		 * passando come parametri di ingresso i valori indicati in input dall'utente.
+		 */
+
 		String nome = null;
 		String cognome = null;
 		String tipoBiglietto = null;
 		String targa = null;
 		String tipologiaPagamento = null;
-		
-		try (Scanner input = new Scanner(System.in)) {
-			System.out.println("Inserisci le informazioni anagrafiche: ");
-			System.out.print("Nome: \t");
-			nome = input.nextLine();
-			System.out.print("Cognome: \t");
-			cognome = input.nextLine();
 
-
-			boolean answer = false;
-			do {
-				System.out.println("Inserisci il tipo di biglietto scelto [passeggero/veicolo]: \t");
-				tipoBiglietto = input.nextLine();
-				
-				if (tipoBiglietto.equals("passeggero")) {
-					answer = true;
-				} else if (tipoBiglietto.equals("veicolo")) {
-					System.out.print("Targa: \t");
-					targa = input.nextLine();
-					answer = true;
-				} else {
-					System.out.println("Errore: tipo non valido");
-					answer = false;
-				}
-
-			} while (answer == false);
-			
-			System.out.println("Scegli la tipologia di pagamento: \t");
-			tipologiaPagamento = input.nextLine();
-
-			gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa, targa, tipologiaPagamento);
+		System.out.println("Inserisci le informazioni anagrafiche: ");
+		System.out.print("\tNome:  ");
+		try {
+			nome = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		System.out.print("\tCognome:  ");
+		try {
+			cognome = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		boolean answer = false;
+		do {
+			System.out.print("Inserisci il tipo di biglietto scelto [passeggero/veicolo]:   ");
+			try {
+				tipoBiglietto = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			if (tipoBiglietto.equals("passeggero")) {
+				answer = true;
+			} else if (tipoBiglietto.equals("veicolo")) {
+				System.out.print("\tTarga: \t");
+				try {
+					targa = inputReader.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				answer = true;
+			} else {
+				System.out.println("Errore: tipo non valido");
+				answer = false;
+			}
+
+		} while (answer == false);
+
+		System.out.print("Scegli la tipologia di pagamento:  ");
+		try {
+			tipologiaPagamento = inputReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		gestisciCorsa.acquistaBiglietto(codiceCliente, nome, cognome, tipoBiglietto, codiceCorsa, targa, tipologiaPagamento);
 	}
 
 	public static void visualizzaCronologiaAcquisti(int codiceCliente) {
