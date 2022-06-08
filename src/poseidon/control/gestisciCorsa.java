@@ -427,7 +427,9 @@ public class gestisciCorsa {
 
 		Corsa corsa = null;
 		Nave nave = null;
-		int codiceCorsa = -1;
+		int codiceCorsa = 1;
+		List<Corsa> lista_corsa = new ArrayList<Corsa>();
+
 
 		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata corsa)
 		try {
@@ -435,9 +437,20 @@ public class gestisciCorsa {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		
+		if (nave == null) { 
 
-		if (nave == null) {
-			codiceCorsa = (int) Math.random();
+			try {
+				lista_corsa = CorsaDAO.readallCorsa();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			for (Corsa c : lista_corsa) {
+				codiceCorsa = c.getCodiceCorsa() + 1;
+				System.out.println(c.getCodiceCorsa());
+			}
+			
 			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
 
 			try {
@@ -482,7 +495,6 @@ public class gestisciCorsa {
 
 		Porto porto = null;
 		
-		
 		try {
 			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
@@ -499,7 +511,7 @@ public class gestisciCorsa {
 				return null;
 			}
 		} else {
-			System.out.println("Il porto inserito e' gia' esistente.");
+			//System.out.println("Il porto inserito e' gia' esistente.");
 			return null;
 		}
 			

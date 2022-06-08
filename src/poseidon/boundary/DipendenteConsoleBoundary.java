@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
+import java.util.Arrays;  
 
 import poseidon.DAO.*;
 import poseidon.control.gestisciCorsa;
@@ -82,6 +83,7 @@ public class DipendenteConsoleBoundary {
 		int capienzaPasseggeri = 0;
 		int capienzaAutoveicoli = 0;
 		String citta = null;
+		char answer = 'n';
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		
@@ -98,26 +100,54 @@ public class DipendenteConsoleBoundary {
 								"Sorrento", "Amalfi", "Salerno", "Carlo Pisacane", "Messina", 
 								"Ortona", "Pozzallo", "Maratea", "Livorno", "Civitavecchia", "Vasto",
 								"Pesaro", "Savona", "Piombino", "Flavia", "Roseto degli Abruzzi"};
+		
+		
+		List<Porto> lista_porto = new ArrayList<Porto>();
+
+		try {
+			lista_porto = PortoDAO.readallPorto();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.print("Porti registrati:");
+		for(Porto p : lista_porto) {
+			System.out.print(" " +p.getCitta());
+		}
 		do {
-			System.out.println("Inserire la citta' del porto");
+			System.out.println("\nRegistrare un nuovo porto [y/n]? "); 
+	
 			try {
-				citta = inputReader.readLine();
-				for(int i = 0; i < listaPorti.length; i++) {
-					if (citta == listaPorti[i]) {
-						porto = gestisciCorsa.inserimentoPorto(citta);
-					}
-					else {
-						System.out.println("ERRORE: Città inserita non valida");
-						System.out.println("Possibili città da inserire:" + listaPorti[i]);
-					}	
-				}
+				answer = inputReader.readLine().charAt(0);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} while(porto != null);
+			
+			if (answer == 'y') {
+				do {
+					System.out.println("Inserire la citta' del porto");
+					try {
+						citta = inputReader.readLine();
+						for(int i = 0; i < listaPorti.length; i++) {
+							if (citta.compareTo(listaPorti[i])==0) {
+								porto = gestisciCorsa.inserimentoPorto(citta);
+								System.out.println("Porto inserito correttamente o già esistente");
+							}
+						}
+					} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+				} while(porto == null);				
+			}
+			else if(answer == 'n') {
+				break;
+			} 
+			else {
+				System.out.println("ERRORE: Carattere inserito non valido");
+			}
+		} while(porto == null);
 		
-		System.out.println("Porto inserito correttamente");
-	
 		System.out.println("Inserire l'orario di partenza (hh:mm)");		
 		try { 
 			orarioPartenzaInput = inputReader.readLine();
@@ -200,6 +230,7 @@ public class DipendenteConsoleBoundary {
 		} else {
 			System.out.println("Si e' verificato un errore nell'inserimento della corsa");
 		}	
+
 	}
 
 	public static void emissioneBiglietto(int codiceImpiegato) {

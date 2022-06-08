@@ -189,22 +189,13 @@ insert into cliente values (10003, 'Di Serio', 'Francesco', 'emissione');
 insert into porto values ('Napoli');
 insert into porto values ('Ischia');
 insert into porto values('Capri');
-insert into porto values('Ravenna');
-insert into porto values('Pozzuoli');
-insert into porto values('Catania');
-insert into porto values('Bari');
-insert into porto values('Brindisi');
-insert into porto values('Palermo');
-insert into porto values('Cagliari');
-insert into porto values('Olbia');
-insert into porto values('Genova');
 
 insert into corsa values (101, '10:00', '11:00', 'Napoli', 'Ischia', 20.00);
 insert into corsa values (102, '16:00', '17:00', 'Ischia', 'Napoli', 20.00);
 insert into corsa values (103, '10:00', '11:00', 'Napoli', 'Capri', 30.00);
 insert into corsa values (104, '16:00', '17:00', 'Capri', 'Napoli', 30.00);
 
-insert into nave values (NI, 30, 270, traghetto, 101);
-insert into nave values (IN, 0, 150, aliscafo, 102);
-insert into nave values (NC, 70, 400, traghetto, 103);
-insert into nave values (CN, 0, 100, aliscafo, 104);
+insert into nave values ('Estate', 30, 270, 'traghetto', 101);
+insert into nave values ('IN', 0, 150, 'aliscafo', 102);
+insert into nave values ('NC', 70, 400, 'traghetto', 103);
+insert into nave values ('CN', 0, 100, 'aliscafo', 104);

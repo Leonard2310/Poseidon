@@ -49,11 +49,14 @@ public class PoseidonMain {
 							DipendenteConsoleBoundary.showDipendenteConsoleBoundary(codice);
 						}
 					}
-					else {
+					else if(answer == 'n') {
 						codice = ApplicationConsoleBoundary.login(0);
 						if (codice > 0) { 
 							ClienteConsoleBoundary.showClienteConsoleBoundary(codice);
 						}
+					} 
+					else {
+						System.out.println("ERRORE: Carattere inserito non valido");
 					}
 					break; 
 				}
