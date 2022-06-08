@@ -66,7 +66,7 @@ public class CorsaDAO {
 			LocalTime orarioArrivo = null;
 			if (r.getTime("orarioArrivo") != null)
 				orarioArrivo = r.getTime("orarioArrivo").toLocalTime();
-			String portoPartenza = r.getString("portoArrivo");
+			String portoPartenza = r.getString("portoPartenza");
 			String portoArrivo = r.getString("portoArrivo");
 			double prezzo = r.getDouble("prezzo");
 			
