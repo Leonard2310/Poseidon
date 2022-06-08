@@ -83,6 +83,7 @@ public class DipendenteConsoleBoundary {
 		int capienzaAutoveicoli = 0;
 		String citta = null;
 		char answer = 'n';
+		int flag = 0;
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		
@@ -129,9 +130,13 @@ public class DipendenteConsoleBoundary {
 						citta = inputReader.readLine();
 						for(int i = 0; i < listaPorti.length; i++) {
 							if (citta.compareTo(listaPorti[i])==0) {
+								flag = 1;
 								porto = gestisciCorsa.inserimentoPorto(citta);
 								System.out.println("Porto inserito correttamente o gi� esistente");
 							}
+						}
+						if (flag == 0) {
+							System.out.println("Impossibile inserire questo porto");
 						}
 					} catch (IOException e) {
 							e.printStackTrace();
