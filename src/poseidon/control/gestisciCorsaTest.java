@@ -27,14 +27,12 @@ class gestisciCorsaTest {
 	static void setUpBeforeClass() throws Exception {
 		CronologiaDAO.deleteallCronologia();
 		BigliettoDAO.deleteallBiglietto();
-		// insert di corse, clienti e dipendenti se non presenti
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		CronologiaDAO.deleteallCronologia();
 		BigliettoDAO.deleteallBiglietto();
-		// delete di corse, clienti e dipendenti (forse no)
 	}
 
 	@BeforeEach
