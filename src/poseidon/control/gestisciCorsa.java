@@ -157,8 +157,9 @@ public class gestisciCorsa {
 				e1.printStackTrace();
 			}
 			for (Corsa c : listaCorsa) {
-				if (c.getOrarioArrivo() == orarioArrivo && c.getOrarioPartenza() == orarioPartenza
-						&& c.getPortoPartenza() == portoPartenza && c.getPortoArrivo() == portoArrivo && c.getPrezzo() <= prezzo) {
+				if (orarioArrivo.equals(c.getOrarioArrivo()) && orarioPartenza.equals(c.getOrarioPartenza())
+						&& portoPartenza.equals(c.getPortoPartenza()) && portoArrivo.equals(c.getPortoArrivo()) 
+						&& c.getPrezzo() <= prezzo) {
 					listaCorsa.add(c);
 				}
 			}
@@ -448,7 +449,6 @@ public class gestisciCorsa {
 			}
 			for (Corsa c : lista_corsa) {
 				codiceCorsa = c.getCodiceCorsa() + 1;
-				System.out.println(c.getCodiceCorsa());
 			}
 			
 			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
@@ -564,7 +564,7 @@ public class gestisciCorsa {
 		}
 
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Errore: il tipo di biglietto inserito non è valido.");
+			System.out.println("Errore: il tipo di biglietto inserito non ï¿½ valido.");
 			return null;
 		}
 
@@ -617,7 +617,7 @@ public class gestisciCorsa {
 
 		data = LocalDate.now();
 		ora = LocalTime.now();
-		/* Elimino i nanosecondi perché non è richiesto che vengano registati */
+		/* Elimino i nanosecondi perchï¿½ non ï¿½ richiesto che vengano registati */
 		ora = LocalTime.of(ora.getHour(), ora.getMinute(), ora.getSecond()); 
 
 		if (tipoBiglietto.equals("veicolo")) {

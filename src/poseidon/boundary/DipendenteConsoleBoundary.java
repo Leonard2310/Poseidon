@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
-import java.util.Arrays;  
 
 import poseidon.DAO.*;
 import poseidon.control.gestisciCorsa;
@@ -89,9 +88,9 @@ public class DipendenteConsoleBoundary {
 		
 		/*
 		 * print: inserire la citta del porto
-		 * controllo se la citta inserita è presente in un vettore in cui ci sono tutti i porti possibili di italia,
+		 * controllo se la citta inserita ï¿½ presente in un vettore in cui ci sono tutti i porti possibili di italia,
 		 * altrimenti errore 'citta inserita non valida'
-		 * è possibile inserirne una tra le seguenti
+		 * ï¿½ possibile inserirne una tra le seguenti
 		 * sytampa del vettore
 		 * 
 		 * */
@@ -131,7 +130,7 @@ public class DipendenteConsoleBoundary {
 						for(int i = 0; i < listaPorti.length; i++) {
 							if (citta.compareTo(listaPorti[i])==0) {
 								porto = gestisciCorsa.inserimentoPorto(citta);
-								System.out.println("Porto inserito correttamente o già esistente");
+								System.out.println("Porto inserito correttamente o giï¿½ esistente");
 							}
 						}
 					} catch (IOException e) {

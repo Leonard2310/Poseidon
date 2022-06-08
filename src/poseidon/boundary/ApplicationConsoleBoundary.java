@@ -1,10 +1,12 @@
 package poseidon.boundary;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import poseidon.DAO.NaveDAO;
 import poseidon.control.*;
 import poseidon.entity.*;
 
@@ -128,6 +130,8 @@ public class ApplicationConsoleBoundary {
 	public static void ricercaCorsa() {
 		// FUNZIONE NON RICHIESTA
 		
+		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+		
 		String answer = null;
 		int codiceCorsa = 0;
 		String portoPartenza = null;
@@ -137,8 +141,14 @@ public class ApplicationConsoleBoundary {
 		Double prezzo = 0.00;
 		
 		List<Corsa> listaCorsa = null;
+		List<Nave> listaNave = null;
 		
-		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+		try {
+			listaNave = NaveDAO.readallNave();
+			System.out.println(listaNave);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		System.out.println("Vuoi inserire dei filtri o il codice della corsa cercata? [filtri/codice]");
 		try {
@@ -190,18 +200,25 @@ public class ApplicationConsoleBoundary {
 			System.out.println("La lista delle corse con tali filtri sono:: ");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
-				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
 				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				for (Nave n : listaNave) {
+					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
+						System.out.println("\tTipo Nave:  "+n.getNome()+"€");
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
+					}
+				}
 				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
 
 		else if (answer.equals("codice")) {
 			
-			System.out.print("Inserisci il codice della corsa: \t");
+			System.out.print("Inserisci il codice della corsa:  ");
 			try {
 				codiceCorsa = Integer.parseInt(inputReader.readLine());
 			} catch (IOException e) {
@@ -212,11 +229,19 @@ public class ApplicationConsoleBoundary {
 			System.out.println("La corsa con tale codice è: \t");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
-				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
 				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				for (Nave n : listaNave) {
+					System.out.println("\tTEST:  "+n.getCodiceCorsa());
+					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
+						System.out.println("\tTipo Nave:  "+n.getNome());
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
+					}
+				}
 				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
@@ -227,11 +252,18 @@ public class ApplicationConsoleBoundary {
 			System.out.println("La lista di tutte le corse disponibili è la seguente: ");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
-				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Partenza:  "+c.getPortoPartenza());
+				System.out.println("\tOrario Partenza:  "+c.getOrarioPartenza());
 				System.out.println("\tPorto Arrivo:  "+c.getPortoArrivo());
 				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
+				for (Nave n : listaNave) {
+					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
+						System.out.println("\tTipo Nave:  "+n.getNome()+"€");
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
+					}
+				}
 				System.out.println("------------------------------------------------------------------------------------------\n");
 			}
 		}
