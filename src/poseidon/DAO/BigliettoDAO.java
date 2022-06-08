@@ -81,7 +81,7 @@ public class BigliettoDAO {
 			int codiceCorsa = r.getInt("codicecorsa");
 			int codiceImpiegato = r.getInt("codiceimpiegato");		
 			
-			if (r.getString("tipo").equals("veicolo")) {
+			if (r.getString("tipo").equals("VEICOLO")) {
 				String targa = r.getString("targa");
 				b = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
 			}
@@ -96,6 +96,47 @@ public class BigliettoDAO {
 		DBManager.getInstance().closeConnection();
 		
 		return lista;
+	}
+	
+	public static Biglietto readBiglietto(int codiceBiglietto, int codiceCorsa) throws SQLException {
+		// PRECONDITIONS: il codiceBiglietto e il codiceCorsa sono numeri > 0
+		// POSTCONDITIONS: viene restituito un riferimento ad un oggetto della classe Biglietto
+		// corrispondente al Biglietto avente il codiceBiglietto e il codiceCorsa passati in ingresso;
+		// se il Biglietto non è stato trovato, viene restituito un riferimento null
+		
+		Biglietto b = null;
+		Connection connection = null;
+		PreparedStatement s = null;
+		ResultSet r = null;
+		
+		connection = DBManager.getInstance().getConnection();
+		s = connection.prepareStatement("SELECT * FROM BIGLIETTO WHERE codicebiglietto = ? AND codicecorsa = ?");
+		s.setInt(1, codiceBiglietto);
+		s.setInt(2, codiceCorsa);
+		r = s.executeQuery();
+	
+		if (r.next()) {
+			LocalDate data = null;
+			if (r.getDate("data") != null) 
+				data = r.getDate("data").toLocalDate();
+			LocalTime ora = null;
+			if (r.getTime("ora") != null) 
+				ora = r.getTime("ora").toLocalTime();				
+			int codiceImpiegato = r.getInt("codiceimpiegato");		
+			
+			if (r.getString("tipo").equals("VEICOLO")) {
+				String targa = r.getString("targa");
+				b = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
+			}
+			else {
+				b = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
+			}
+		}
+		
+		s.close();
+		DBManager.getInstance().closeConnection();
+		
+		return b;
 	}
 	
 	public static void deleteBiglietto(int codiceBiglietto, int codiceCorsa) throws SQLException{
