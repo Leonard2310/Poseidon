@@ -138,6 +138,11 @@ public class ClienteConsoleBoundary {
 
 		lista_cronologia = gestisciCorsa.visualizzazioneCronologiaAcquisti(codiceCliente);
 		
+		if (lista_cronologia.size() == 0) {
+			System.out.println("\nLa tua cronologia è vuota.");
+			return;
+		}
+		
 		System.out.println("\nCRONOLOGIA:");
 
 		for (CronologiaAcquisti c : lista_cronologia) {
@@ -146,7 +151,14 @@ public class ClienteConsoleBoundary {
 			biglietto = c.getBiglietto();
 			
 			System.out.println("\tCorsa: " + corsa.getCodiceCorsa());
-			System.out.println("\tBiglietto: " + biglietto.getCodiceBiglietto());
+			
+			if (biglietto.getCodiceBiglietto() == 0) {
+				System.out.println("\tBiglietto: non ancora emesso");				
+			}
+			else {
+				System.out.println("\tBiglietto: " + biglietto.getCodiceBiglietto());				
+			}
+			
 			System.out.println("\tRicevuta: " + c.getRicevuta());
 			System.out.println("\t-------------------------");
 		}

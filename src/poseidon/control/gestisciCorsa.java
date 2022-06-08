@@ -76,7 +76,7 @@ public class gestisciCorsa {
 
 			for (Cliente c : lista_clienti) {
 				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password)) {
-					System.out.println("Errore: cliente giï¿½ esistente.");
+					System.out.println("Errore: cliente già esistente.");
 					return -1;
 				}
 			}
@@ -112,7 +112,7 @@ public class gestisciCorsa {
 
 			for (Dipendente d : lista_dipendenti) {
 				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password)) {
-					System.out.println("Errore: cliente giÃ  esistente.");
+					System.out.println("Errore: dipendente già esistente.");
 					return -1;
 				}
 			}

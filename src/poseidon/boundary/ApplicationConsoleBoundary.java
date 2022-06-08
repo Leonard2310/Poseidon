@@ -117,7 +117,7 @@ public class ApplicationConsoleBoundary {
 		}
 
 		if (codice > 0) {
-			System.out.println("Benvenuto nella nostra famiglia. Il codice che ti Ã¨ stato assegnato Ã¨ " + codice);
+			System.out.println("Benvenuto nella nostra famiglia. Il codice che ti è stato assegnato è " + codice);
 		} else {
 			System.out.println("Errore di registrazione.");
 		}
