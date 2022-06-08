@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import poseidon.control.gestisciCorsa;
+import poseidon.entity.Biglietto;
+import poseidon.entity.Corsa;
 import poseidon.entity.CronologiaAcquisti;
 
 public class ClienteConsoleBoundary {
@@ -131,14 +133,22 @@ public class ClienteConsoleBoundary {
 		// FUNZIONE NON IMPLEMENTATA
 
 		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
+		Corsa corsa;
+		Biglietto biglietto;
 
 		lista_cronologia = gestisciCorsa.visualizzazioneCronologiaAcquisti(codiceCliente);
+		
+		System.out.println("\nCRONOLOGIA:");
 
 		for (CronologiaAcquisti c : lista_cronologia) {
-			System.out.println("Corsa: " + c.getCorsa());
-			System.out.println("Biglietto: " + c.getBiglietto());
-			System.out.println("Ricevuta: " + c.getRicevuta());
-			System.out.println("\n-----------------\n");
+			
+			corsa = c.getCorsa();
+			biglietto = c.getBiglietto();
+			
+			System.out.println("\tCorsa: " + corsa.getCodiceCorsa());
+			System.out.println("\tBiglietto: " + biglietto.getCodiceBiglietto());
+			System.out.println("\tRicevuta: " + c.getRicevuta());
+			System.out.println("\t-----------------");
 		}
 
 	}
