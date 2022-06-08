@@ -74,6 +74,8 @@ public class ClienteConsoleBoundary {
 		String tipoBiglietto = null;
 		String targa = null;
 		String tipologiaPagamento = null;
+		
+		inputReader = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println("Inserisci le informazioni anagrafiche: ");
 		System.out.print("\tNome:  ");

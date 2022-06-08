@@ -148,7 +148,7 @@ public class gestisciCorsa {
 			}
 			listaCorsa.add(corsa);
 			return listaCorsa;
-		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null && prezzo != 0.00) {
+		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null && prezzo != 0.0) {
 			try {
 				listaCorsa = CorsaDAO.readallCorsa();
 			} catch (SQLException e1) {

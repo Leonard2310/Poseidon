@@ -145,7 +145,6 @@ public class ApplicationConsoleBoundary {
 		
 		try {
 			listaNave = NaveDAO.readallNave();
-			System.out.println(listaNave);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -197,6 +196,7 @@ public class ApplicationConsoleBoundary {
 			}
 
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
+			
 			System.out.println("La lista delle corse con tali filtri sono:: ");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
@@ -207,7 +207,7 @@ public class ApplicationConsoleBoundary {
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
 				for (Nave n : listaNave) {
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
-						System.out.println("\tTipo Nave:  "+n.getNome()+"€");
+						System.out.println("\tTipo Nave:  "+n.getNome());
 						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
 						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
 					}
@@ -226,6 +226,7 @@ public class ApplicationConsoleBoundary {
 			}
 			
 			listaCorsa = gestisciCorsa.ricercaCorsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
+			
 			System.out.println("La corsa con tale codice è: \t");
 			for (Corsa c : listaCorsa) {
 				System.out.println("CODICE CORSA:  "+c.getCodiceCorsa());
@@ -235,7 +236,6 @@ public class ApplicationConsoleBoundary {
 				System.out.println("\tOrario Arrivo:  "+c.getOrarioArrivo());
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
 				for (Nave n : listaNave) {
-					System.out.println("\tTEST:  "+n.getCodiceCorsa());
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
 						System.out.println("\tTipo Nave:  "+n.getNome());
 						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
@@ -259,7 +259,7 @@ public class ApplicationConsoleBoundary {
 				System.out.println("\tPrezzo base:  "+c.getPrezzo()+"€");
 				for (Nave n : listaNave) {
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
-						System.out.println("\tTipo Nave:  "+n.getNome()+"€");
+						System.out.println("\tTipo Nave:  "+n.getNome());
 						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
 						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
 					}

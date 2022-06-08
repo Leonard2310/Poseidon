@@ -76,7 +76,7 @@ CREATE TABLE public.nave
 (
     nome character varying NOT NULL,
     capienzaautoveicoli integer DEFAULT 0,
-    capienzapassegeri integer DEFAULT 0,
+    capienzapasseggeri integer DEFAULT 0,
     categoria character varying NOT NULL,
     codicecorsa integer NOT NULL,
     CONSTRAINT nave_pkey PRIMARY KEY (nome)
