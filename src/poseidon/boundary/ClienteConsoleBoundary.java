@@ -1,6 +1,8 @@
 package poseidon.boundary;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import poseidon.control.gestisciCorsa;
@@ -13,7 +15,7 @@ public class ClienteConsoleBoundary {
 		// POSTCONDITIONS: le operazioni che il cliente può effettuare sono state
 		// mostrate a schermo
 
-		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+		inputReader = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
 		do {
 			System.out.println("Le operazioni disponibili sono: \n" + "\t1) Acquista Biglietto\n"
@@ -57,6 +59,7 @@ public class ClienteConsoleBoundary {
 			}
 			}
 		} while (option != 3);
+		
 	}
 
 	public static void acquistaBiglietto(int codiceCorsa, int codiceCliente) {

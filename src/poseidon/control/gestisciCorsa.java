@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import poseidon.entity.*;
 import poseidon.DAO.*;
 
@@ -231,7 +229,7 @@ public class gestisciCorsa {
 		}
 		
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Il tipo di biglietto inserito non è valido.");
+			System.out.println("Errore: il tipo di biglietto inserito non è valido.");
 			return null;
 		}
 
@@ -267,6 +265,7 @@ public class gestisciCorsa {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				
 				aggiuntaAcquistoCronologia(codiceCliente, ricevuta, corsa, tipoBiglietto, targa);
 				return ricevuta;
 			} else {
@@ -396,19 +395,18 @@ public class gestisciCorsa {
 		Corsa corsa = null;
 		double prezzo_finale = 0.00;
 
-		try (Scanner input = new Scanner(System.in)) {
-			try {
-				corsa = CorsaDAO.readCorsa(codiceCorsa);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 
-			if (tipoBiglietto.equals("veicolo")) {
-				prezzo_finale = corsa.getPrezzo();
-			} else {
-				prezzo_finale = 50 + corsa.getPrezzo();
+		try {
+			corsa = CorsaDAO.readCorsa(codiceCorsa);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-			}
+		if (tipoBiglietto.equals("veicolo")) {
+			prezzo_finale = corsa.getPrezzo();
+		} else {
+			prezzo_finale = 50 + corsa.getPrezzo();
+
 		}
 
 		return prezzo_finale;
