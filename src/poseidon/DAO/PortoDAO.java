@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import poseidon.entity.*;
 
@@ -59,6 +62,34 @@ public class PortoDAO {
 		DBManager.getInstance().closeConnection();
 
 		return porto;
+	}
+	
+	public static List<Porto> readallPorto() throws SQLException {
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene restituita un'instanza specifica della tabella PORTO
+
+		List<Porto> lista_porto = new ArrayList<Porto>();
+		Porto porto = null;
+		Connection connection = null;
+		Statement s = null;
+		ResultSet r = null;
+
+		connection = DBManager.getInstance().getConnection();
+		s = connection.createStatement();
+
+		r = s.executeQuery("SELECT * FROM PORTO");
+
+		while (r.next()) {
+			String citta = r.getString("citta");
+			
+			porto = new Porto(citta);
+			lista_porto.add(porto);
+		}
+
+		s.close();
+		DBManager.getInstance().closeConnection();
+
+		return lista_porto;
 	}
 	
 }
