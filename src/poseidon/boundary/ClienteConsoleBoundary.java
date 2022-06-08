@@ -148,7 +148,7 @@ public class ClienteConsoleBoundary {
 			System.out.println("\tCorsa: " + corsa.getCodiceCorsa());
 			System.out.println("\tBiglietto: " + biglietto.getCodiceBiglietto());
 			System.out.println("\tRicevuta: " + c.getRicevuta());
-			System.out.println("\t-----------------");
+			System.out.println("\t-------------------------");
 		}
 
 	}

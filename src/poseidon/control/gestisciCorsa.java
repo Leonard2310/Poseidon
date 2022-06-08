@@ -138,6 +138,8 @@ public class gestisciCorsa {
 		// FUNZIONE NON RICHIESTA
 
 		List<Corsa> listaCorsa = new ArrayList<Corsa>();
+		List<Corsa> listaFiltri = new ArrayList<Corsa>();
+		
 		Corsa corsa = null;
 
 		if (codiceCorsa != 0) {
@@ -151,18 +153,17 @@ public class gestisciCorsa {
 		} else if (orarioPartenza != null && orarioArrivo != null && portoPartenza != null && portoArrivo != null && prezzo != 0.0) {
 			try {
 				listaCorsa = CorsaDAO.readallCorsa();
+				for (Corsa c : listaCorsa) {
+					if (orarioArrivo.equals(c.getOrarioArrivo()) && orarioPartenza.equals(c.getOrarioPartenza())
+							&& portoPartenza.equals(c.getPortoPartenza()) && portoArrivo.equals(c.getPortoArrivo()) 
+							&& c.getPrezzo() <= prezzo) {
+						listaFiltri.add(c);
+					}
+				}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			for (Corsa c : listaCorsa) {
-				if (orarioArrivo.equals(c.getOrarioArrivo()) && orarioPartenza.equals(c.getOrarioPartenza())
-						&& portoPartenza.equals(c.getPortoPartenza()) && portoArrivo.equals(c.getPortoArrivo()) 
-						&& c.getPrezzo() <= prezzo) {
-					listaCorsa.add(c);
-				}
-			}
-
-			return listaCorsa;
+			return listaFiltri;
 		} else {
 			System.out.println("Nessuna corsa per i filtri specificati");
 			try {
