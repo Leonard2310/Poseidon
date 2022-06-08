@@ -605,6 +605,8 @@ public class gestisciCorsa {
 
 		data = LocalDate.now();
 		ora = LocalTime.now();
+		/* Elimino i nanosecondi perché non è richiesto che vengano registati */
+		ora = LocalTime.of(ora.getHour(), ora.getMinute(), ora.getSecond()); 
 
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
