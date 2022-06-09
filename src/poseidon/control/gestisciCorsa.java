@@ -596,14 +596,37 @@ public class gestisciCorsa {
 				return null;
 			}
 			try {
-				if (CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta) == null) {
+				CronologiaAcquisti cronologia = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
+				if (cronologia == null) {
 					System.out.println("Errore: l'acquisto selezionato non esiste.");
+					return null;
+				}
+				else if (tipoBiglietto.equals("veicolo")) {
+					if (!(cronologia.getBiglietto() instanceof BigliettoVeicolo)) {
+						System.out.println("Errore: l'acquisto selezionato riguarda un biglietto passeggero.");
+						return null;
+					}
+					else {
+						BigliettoVeicolo v = (BigliettoVeicolo)cronologia.getBiglietto();
+						if (!v.getTarga().equals(targa)) {
+							System.out.println("Errore: l'acquisto selezionato presenta una targa diversa.");
+							return null;
+						}
+					}
+				}
+				else if (!(cronologia.getBiglietto() instanceof BigliettoPasseggero)) {
+					System.out.println("Errore: l'acquisto selezionato riguarda un biglietto veicolo.");
 					return null;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return null;
 			}
+		}
+		
+		if (calcolaDisponibilita(codiceCorsa, tipoBiglietto) <= 0) {
+			System.out.println("Errore: non ci sono più biglietti disponibili di questo tipo per questa corsa.");
+			return null;
 		}
 
 		try {
