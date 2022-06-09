@@ -72,7 +72,9 @@ public class DipendenteConsoleBoundary {
 		String portoPartenza = null;
 		String portoArrivo = null;
 		String orarioPartenzaInput = null;
+		LocalTime orarioPartenza;
 		String orarioArrivoInput = null;
+		LocalTime orarioArrivo;
 		Double prezzo = 0.0;
 		String nomeNave = null;
 		Corsa corsa = null;
@@ -124,25 +126,22 @@ public class DipendenteConsoleBoundary {
 			}
 			
 			if (answer == 'y') {
-				do {
-					System.out.println("Inserire la citta' del porto");
-					try {
-						citta = inputReader.readLine();
-						for(int i = 0; i < listaPorti.length; i++) {
-							if (citta.compareTo(listaPorti[i])==0) {
-								flag = 1;
-								porto = gestisciCorsa.inserimentoPorto(citta);
-								System.out.println("Porto inserito correttamente o gi� esistente");
-							}
+				System.out.println("Inserire la citta' del porto:");
+				try {
+					citta = inputReader.readLine();
+					for(int i = 0; i < listaPorti.length; i++) {
+						if (citta.compareTo(listaPorti[i])==0) {
+							flag = 1;
+							porto = gestisciCorsa.inserimentoPorto(citta);
+							System.out.println("Porto inserito correttamente o gia' esistente.");
 						}
-						if (flag == 0) {
-							System.out.println("Impossibile inserire questo porto");
-						}
-					} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-				} while(porto == null);				
+					}
+					if (flag == 0) {
+						System.out.println("Impossibile inserire questo porto.");
+					}
+				} catch (IOException e) {
+						e.printStackTrace();
+				}	
 			}
 			else if(answer == 'n') {
 				break;
@@ -152,44 +151,86 @@ public class DipendenteConsoleBoundary {
 			}
 		} while(porto == null);
 		
-		System.out.println("Inserire l'orario di partenza (hh:mm)");		
-		try { 
-			orarioPartenzaInput = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		LocalTime orarioPartenza = LocalTime.parse(orarioPartenzaInput);
+		do {
+			System.out.println("Inserire l'orario di partenza (hh:mm):");		
+			try { 
+				orarioPartenzaInput = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			orarioPartenza = LocalTime.parse(orarioPartenzaInput);
+			
+			System.out.println("Inserire l'orario di arrivo (hh:mm):");		
+			try { 
+				orarioArrivoInput = inputReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			orarioArrivo = LocalTime.parse(orarioArrivoInput);
+			
+			if(orarioPartenza.compareTo(orarioArrivo) == 0) {
+				System.out.println("ERRORE: l'orario inserito non e' valido!");
+				flag=0;
+			}
+			else {
+				boolean is = false;
+				is = orarioPartenza.isAfter(orarioArrivo);
+				if(is == true) {
+					System.out.println("ERRORE: l'orario inserito non e' valido!");
+					flag=0;
+				}
+				else if(is==false)
+					flag=1;
+			}		
+		} while(flag==0);
 		
-		System.out.println("Inserire l'orario di arrivo (hh:mm)");		
-		try { 
-			orarioArrivoInput = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		LocalTime orarioArrivo = LocalTime.parse(orarioArrivoInput);
+		do {
+			System.out.println("Inserire il porto di partenza:");
+			try { 
+				portoPartenza = inputReader.readLine();
+				
+				for(int i = 0; i < listaPorti.length; i++) {
+					if (portoPartenza.compareTo(listaPorti[i])==0) {
+						flag = 1;
+					}
+				}
+				if (flag == 0) {
+					System.out.println("Impossibile inserire questo porto: non e' stato registrato.");
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} while(flag==0);
 		
-		System.out.println("Inserire il nome porto di partenza");
-		try { 
-			portoPartenza = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		System.out.println("Inserire il nome porto di arrivo");
-		try { 
-			portoArrivo = inputReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		do {
+			System.out.println("Inserire il porto di arrivo:");
+			try { 
+				portoArrivo = inputReader.readLine();
+				
+				for(int i = 0; i < listaPorti.length; i++) {
+					if (portoArrivo.compareTo(listaPorti[i])==0) {
+						flag = 1;
+					}
+				}
+				if (flag == 0) {
+					System.out.println("Impossibile inserire questo porto: non e' stato registrato.");
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} while(flag==0);
 		
-		System.out.println("Inserire il nome della nave che effettuera' la corsa");
+		System.out.println("Inserire il nome della nave che effettuera' la corsa:");
 		try { 
 			nomeNave = inputReader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Inserire il prezzo della corsa (nn.nn)");
+		System.out.println("Inserire il prezzo della corsa (nn.nn):");
 		try { 
 			prezzo = Double.parseDouble(inputReader.readLine());
 		} catch (IOException e) {
@@ -228,6 +269,7 @@ public class DipendenteConsoleBoundary {
 			
 			if (nave != null) {
 				System.out.println("Nave inserita correttamente");
+				System.out.println("Operazione conclusa con successo!");
 			} else {
 				System.out.println("Si e' verificato un errore nell'inserimento della nave");
 			}

@@ -458,7 +458,7 @@ public class gestisciCorsa {
 			}
 
 			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-
+			
 			try {
 				CorsaDAO.creaCorsa(corsa);
 			} catch (SQLException e1) {
