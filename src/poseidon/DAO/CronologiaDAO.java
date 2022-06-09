@@ -97,11 +97,11 @@ public class CronologiaDAO {
 			
 			int codiceBiglietto = r.getInt("codiceBiglietto");
 			LocalDate data = null;
-			if (r.getDate("Data") != null)
-				data = r.getDate("Data").toLocalDate();
+			if (r.getDate("DataEmissione") != null)
+				data = r.getDate("DataEmissione").toLocalDate();
 			LocalTime ora = null;
-			if (r.getDate("Ora") != null)
-				ora = r.getTime("Ora").toLocalTime();
+			if (r.getDate("OraEmissione") != null)
+				ora = r.getTime("OraEmissione").toLocalTime();
 			int codiceImpiegato = r.getInt("codiceImpiegato");	
 			Biglietto biglietto = null;
 			if (r.getString("tipo").equals("veicolo")) {
@@ -154,11 +154,11 @@ public class CronologiaDAO {
 			
 			int codiceBiglietto = r.getInt("codiceBiglietto");
 			LocalDate data = null;
-			if (r.getDate("Data") != null)
-				data = r.getDate("Data").toLocalDate();
+			if (r.getDate("DataEmissione") != null)
+				data = r.getDate("DataEmissione").toLocalDate();
 			LocalTime ora = null;
-			if (r.getDate("Ora") != null)
-				ora = r.getTime("Ora").toLocalTime();
+			if (r.getDate("OraEmissione") != null)
+				ora = r.getTime("OraEmissione").toLocalTime();
 			int codiceImpiegato = r.getInt("codiceImpiegato");	
 			Biglietto biglietto = null;
 			if (r.getString("tipo").equals("veicolo")) {
@@ -196,8 +196,8 @@ public class CronologiaDAO {
 										+ " portoarrivo = ?,"
 										+ " prezzo = ?,"
 										+ " codicebiglietto = ?,"
-										+ " data = ?,"
-										+ " ora = ?,"
+										+ " dataemissione = ?,"
+										+ " oraemissione = ?,"
 										+ " codiceimpiegato = ?,"
 										+ " tipo = ?,"
 										+ " targa = ?"
