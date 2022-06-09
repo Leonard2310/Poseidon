@@ -19,7 +19,7 @@ public class ClienteConsoleBoundary {
 		int option = 0;
 		do {
 			System.out.println("Le operazioni disponibili sono: \n" + "\t1) Acquista Biglietto\n"
-					+ "\t2) Visualizza Cronologia Acquisti\n" + "\t3) Esci");
+					+ "\t2) Visualizza Cronologia Acquisti\n" + "\t3) Logout");
 			System.out.flush();
 
 			try {
@@ -135,7 +135,7 @@ public class ClienteConsoleBoundary {
 		lista_cronologia = gestisciCorsa.visualizzazioneCronologiaAcquisti(codiceCliente);
 		
 		if (lista_cronologia.size() == 0) {
-			System.out.println("\nLa tua cronologia è vuota.");
+			System.out.println("\nLa tua cronologia Ã¨ vuota.");
 			return;
 		}
 		

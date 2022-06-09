@@ -20,7 +20,7 @@ public class DipendenteConsoleBoundary {
 		do {
 			System.out.println("Le operazioni disponibili sono: \n" + "\t1) Inserimento Corsa\n"
 					+ "\t2) Modifica Corsa\n" + "\t3) Cancellazione Corsa\n" + "\t4) Emissione Biglietto\n"
-					+ "\t5) Verifica Acquisti\n" + "\t6) Esci");
+					+ "\t5) Verifica Acquisti\n" + "\t6) Logout");
 			System.out.flush();
 
 			try {

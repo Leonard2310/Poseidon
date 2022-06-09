@@ -259,11 +259,11 @@ public class gestisciCorsa {
 
 		if (prezzo_finale > 0.0) {
 
-			int disponibilita = calcolaDisponibilita(codiceCorsa, tipoBiglietto);
+			int disponibilita = calcolaDisponibilitaCronologia(codiceCorsa, tipoBiglietto);
 
 			if (disponibilita > 0) {
-				System.out.println("La corsa è disponibile");
-				System.out.println("Il prezzo è " + prezzo_finale);
+				System.out.println("La corsa è disponibile (" + disponibilita + " posti rimanenti)");
+				System.out.println("Il prezzo finale è " + prezzo_finale +"0€");
 
 				bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
 
@@ -314,9 +314,9 @@ public class gestisciCorsa {
 		}
 
 		if (tipoBiglietto.equals("passeggero")) {
-			ricevuta = codiceCliente + "P" + codiceCorsa + builder;
+			ricevuta = codiceCliente + "PAS" + codiceCorsa + builder;
 		} else if (tipoBiglietto.equals("veicolo")) {
-			ricevuta = codiceCliente + "V" + codiceCorsa + builder;
+			ricevuta = codiceCliente + "VEI" + codiceCorsa + builder;
 		}
 
 		return ricevuta;
@@ -344,7 +344,7 @@ public class gestisciCorsa {
 
 	}
 
-	public static int calcolaDisponibilita(int codiceCorsa, String tipoBiglietto) {
+	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: creazione delle Navi effettuata
 		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
 		// effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
@@ -393,6 +393,57 @@ public class gestisciCorsa {
 
 		return disponibilita;
 	}
+	
+	public static int calcolaDisponibilitaCronologia(int codiceCorsa, String tipoBiglietto) {
+		// PRECONDITIONS: creazione delle Navi effettuata
+		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
+		// effettuando un controllo sulle ricevute di acquisto per la corsa specificata e per tale tipologia.
+
+		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
+		List<Nave> lista_nave = new ArrayList<Nave>();
+		
+		Corsa corsa = new Corsa(0, null, null, null, null, 0);
+
+		String ricevuta = null;
+		int capienza = 0;
+		int count = 0;
+
+		try {
+			lista_nave = NaveDAO.readallNave();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (Nave n : lista_nave) {
+			if (codiceCorsa == n.getCodiceCorsa()) {
+				if (tipoBiglietto.equals("passeggero")) {
+					capienza = n.getCapienzaPassegeri();
+				} else if (tipoBiglietto.equals("veicolo")) {
+					capienza = n.getCapienzaAutoveicoli();
+				}
+			}
+		}
+
+		try {
+			lista_cronologia = CronologiaDAO.readallCronologia();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (CronologiaAcquisti c : lista_cronologia) {
+			corsa = c.getCorsa();
+			if (codiceCorsa == corsa.getCodiceCorsa()) {
+				ricevuta = c.getRicevuta();
+				if (ricevuta.contains("VEI") && tipoBiglietto.equals("veicolo")) {
+					count += 1;
+				} else if (ricevuta.contains("PAS") && tipoBiglietto.equals("passeggero")) {
+					count += 1;
+				}
+			}
+		}
+
+		int disponibilita = capienza - count;
+
+		return disponibilita;
+	}
 
 	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
@@ -409,13 +460,13 @@ public class gestisciCorsa {
 
 		if (corsa != null) {
 
-			if (tipoBiglietto.equals("veicolo")) {
+			if (tipoBiglietto.equals("passeggero")) {
 				prezzo_finale = corsa.getPrezzo();
 			} else {
-				prezzo_finale = 50 + corsa.getPrezzo();
+				prezzo_finale = 50.0 + corsa.getPrezzo();
 
 			}
-		} 
+		}
 
 		return prezzo_finale;
 	}
@@ -600,21 +651,18 @@ public class gestisciCorsa {
 				if (cronologia == null) {
 					System.out.println("Errore: l'acquisto selezionato non esiste.");
 					return null;
-				}
-				else if (tipoBiglietto.equals("veicolo")) {
+				} else if (tipoBiglietto.equals("veicolo")) {
 					if (!(cronologia.getBiglietto() instanceof BigliettoVeicolo)) {
 						System.out.println("Errore: l'acquisto selezionato riguarda un biglietto passeggero.");
 						return null;
-					}
-					else {
-						BigliettoVeicolo v = (BigliettoVeicolo)cronologia.getBiglietto();
+					} else {
+						BigliettoVeicolo v = (BigliettoVeicolo) cronologia.getBiglietto();
 						if (!v.getTarga().equals(targa)) {
 							System.out.println("Errore: l'acquisto selezionato presenta una targa diversa.");
 							return null;
 						}
 					}
-				}
-				else if (!(cronologia.getBiglietto() instanceof BigliettoPasseggero)) {
+				} else if (!(cronologia.getBiglietto() instanceof BigliettoPasseggero)) {
 					System.out.println("Errore: l'acquisto selezionato riguarda un biglietto veicolo.");
 					return null;
 				}
@@ -623,9 +671,9 @@ public class gestisciCorsa {
 				return null;
 			}
 		}
-		
-		if (calcolaDisponibilita(codiceCorsa, tipoBiglietto) <= 0) {
-			System.out.println("Errore: non ci sono pi� biglietti disponibili di questo tipo per questa corsa.");
+
+		if (calcolaDisponibilitaBiglietti(codiceCorsa, tipoBiglietto) <= 0) {
+			System.out.println("Errore: non ci sono pi� biglietti disponibili di questo tipo per questa corsa.");
 			return null;
 		}
 

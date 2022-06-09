@@ -117,7 +117,7 @@ public class ApplicationConsoleBoundary {
 		}
 
 		if (codice > 0) {
-			System.out.println("Benvenuto nella nostra famiglia. Il codice che ti è stato assegnato è " + codice);
+			System.out.println("Benvenuto nella nostra famiglia. Il codice che ti ï¿½ stato assegnato ï¿½ " + codice);
 		} else {
 			System.out.println("Errore di registrazione.");
 		}
@@ -125,6 +125,8 @@ public class ApplicationConsoleBoundary {
 
 	public static void logout() {
 		// FUNZIONE NON RICHIESTA
+		
+		System.out.println("Hai effettuato il logout.\n");
 	}
 
 	public static void ricercaCorsa() {
