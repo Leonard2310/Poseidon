@@ -224,6 +224,15 @@ public class gestisciCorsa {
 			System.out.println("Errore: il codice cliente deve essere > 0.");
 			return null;
 		}
+		try {
+			if (ClienteDAO.readCliente(codiceCliente) == null) {
+				System.out.println("Errore: il cliente selezionato non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 
 		if (nome.equals("") || nome == null) {
 			System.out.println("Errore: necessario inserire il nome.");
