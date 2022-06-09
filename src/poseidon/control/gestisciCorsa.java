@@ -343,56 +343,6 @@ public class gestisciCorsa {
 		}
 
 	}
-
-	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDITIONS: creazione delle Navi effettuata
-		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
-		// effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
-
-		List<Nave> lista_nave = new ArrayList<Nave>();
-		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
-
-		int capienza = 0;
-		int count = 0;
-
-		try {
-			lista_nave = NaveDAO.readallNave();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		for (Nave n : lista_nave) {
-			if (codiceCorsa == n.getCodiceCorsa()) {
-				if (tipoBiglietto.equals("passeggero")) {
-					capienza = n.getCapienzaPassegeri();
-				} else if (tipoBiglietto.equals("veicolo")) {
-					capienza = n.getCapienzaAutoveicoli();
-				}
-			}
-		}
-
-		try {
-			lista_biglietto = BigliettoDAO.readallBiglietto();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		for (Biglietto b : lista_biglietto) {
-			if (codiceCorsa == b.getCodiceCorsa()) {
-				if (tipoBiglietto.equals("veicolo")) {
-					if ((b instanceof BigliettoVeicolo) == true) {
-						count += 1;
-					}
-				} else if (tipoBiglietto.equals("passeggero")) {
-					if ((b instanceof BigliettoPasseggero) == true) {
-						count += 1;
-					}
-				}
-			}
-		}
-
-		int disponibilita = capienza - count;
-
-		return disponibilita;
-	}
 	
 	public static int calcolaDisponibilitaCronologia(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: creazione delle Navi effettuata
@@ -570,6 +520,56 @@ public class gestisciCorsa {
 		}
 
 		return porto;
+	}
+	
+	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
+		// PRECONDITIONS: creazione delle Navi effettuata
+		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
+		// effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
+
+		List<Nave> lista_nave = new ArrayList<Nave>();
+		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
+
+		int capienza = 0;
+		int count = 0;
+
+		try {
+			lista_nave = NaveDAO.readallNave();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (Nave n : lista_nave) {
+			if (codiceCorsa == n.getCodiceCorsa()) {
+				if (tipoBiglietto.equals("passeggero")) {
+					capienza = n.getCapienzaPassegeri();
+				} else if (tipoBiglietto.equals("veicolo")) {
+					capienza = n.getCapienzaAutoveicoli();
+				}
+			}
+		}
+
+		try {
+			lista_biglietto = BigliettoDAO.readallBiglietto();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (Biglietto b : lista_biglietto) {
+			if (codiceCorsa == b.getCodiceCorsa()) {
+				if (tipoBiglietto.equals("veicolo")) {
+					if ((b instanceof BigliettoVeicolo) == true) {
+						count += 1;
+					}
+				} else if (tipoBiglietto.equals("passeggero")) {
+					if ((b instanceof BigliettoPasseggero) == true) {
+						count += 1;
+					}
+				}
+			}
+		}
+
+		int disponibilita = capienza - count;
+
+		return disponibilita;
 	}
 
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
