@@ -16,7 +16,6 @@ import poseidon.DAO.BigliettoDAO;
 import poseidon.DAO.CorsaDAO;
 import poseidon.DAO.CronologiaDAO;
 import poseidon.entity.Biglietto;
-import poseidon.entity.BigliettoPasseggero;
 import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.Corsa;
 import poseidon.entity.CronologiaAcquisti;
@@ -47,395 +46,117 @@ class acquistoBigliettoTest {
 	void testAcquistoBiglietto_1() throws SQLException {
 
 		/* Output attesi */
-		int codiceBiglietto = 1;
+		int codiceCliente = 10001;
 		int codiceCorsa = 101;
-		int codiceImpiegato = 1001;
 		String targa = "AA000AA";
-		int codiceCliente = 10001;
 		
 		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 101, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals(ricevuta.length(), 14);
 		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
+		assertNotNull(ricevuta);
 	}
-
+	
 	@Test
-	void testEmissioneBiglietto_2() throws SQLException {
+	void testAcquistoBiglietto_2() throws SQLException {
 
 		/* Output attesi */
-		int codiceBiglietto = 2;
+		int codiceCliente = 10002;
 		int codiceCorsa = 101;
-		int codiceImpiegato = 1002;
-		String targa = "AA000AA";
-		int codiceCliente = 10001;
 		
 		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 101, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10002, "Leonardo", "Catello", "passeggero", 101, null, "bancomat");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
-		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
+		assertEquals(ricevuta.length(), 14);
+		assertNull(v.getTarga());
+		assertNotNull(ricevuta);
 	}
 	
 	@Test
-	void testEmissioneBiglietto_3() throws SQLException {
+	void testAcquistoBiglietto_3() throws SQLException {
 
 		/* Output attesi */
-		int codiceBiglietto = 3;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1001;
-		int codiceCliente = 10001;
+		int codiceCliente = 10003;
+		int codiceCorsa = 3;
 		
 		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "passeggero", 10001, 'y', "10001VEI1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Daiana", "Cipollaro", "passeggero", 3, null, "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
-	}
-
-	@Test
-	void testEmissioneBiglietto_4() throws SQLException {
-
-		/* Output attesi */
-		int codiceBiglietto = 4;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1002;
-		int codiceCliente = 10001;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 101, "AA000AA", "passeggero", 10001, 'y', "10001VEI1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
+		assertEquals(ricevuta.length(), 12);
+		assertNull(v.getTarga());
+		assertNotNull(ricevuta);
 	}
 	
 	@Test
-	void testEmissioneBiglietto_5() throws SQLException {
-
-		/* Output attesi */
-		int codiceBiglietto = 1;
-		int codiceCorsa = 102;
-		int codiceImpiegato = 1001;
-		int codiceCliente = 10001;
+	void testAcquistoBiglietto_4() throws SQLException {
 		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 102, "AA000AA", "passeggero", 10001, 'y', "10001VEI1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_6() throws SQLException {
-
-		/* Output attesi */
-		int codiceBiglietto = 2;
-		int codiceCorsa = 102;
-		int codiceImpiegato = 1002;
-		int codiceCliente = 10001;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 102, "AA000AA", "passeggero", 10001, 'y', "10001VEI1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_7() throws SQLException {
-
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);
-		Biglietto big = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001VEI1019UO");
+		Biglietto biglietto = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
+		CronologiaAcquisti cronologia = new CronologiaAcquisti(10003, corsa, biglietto, "10001VEI1019UO");
 		CronologiaDAO.creaCronologia(cronologia);
-		
+
 		/* Output attesi */
-		int codiceBiglietto = 5;
 		int codiceCorsa = 101;
-		int codiceImpiegato = 1001;
+		int codiceCliente = 1003;
 		String targa = "AA000AA";
 		
 		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "veicolo", 10001, 'n', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001VEI1019UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
-		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-
-	@Test
-	void testEmissioneBiglietto_8() throws SQLException {
-
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(101);
-		Biglietto big = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001VEI1019UO");
-		CronologiaDAO.creaCronologia(cronologia);
-		
-		/* Output attesi */
-		int codiceBiglietto = 6;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1002;
-		String targa = "AA000AA";
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 101, "AA000AA", "veicolo", 10001, 'n', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001VEI1019UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
-		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_9() throws SQLException {
-
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(101);
-		Biglietto big = new BigliettoPasseggero(0, null, null, 0, 0);
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001PAS1019UO");
-		CronologiaDAO.creaCronologia(cronologia);
-		
-		/* Output attesi */
-		int codiceBiglietto = 7;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1001;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "passeggero", 10001, 'n', "10001PAS1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001PAS1019UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-
-	@Test
-	void testEmissioneBiglietto_10() throws SQLException {
-
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(101);
-		Biglietto big = new BigliettoPasseggero(0, null, null, 0, 0);
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001PAS1019UO");
-		CronologiaDAO.creaCronologia(cronologia);
-		
-		/* Output attesi */
-		int codiceBiglietto = 8;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1002;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 101, "AA000AA", "passeggero", 10001, 'n', "10001PAS1019UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001PAS1019UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_11() throws SQLException {
-
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(102);
-		Biglietto big = new BigliettoPasseggero(0, null, null, 0, 0);
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001PAS1029UO");
-		CronologiaDAO.creaCronologia(cronologia);
-		
-		/* Output attesi */
-		int codiceBiglietto = 3;
-		int codiceCorsa = 102;
-		int codiceImpiegato = 1001;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 102, "AA000AA", "passeggero", 10001, 'n', "10001PAS1029UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001PAS1029UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_12() throws SQLException {
-
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(102);
-		Biglietto big = new BigliettoPasseggero(0, null, null, 0, 0);
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, big, "10001PAS1029UO");
-		CronologiaDAO.creaCronologia(cronologia);
-		
-		/* Output attesi */
-		int codiceBiglietto = 4;
-		int codiceCorsa = 102;
-		int codiceImpiegato = 1002;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1002, 102, "AA000AA", "passeggero", 10001, 'n', "10001PAS1029UO");
-		BigliettoPasseggero biglietto = (BigliettoPasseggero) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
-		CronologiaAcquisti c = CronologiaDAO.readCronologia(10001, codiceCorsa, "10001PAS1029UO");
-				
-		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoPasseggero);
-		assertEquals(b, biglietto);
-		assertEquals(b, c.getBiglietto());
-	}
-	
-	@Test
-	void testEmissioneBiglietto_13() throws SQLException {
-
-		/* Output attesi */
-		int codiceBiglietto = 9;
-		int codiceCorsa = 101;
-		int codiceImpiegato = 1003;
-		String targa = "AA000AA";
-		int codiceCliente = 10001;
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1003, 101, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Daiana", "Cipollaro", "veicolo", 101, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
-		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
+		assertEquals(ricevuta.length(), 14);
+		assertEquals(targa, v.getTarga());
+		assertNotNull(ricevuta);
 	}
 	
 	@Test
-	void testEmissioneBiglietto_14() throws SQLException {
+	void testAcquistoBiglietto_5() throws SQLException {
+		
+		/* Inizializzazione precondizioni */
+		Corsa corsa = CorsaDAO.readCorsa(103);
+		Biglietto biglietto = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
+		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, biglietto, "10001VEI1019UO");
+		CronologiaDAO.creaCronologia(cronologia);
 
 		/* Output attesi */
-		int codiceBiglietto = 1;
 		int codiceCorsa = 103;
-		int codiceImpiegato = 1001;
-		String targa = "AA000AA";
-		int codiceCliente = 10001;
+		int codiceCliente = 1001;
 		
 		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 103, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		BigliettoVeicolo v = (BigliettoVeicolo)b;
-		BigliettoVeicolo biglietto = (BigliettoVeicolo) BigliettoDAO.readBiglietto(codiceBiglietto, codiceCorsa);
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Leonardo", "Catello", "passeggero", 103, null, "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		Corsa corsa = CorsaDAO.readCorsa(codiceCorsa);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
-		assertEquals(codiceBiglietto, b.getCodiceBiglietto());
-		assertEquals(codiceCorsa, b.getCodiceCorsa());
-		assertEquals(codiceImpiegato, b.getCodiceImpiegato());
-		assertTrue(b instanceof BigliettoVeicolo);
-		assertEquals(targa, v.getTarga());
-		assertEquals(b, biglietto);
-		assertEquals(corsa, c.getCorsa());
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(b, c.getBiglietto());
+		assertEquals(ricevuta.length(), 14);
+		assertNull(v.getTarga());
+		assertNotNull(ricevuta);
 	}
+
+	
 	
 	@Test
 	void testEmissioneBiglietto_15() throws SQLException {
@@ -478,119 +199,6 @@ class acquistoBigliettoTest {
 		assertEquals(lista_cronologie, lista_c);
 	}
 	
-	@Test
-	void testEmissioneBiglietto_17() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, -1, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-	
-	@Test
-	void testEmissioneBiglietto_18() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 500, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-	
-	@Test
-	void testEmissioneBiglietto_19() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "animale", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-	
-	@Test
-	void testEmissioneBiglietto_20() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, null, "veicolo", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-	
-	@Test
-	void testEmissioneBiglietto_21() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "veicolo", -1, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-	
-	@Test
-	void testEmissioneBiglietto_22() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(1001, 101, "AA000AA", "veicolo", 50000, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
 	
 	@Test
 	void testEmissioneBiglietto_23() throws SQLException {
