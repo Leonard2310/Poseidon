@@ -22,7 +22,7 @@ public class gestisciCorsa {
 	public static int loginCliente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
 		// POSTCONDITIONS: se il cliente identificato dai parametri in ingresso viene trovato nel database,
-		// 		viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Cliente> lista_clienti = null;
 		try {
@@ -42,7 +42,7 @@ public class gestisciCorsa {
 	public static int loginDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
 		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso viene trovato nel database,
-		// 		viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti;
 		try {
@@ -72,7 +72,7 @@ public class gestisciCorsa {
 
 			for (Cliente c : lista_clienti) {
 				if (c.getCognome().equals(cognome) && c.getNome().equals(nome) && c.getPassword().equals(password)) {
-					System.out.println("Errore: cliente gi� esistente.");
+					System.out.println("Errore: cliente già esistente.");
 					return -1;
 				}
 			}
@@ -96,7 +96,7 @@ public class gestisciCorsa {
 	public static int registraDipendente(String cognome, String nome, String password) {
 		// PRECONDITIONS: i parametri passati in input sono valide stringhe testuali
 		// POSTCONDITIONS: se il dipendente identificato dai parametri in ingresso non viene trovato nel database,
-		// 		viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
+		// viene inserito e viene restituito il suo codice; altrimenti, viene restituito valore -1
 
 		List<Dipendente> lista_dipendenti = null;
 		int codiceImpiegato = 10001;
@@ -106,7 +106,7 @@ public class gestisciCorsa {
 
 			for (Dipendente d : lista_dipendenti) {
 				if (d.getCognome().equals(cognome) && d.getNome().equals(nome) && d.getPassword().equals(password)) {
-					System.out.println("Errore: dipendente gi� esistente.");
+					System.out.println("Errore: dipendente gi� esistente.");
 					return -1;
 				}
 			}
@@ -211,10 +211,9 @@ public class gestisciCorsa {
 
 	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa,
 			String targa, String tipologiaPagamento) {
-		// PRECONDITIONS: - 
-		// POSTCONDITIONS: se c'è disponibilità nella corsa selezionata e l'elaborazione dell'acquisto avviene con successo viene 
-		//		restituita una ricevuta e viene aggiunto l'acquisto in cronologia, in caso contrario viene restituita una stringa null.
-		 
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: se c'è disponibilità nella corsa selezionata e l'elaborazione dell'acquisto avviene con successo viene
+		// restituita una ricevuta e viene aggiunto l'acquisto in cronologia, in caso contrario viene restituita una stringa null.
 
 		Corsa corsa = new Corsa(codiceCorsa, null, null, null, null, 0.0);
 		boolean bool_pagamento = false;
@@ -257,40 +256,47 @@ public class gestisciCorsa {
 		}
 
 		double prezzo_finale = inserisciTipologiaBiglietto(codiceCorsa, tipoBiglietto);
-		int disponibilita = calcolaDisponibilita(codiceCorsa, tipoBiglietto);
 
-		if (disponibilita > 0) {
-			System.out.println("La corsa è disponibile");
-			System.out.println("Il prezzo è " + prezzo_finale);
+		if (prezzo_finale > 0.0) {
 
-			bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
+			int disponibilita = calcolaDisponibilita(codiceCorsa, tipoBiglietto);
 
-			if (bool_pagamento == true) {
-				ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
+			if (disponibilita > 0) {
+				System.out.println("La corsa è disponibile");
+				System.out.println("Il prezzo è " + prezzo_finale);
 
-				try {
-					corsa = CorsaDAO.readCorsa(codiceCorsa);
-				} catch (SQLException e) {
-					e.printStackTrace();
+				bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
+
+				if (bool_pagamento == true) {
+					ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
+
+					try {
+						corsa = CorsaDAO.readCorsa(codiceCorsa);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+					aggiuntaAcquistoCronologia(codiceCliente, ricevuta, corsa, tipoBiglietto, targa);
+					return ricevuta;
+				} else {
+					System.out.println("Errore: elaborazione d'acquisto fallita");
+					return null;
 				}
-
-				aggiuntaAcquistoCronologia(codiceCliente, ricevuta, corsa, tipoBiglietto, targa);
-				return ricevuta;
 			} else {
-				System.out.println("Elaborazione d'acquisto fallita");
+				System.out.println("Errore: assenza di posti disponibili");
 				return null;
 			}
 		} else {
-			System.out.println("Assenza di posti disponibili");
+			System.out.println("Errore: corsa non trovata");
 			return null;
 		}
 
 	}
 
 	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
-		// PRECONDITIONS: - 
-		// POSTCONDITIONS: viene generata una stringa formata dal codice cliente, dal codice della corsa che si sta acquistando, 
-		// 		da un riferimento alla tipologia del biglietto e da tre caratteri alfanumerici casuali.
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene generata una stringa formata dal codice cliente, dal codice della corsa che si sta acquistando,
+		// da un riferimento alla tipologia del biglietto e da tre caratteri alfanumerici casuali.
 
 		String vocabolarioAlfaNumerico;
 		StringBuilder builder;
@@ -317,9 +323,9 @@ public class gestisciCorsa {
 	}
 
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
-		// PRECONDITIONS: - 
-		// POSTCONDITIONS: viene aggiunto l'acquisto in cronologia mediante il codice cliente, l'istanza della corsa la ricevuta e, 
-		//		nel caso dell'acquisto di un biglietto con opzione veicolo, la targa.
+		// PRECONDITIONS: -
+		// POSTCONDITIONS: viene aggiunto l'acquisto in cronologia mediante il codice cliente, l'istanza della corsa la ricevuta e,
+		// nel caso dell'acquisto di un biglietto con opzione veicolo, la targa.
 
 		Biglietto b = null;
 
@@ -339,9 +345,9 @@ public class gestisciCorsa {
 	}
 
 	public static int calcolaDisponibilita(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDITIONS: creazione delle Navi effettuata 
-		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati 
-		//		effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
+		// PRECONDITIONS: creazione delle Navi effettuata
+		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
+		// effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
 
 		List<Nave> lista_nave = new ArrayList<Nave>();
 		List<Biglietto> lista_biglietto = new ArrayList<Biglietto>();
@@ -389,10 +395,10 @@ public class gestisciCorsa {
 	}
 
 	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDITIONS: - 
+		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene calcolato il prezzo finale in base alla tipologia scelta dall'utente
 
-		Corsa corsa = null;
+		Corsa corsa = new Corsa(0, null, null, null, null, 0);
 		double prezzo_finale = 0.0;
 
 		try {
@@ -401,12 +407,15 @@ public class gestisciCorsa {
 			e.printStackTrace();
 		}
 
-		if (tipoBiglietto.equals("veicolo")) {
-			prezzo_finale = corsa.getPrezzo();
-		} else {
-			prezzo_finale = 50 + corsa.getPrezzo();
+		if (corsa != null) {
 
-		}
+			if (tipoBiglietto.equals("veicolo")) {
+				prezzo_finale = corsa.getPrezzo();
+			} else {
+				prezzo_finale = 50 + corsa.getPrezzo();
+
+			}
+		} 
 
 		return prezzo_finale;
 	}
@@ -420,8 +429,8 @@ public class gestisciCorsa {
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo,
 			Double prezzo, String nomeNave) {
 		// PRECONDIZIONE: -
-		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene estituito un riferimento all'oggetto 
-		// 		della classe Corsa contenente i dati della nuova corsa. Altrimenti viene restituita l'istanza = null.
+		// POSTOCONDIZIONE: se l'inserimento della corsa e' avvenuta con successo viene estituito un riferimento all'oggetto
+		// della classe Corsa contenente i dati della nuova corsa. Altrimenti viene restituita l'istanza = null.
 
 		Corsa corsa = null;
 		Nave nave = null;
@@ -456,7 +465,7 @@ public class gestisciCorsa {
 			}
 
 		} else {
-			System.out.println("La nave inserita e' gia' esistente.");
+			System.out.println("Errore: la nave inserita e' gia' esistente.");
 			return null;
 		}
 
@@ -466,7 +475,7 @@ public class gestisciCorsa {
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
 			int codiceCorsa) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
-		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito un riferimento all'oggetto 
+		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito un riferimento all'oggetto
 		// della classe Nave contenente i dati della nuova nave. Altrimenti viene restituita l'istanza = null.
 
 		Nave nave = null;
@@ -484,8 +493,8 @@ public class gestisciCorsa {
 
 	public static Porto inserimentoPorto(String citta) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova nave
-		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene restituito un riferimento all'oggetto 
-		// 		della classe Porto contenente i dati del nuovo Porto. Altrimenti viene restituita l'istanza = null.
+		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene restituito un riferimento all'oggetto
+		// della classe Porto contenente i dati del nuovo Porto. Altrimenti viene restituita l'istanza = null.
 
 		Porto porto = null;
 
@@ -515,9 +524,9 @@ public class gestisciCorsa {
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
 			int codiceCliente, char flag, String ricevuta) {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito un riferimento all'oggetto 
-		//		della classe Biglietto contenente i dati del nuovo biglietto e la cronologia acquisti del cliente viene aggiornata; 
-		// 		altrimenti, viene restituito un riferimento null
+		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito un riferimento all'oggetto
+		// della classe Biglietto contenente i dati del nuovo biglietto e la cronologia acquisti del cliente viene aggiornata;
+		// altrimenti, viene restituito un riferimento null
 
 		Biglietto biglietto = null;
 		LocalDate data = null;
@@ -670,9 +679,9 @@ public class gestisciCorsa {
 
 	public static List<CronologiaAcquisti> verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto, viene restituito un 
-		// 		riferimento all'oggetto della classe CronologiaAcquisti contenente i dati del nuovo acquisto; 
-		//		altrimenti, viene restituito un riferimento null.
+		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto, viene restituito un
+		// riferimento all'oggetto della classe CronologiaAcquisti contenente i dati del nuovo acquisto;
+		// altrimenti, viene restituito un riferimento null.
 
 		List<CronologiaAcquisti> lista = null;
 		List<CronologiaAcquisti> lista_result = new ArrayList<CronologiaAcquisti>();
