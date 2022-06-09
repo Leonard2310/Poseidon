@@ -253,6 +253,15 @@ public class gestisciCorsa {
 			System.out.println("Errore: il codice corsa deve essere > 0.");
 			return null;
 		}
+		try {
+			if (CorsaDAO.readCorsa(codiceCorsa) == null) {
+				System.out.println("Errore: la corsa selezionata non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 
 		if (tipoBiglietto.equals("veicolo") && (targa == null || targa.equals(""))) {
 			System.out.println("Errore: necessario inserire la targa.");
