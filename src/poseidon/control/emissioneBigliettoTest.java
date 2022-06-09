@@ -21,7 +21,7 @@ import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.Corsa;
 import poseidon.entity.CronologiaAcquisti;
 
-class gestisciCorsaTest {
+class emissioneBigliettoTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
