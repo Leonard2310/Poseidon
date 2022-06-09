@@ -442,7 +442,7 @@ class emissioneBigliettoTest {
 	@Test
 	void testEmissioneBiglietto_15() throws SQLException {
 		
-		/* Before all error tests */
+		/* Before each error tests */
 		BigliettoDAO.deleteallBiglietto();
 
 		/* Output attesi */
@@ -464,6 +464,9 @@ class emissioneBigliettoTest {
 	@Test
 	void testEmissioneBiglietto_16() throws SQLException {
 		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
+		
 		/* Output attesi */
 		Biglietto biglietto = null;
 		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
@@ -482,6 +485,9 @@ class emissioneBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_17() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Output attesi */
 		Biglietto biglietto = null;
@@ -502,6 +508,9 @@ class emissioneBigliettoTest {
 	@Test
 	void testEmissioneBiglietto_18() throws SQLException {
 		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
+		
 		/* Output attesi */
 		Biglietto biglietto = null;
 		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
@@ -520,6 +529,9 @@ class emissioneBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_19() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Output attesi */
 		Biglietto biglietto = null;
@@ -540,6 +552,9 @@ class emissioneBigliettoTest {
 	@Test
 	void testEmissioneBiglietto_20() throws SQLException {
 		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
+		
 		/* Output attesi */
 		Biglietto biglietto = null;
 		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
@@ -558,6 +573,9 @@ class emissioneBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_21() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Output attesi */
 		Biglietto biglietto = null;
@@ -578,6 +596,9 @@ class emissioneBigliettoTest {
 	@Test
 	void testEmissioneBiglietto_22() throws SQLException {
 		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
+		
 		/* Output attesi */
 		Biglietto biglietto = null;
 		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
@@ -596,6 +617,9 @@ class emissioneBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_23() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);
@@ -621,6 +645,9 @@ class emissioneBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_24() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);
