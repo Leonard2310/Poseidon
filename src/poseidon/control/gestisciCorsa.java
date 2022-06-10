@@ -210,14 +210,14 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param codiceCliente
-	 * @param nome
-	 * @param cognome
-	 * @param tipoBiglietto
-	 * @param codiceCorsa
-	 * @param targa
-	 * @param tipologiaPagamento
-	 * @return
+	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
+	 * @param nome: nome dell'intestatario del biglietto in acquisto.
+	 * @param cognome: cognome dell'intestatario del biglietto in acquisto.
+	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param targa: targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
+	 * @param tipologiaPagamento: tipologia del pagamento per l'elaborazione dell'acquisto.
+	 * @return stringa identificativa dell'acquisto effettuato (null se acquisto fallito).
 	 */
 	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa,
 			String targa, String tipologiaPagamento) {
@@ -322,10 +322,11 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param codiceCliente
-	 * @param codiceCorsa
-	 * @param tipoBiglietto
-	 * @return
+	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
+	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @return stringa alfanumerica identificativa dell'acquisto effettuato formata da codiceCliente, codiceCorsa, 
+	 * 			identificativo del tipoBiglietto e tre caratteri alfanumerici casuali.
 	 */
 	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
