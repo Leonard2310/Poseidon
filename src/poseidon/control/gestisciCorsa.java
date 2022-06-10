@@ -734,7 +734,7 @@ public class gestisciCorsa {
 		for(int i = 0; i < listaPorti.length; i++) {
 			if (citta.compareTo(listaPorti[i])==0) {
 				flag = 1;
-				System.out.println("Porto inserito correttamente o gia' esistente.");
+				System.out.println("Porto inserito correttamente.");
 			}
 		}	
 		

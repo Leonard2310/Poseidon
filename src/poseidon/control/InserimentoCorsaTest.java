@@ -21,6 +21,7 @@ class InserimentoCorsaTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		CorsaDAO.deleteallCorsa();
+		NaveDAO.deleteallNave();
 		
 	}
 
@@ -31,17 +32,19 @@ class InserimentoCorsaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		CorsaDAO.deleteallCorsa();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		CorsaDAO.deleteallCorsa();
 	}
 
 	@Test
 	void testInserimentoCorsa_1() throws SQLException {
 		
 		/* Output attesi */
-		int codiceCorsa = 101;
+		int codiceCorsa = 1;
 		String portoPartenza = "Napoli";
 		String portoArrivo = "Ischia";
 		LocalTime orarioPartenza = LocalTime.of(10,15);

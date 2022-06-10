@@ -74,14 +74,14 @@ class InserimentoPortoTest {
 
 		/* Output attesi */
 		Porto porto = null;
-		List<Porto> lista_porto = new ArrayList<Porto>(0);
+		Porto test_porto = new Porto("Napoli");
+		PortoDAO.creaPorto(test_porto);
+
 		
 		/* Funzione */
 		Porto p = gestisciCorsa.inserimentoPorto("Napoli");
-		List<Porto> lista_p = PortoDAO.readallPorto();
 		
 		/* Controllo Output */
-		assertEquals(lista_porto, lista_p);
 		assertEquals(porto, p);
 		
 	}
