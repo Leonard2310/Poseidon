@@ -706,7 +706,7 @@ public class gestisciCorsa {
 			return null;
 		}
 		
-		if(citta.equals("") || citta == null) {
+		if (citta == null || citta.equals("")) {
 			System.out.println("Errore: valori inseriti non validi");
 			return null;
 		}
@@ -714,24 +714,11 @@ public class gestisciCorsa {
 		for(int i = 0; i < listaPorti.length; i++) {
 			if (citta.compareTo(listaPorti[i])==0) {
 				flag = 1;
-				porto = gestisciCorsa.inserimentoPorto(citta);
 				System.out.println("Porto inserito correttamente o gia' esistente.");
 			}
 		}
 		if (flag == 0) {
 			System.out.println("Impossibile inserire questo porto.");
-		}
-		
-		for(int i = 0; i < listaPorti.length; i++) {
-			if (citta.compareTo(listaPorti[i])==0) {
-				flag = 1;
-				porto = gestisciCorsa.inserimentoPorto(citta);
-				System.out.println("Porto inserito correttamente o gia' esistente.");
-			}
-		}
-		if (flag == 0) {
-			System.out.println("Impossibile inserire questo porto.");
-			return null;
 		}
 		
 		try {

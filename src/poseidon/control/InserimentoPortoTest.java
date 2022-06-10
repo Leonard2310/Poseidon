@@ -9,13 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import poseidon.DAO.*;
 import poseidon.entity.*;
-import poseidon.control.*;
 
 class InserimentoPortoTest {
 
@@ -31,10 +29,12 @@ class InserimentoPortoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		PortoDAO.deleteallPorto();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		PortoDAO.deleteallPorto();
 	}
 
 	@Test
@@ -75,10 +75,10 @@ class InserimentoPortoTest {
 
 		/* Output attesi */
 		Porto porto = null;
-		List<Porto> lista_porto = new ArrayList<Porto>(0);
+		List<Porto> lista_porto = new ArrayList<Porto>();
 		
 		/* Funzione */
-		Porto p = gestisciCorsa.inserimentoPorto("Pozzuoli");
+		Porto p = gestisciCorsa.inserimentoPorto("Napoli");
 		List<Porto> lista_p = PortoDAO.readallPorto();
 		
 		/* Controllo Output */
