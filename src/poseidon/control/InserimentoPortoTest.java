@@ -56,13 +56,16 @@ class InserimentoPortoTest {
 		
 		/* Output attesi */
 		Porto porto = null;
+		List<Porto> lista_porto = new ArrayList<Porto>(0);
 		
 		/* Funzione */
 		final int max_string_size = 50;
 		Porto p = gestisciCorsa.inserimentoPorto("Poooooooooooooooooozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzuuuuuuuuuuuuooooooooooooollllllllllllllllllllliiiiiiiiiiiiiiiiiiiii");
-		
+		List<Porto> lista_p = PortoDAO.readallPorto();
+
 		/* Controllo Output */
 		assertEquals(max_string_size, p.getCitta().length());
+		assertEquals(lista_porto, lista_p);
 		assertEquals(porto, p);
 		
 	}
@@ -72,11 +75,14 @@ class InserimentoPortoTest {
 
 		/* Output attesi */
 		Porto porto = null;
+		List<Porto> lista_porto = new ArrayList<Porto>(0);
 		
 		/* Funzione */
 		Porto p = gestisciCorsa.inserimentoPorto("Pozzuoli");
+		List<Porto> lista_p = PortoDAO.readallPorto();
 		
 		/* Controllo Output */
+		assertEquals(lista_porto, lista_p);
 		assertEquals(porto, p);
 		
 	}
