@@ -1,6 +1,5 @@
 package poseidon.control;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -609,9 +608,7 @@ public class gestisciCorsa {
 		return corsa;
 	}
 
-<<<<<<< HEAD
-	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli, int codiceCorsa) {
-=======
+
 	/**
 	 * @param nomeNave: nome identificativo della nave in procinto di essere aggiunta.
 	 * @param categoria: categoria della nave in procinto di essere aggiunta [traghetto/aliscafo].
@@ -622,7 +619,6 @@ public class gestisciCorsa {
 	 */
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
 			int codiceCorsa) {
->>>>>>> 5910d849d6de57c97a42cacfb99a74f038cf6c97
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
 		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito un riferimento all'oggetto
 		// della classe Nave contenente i dati della nuova nave. Altrimenti viene restituita l'istanza = null.
