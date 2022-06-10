@@ -179,7 +179,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: il codice corsa deve essere > 0.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -203,7 +203,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: la corsa selezionata non esiste.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -227,7 +227,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: il codice cliente deve essere > 0.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -251,7 +251,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: il cliente selezionato non esiste.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -275,7 +275,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: il tipo di biglietto inserito non è valido.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -299,7 +299,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: necessario inserire la targa.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -323,7 +323,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: necessario inserire il nome.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -347,7 +347,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: necessario inserire il cognome.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
@@ -371,7 +371,7 @@ class acquistoBigliettoTest {
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals("Errore: necessario inserire la tipologia del pagamento.", exp_ricevuta, ricevuta);
+		assertEquals(exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
 	}
