@@ -209,6 +209,16 @@ public class gestisciCorsa {
 		return lista_cronologia;
 	}
 
+	/**
+	 * @param codiceCliente
+	 * @param nome
+	 * @param cognome
+	 * @param tipoBiglietto
+	 * @param codiceCorsa
+	 * @param targa
+	 * @param tipologiaPagamento
+	 * @return
+	 */
 	public static String acquistaBiglietto(int codiceCliente, String nome, String cognome, String tipoBiglietto, int codiceCorsa,
 			String targa, String tipologiaPagamento) {
 		// PRECONDITIONS: -
@@ -311,6 +321,12 @@ public class gestisciCorsa {
 
 	}
 
+	/**
+	 * @param codiceCliente
+	 * @param codiceCorsa
+	 * @param tipoBiglietto
+	 * @return
+	 */
 	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene generata una stringa formata dal codice cliente, dal codice della corsa che si sta acquistando,
@@ -340,6 +356,13 @@ public class gestisciCorsa {
 		return ricevuta;
 	}
 
+	/**
+	 * @param codiceCliente
+	 * @param ricevuta
+	 * @param corsa
+	 * @param tipoBiglietto
+	 * @param targa
+	 */
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene aggiunto l'acquisto in cronologia mediante il codice cliente, l'istanza della corsa la ricevuta e,
@@ -362,6 +385,11 @@ public class gestisciCorsa {
 
 	}
 	
+	/**
+	 * @param codiceCorsa
+	 * @param tipoBiglietto
+	 * @return
+	 */
 	public static int calcolaDisponibilitaCronologia(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: creazione delle Navi effettuata
 		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
@@ -413,6 +441,11 @@ public class gestisciCorsa {
 		return disponibilita;
 	}
 
+	/**
+	 * @param codiceCorsa
+	 * @param tipoBiglietto
+	 * @return
+	 */
 	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: viene calcolato il prezzo finale in base alla tipologia scelta dall'utente
@@ -445,6 +478,15 @@ public class gestisciCorsa {
 	 *
 	 */
 
+	/**
+	 * @param orarioPartenza
+	 * @param orarioArrivo
+	 * @param portoPartenza
+	 * @param portoArrivo
+	 * @param prezzo
+	 * @param nomeNave
+	 * @return
+	 */
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo,
 			Double prezzo, String nomeNave) {
 		// PRECONDIZIONE: -
@@ -491,6 +533,14 @@ public class gestisciCorsa {
 		return corsa;
 	}
 
+	/**
+	 * @param nomeNave
+	 * @param categoria
+	 * @param capienzaPasseggeri
+	 * @param capienzaAutoveicoli
+	 * @param codiceCorsa
+	 * @return
+	 */
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
 			int codiceCorsa) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
@@ -510,6 +560,10 @@ public class gestisciCorsa {
 		return nave;
 	}
 
+	/**
+	 * @param citta
+	 * @return
+	 */
 	public static Porto inserimentoPorto(String citta) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova nave
 		// POSTOCONDIZIONE: se l'inserimento del porto e' avvenuta con successo viene restituito un riferimento all'oggetto
@@ -540,6 +594,11 @@ public class gestisciCorsa {
 		return porto;
 	}
 	
+	/**
+	 * @param codiceCorsa
+	 * @param tipoBiglietto
+	 * @return
+	 */
 	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: creazione delle Navi effettuata
 		// POSTCONDITIONS: viene calcolata la disponibilità in base alla capacità della nave e ai posti occupati
@@ -590,6 +649,16 @@ public class gestisciCorsa {
 		return disponibilita;
 	}
 
+	/**
+	 * @param codiceImpiegato
+	 * @param codiceCorsa
+	 * @param targa
+	 * @param tipoBiglietto
+	 * @param codiceCliente
+	 * @param flag
+	 * @param ricevuta
+	 * @return
+	 */
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
 			int codiceCliente, char flag, String ricevuta) {
 		// PRECONDITIONS: -
@@ -766,6 +835,9 @@ public class gestisciCorsa {
 		return biglietto;
 	}
 
+	/**
+	 * @return
+	 */
 	public static List<CronologiaAcquisti> verificaAcquisti() {
 		// PRECONDITIONS: -
 		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto, viene restituito un
