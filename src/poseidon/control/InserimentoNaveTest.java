@@ -43,8 +43,8 @@ class InserimentoNaveTest {
 		
 		/* Output attesi */
 		String nome = "Estate";
-		int capienzaAutoveicoli = 270;
-		int capienzaPasseggeri = 30;
+		int capienzaAutoveicoli = 30;
+		int capienzaPasseggeri = 270;
 		String categoria = "traghetto";
 		int codiceCorsa = 101;
 		
@@ -64,14 +64,14 @@ class InserimentoNaveTest {
 	void InserimentoNaveTest_2() throws SQLException {
 
 		/* Output attesi */
-		String nome = "Estate";
-		int capienzaAutoveicoli = 270;
-		int capienzaPasseggeri = 0;
+		String nome = "IN";
+		int capienzaAutoveicoli = 0;
+		int capienzaPasseggeri = 270;
 		String categoria = "aliscafo";
-		int codiceCorsa = 101;
+		int codiceCorsa = 102;
 		
 		/* Funzione */
-		Nave n = gestisciCorsa.inserimentoNave("Estate", "aliscafo", 270, 0, 101);
+		Nave n = gestisciCorsa.inserimentoNave("IN", "aliscafo", 270, 0, 102);
 
 		/* Controllo Output */
 		assertEquals(nome, n.getNome());
@@ -198,7 +198,6 @@ class InserimentoNaveTest {
 		/* Controllo Output */
 		assertEquals(lista_nave, lista_n);
 		assertEquals(nave, n);	
-		assertNull(n.getCodiceCorsa());
 
 	}
 
