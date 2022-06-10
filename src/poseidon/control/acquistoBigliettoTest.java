@@ -128,6 +128,8 @@ class acquistoBigliettoTest {
 		assertNotNull(ricevuta);
 	}
 	
+	
+	
 	/*
 	 * 		TEST SINGLE
 	 */
@@ -151,6 +153,8 @@ class acquistoBigliettoTest {
 		assertNull(v.getTarga());
 		assertNotNull(ricevuta);
 	}
+	
+	
 	
 	/*
 	 * 		TEST ERRORE
@@ -370,64 +374,6 @@ class acquistoBigliettoTest {
 		assertEquals("Errore: necessario inserire la tipologia del pagamento.", exp_ricevuta, ricevuta);
 		assertNull(v.getTarga());
 		
-	}
-	
-	
-	
-	
-	
-//	DA CONTROLLARE
-	@Test
-	void testAcquistoBiglietto_15() throws SQLException {
-		
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(101);
-		Biglietto biglietto = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10003, corsa, biglietto, "10001VEI1019UO");
-		CronologiaDAO.creaCronologia(cronologia);
-
-		/* Output attesi */
-		int codiceCorsa = 101;
-		int codiceCliente = 1003;
-		String targa = "AA000AA";
-		
-		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Daiana", "Cipollaro", "veicolo", 101, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
-		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(ricevuta.length(), 14);
-		assertEquals(targa, v.getTarga());
-		assertNotNull(ricevuta);
-	}
-	
-	@Test
-	void testAcquistoBiglietto_16() throws SQLException {
-		
-		/* Inizializzazione precondizioni */
-		Corsa corsa = CorsaDAO.readCorsa(103);
-		Biglietto biglietto = new BigliettoVeicolo(0, null, null, 0, 0, "AA000AA");
-		CronologiaAcquisti cronologia = new CronologiaAcquisti(10001, corsa, biglietto, "10001VEI1019UO");
-		CronologiaDAO.creaCronologia(cronologia);
-
-		/* Output attesi */
-		int codiceCorsa = 103;
-		int codiceCliente = 1001;
-		
-		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Leonardo", "Catello", "passeggero", 103, null, "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
-		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(ricevuta.length(), 14);
-		assertNull(v.getTarga());
-		assertNotNull(ricevuta);
 	}
 
 	
