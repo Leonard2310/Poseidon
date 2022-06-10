@@ -597,12 +597,12 @@ public class gestisciCorsa {
 	}
 	
 	/**
-	 * @param codiceCorsa
-	 * @param tipoBiglietto
-	 * @return
+	 * @param codiceCorsa: codice identificativo della corsa per la quale si vuole calcolare la disponibilit‡ residua.
+	 * @param tipoBiglietto: tipologia di biglietto per il quale si vuole calcolare la disponibilit‡ residua.
+	 * @return intero contenente il numero di biglietti della tipologia indicata disponibili per la corsa selezionata.
 	 */
 	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
-		// PRECONDITIONS: creazione delle Navi effettuata
+		// PRECONDITIONS: creazione della corsa e della nave corrispondente effettuate
 		// POSTCONDITIONS: viene calcolata la disponibilit√† in base alla capacit√† della nave e ai posti occupati
 		// effettuando un controllo sui biglietti acquistati per la corsa specificata e per tale tipologia.
 
@@ -612,6 +612,8 @@ public class gestisciCorsa {
 		int capienza = 0;
 		int count = 0;
 
+		/* Accedo al database per ottenere il numero di posti totali 
+		 * della nave corrispondente alla corsa indicata */
 		try {
 			lista_nave = NaveDAO.readallNave();
 		} catch (SQLException e) {
@@ -627,6 +629,8 @@ public class gestisciCorsa {
 			}
 		}
 
+		/* Accedo al database per contare il numero di biglietti della 
+		 * tipologia indicata emessi per la corsa desiderata*/
 		try {
 			lista_biglietto = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e) {
@@ -646,24 +650,25 @@ public class gestisciCorsa {
 			}
 		}
 
+		/* Calcolo la disponibilit‡ residua */
 		int disponibilita = capienza - count;
 
 		return disponibilita;
 	}
 
 	/**
-	 * @param codiceImpiegato
-	 * @param codiceCorsa
-	 * @param targa
-	 * @param tipoBiglietto
-	 * @param codiceCliente
-	 * @param flag
-	 * @param ricevuta
-	 * @return
+	 * @param codiceImpiegato: codice identificativo dell'impiegato che emette il biglietto.
+	 * @param codiceCorsa: codice identificativo della corsa per la quale si emette il biglietto.
+	 * @param targa: targa identificativa del veicolo per il quale si emette il biglietto (di tipo "veicolo").
+	 * @param tipoBiglietto: tipologia del biglietto che viene emesso.
+	 * @param codiceCliente: codice identificativo del cliente che ha richiesto l'emissione del biglietto.
+	 * @param flag: carattere indicante la scelta di generare o meno una nuova ricevuta ('y' o 'n').
+	 * @param ricevuta: stringa rappresentante la ricevuta d'acquisto del biglietto che viene emesso (flag == 'n').
+	 * @return oggetto della classe Biglietto contenente i dati del biglietto emesso (null in caso di fallimento).
 	 */
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
 			int codiceCliente, char flag, String ricevuta) {
-		// PRECONDITIONS: -
+		// PRECONDITIONS: il flag deve essere 'y' in caso di generazione di una nuova ricevuta, 'n' in caso contrario.
 		// POSTCONDITIONS: se la creazione del nuovo biglietto va a buon fine, viene restituito un riferimento all'oggetto
 		// della classe Biglietto contenente i dati del nuovo biglietto e la cronologia acquisti del cliente viene aggiornata;
 		// altrimenti, viene restituito un riferimento null
@@ -677,7 +682,7 @@ public class gestisciCorsa {
 		int codiceBiglietto = 1;
 		Corsa corsa = null;
 
-		/* Controllo input */
+		/* Controllo i valori di input */
 		if (codiceImpiegato <= 0) {
 			System.out.println("Errore: il codice impiegato deve essere > 0.");
 			return null;
@@ -707,7 +712,7 @@ public class gestisciCorsa {
 		}
 
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Errore: il tipo di biglietto inserito non ÔøΩ valido.");
+			System.out.println("Errore: il tipo di biglietto inserito non Ë valido.");
 			return null;
 		}
 
@@ -761,11 +766,15 @@ public class gestisciCorsa {
 			}
 		}
 
+		/* Verifico la disponibilit‡ di posti disponibili per la corsa selezionata 
+		 * e per la tipologia di biglietto inserita */
 		if (calcolaDisponibilitaBiglietti(codiceCorsa, tipoBiglietto) <= 0) {
-			System.out.println("Errore: non ci sono piÔøΩ biglietti disponibili di questo tipo per questa corsa.");
+			System.out.println("Errore: non ci sono pi˘ biglietti disponibili di questo tipo per questa corsa.");
 			return null;
 		}
 
+		/* Accedo al database per ottenere il codice dell'ultimo biglietto 
+		 * emesso per la corsa selezionata */
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e) {
@@ -778,17 +787,21 @@ public class gestisciCorsa {
 			}
 		}
 
+		/* Ricavo i valori attuali di data e ora */
 		data = LocalDate.now();
 		ora = LocalTime.now();
-		/* Elimino i nanosecondi perchÔøΩ non ÔøΩ richiesto che vengano registati */
+		/* Elimino i nanosecondi perchÈ non Ë richiesto che vengano registati */
 		ora = LocalTime.of(ora.getHour(), ora.getMinute(), ora.getSecond());
 
+		/* Creo una nuova entit‡ della classe BigliettoVeicolo o BigliettoPasseggero,
+		 *  a seconda della tipologia di biglietto inserita */
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
 		} else if (tipoBiglietto.equals("passeggero")) {
 			biglietto = new BigliettoPasseggero(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato);
 		}
 
+		/* Aggiungo il biglietto al database */
 		try {
 			BigliettoDAO.creaBiglietto(biglietto);
 		} catch (SQLException e) {
@@ -796,12 +809,17 @@ public class gestisciCorsa {
 			return null;
 		}
 
+		/* Effettuo la stampa delle informazioni del biglietto emesso
+		 *  utilizzando un metodo del sistema esterno "Stampante" */
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non √® possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
+			System.out.println("Al momento non Ë possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
+		/* Accedo al database per aggiornare l'elenco degli acquisti effettuati
+		 *  dal cliente che ha richiesto l'emissione del biglietto */
 		if (flag == 'n') {
+			/* Modifico la cronologia gi‡ esistente */
 			try {
 				c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
 				if (c != null) {
@@ -817,6 +835,7 @@ public class gestisciCorsa {
 				return null;
 			}
 		} else if (flag == 'y') {
+			/* Inserisco una nuova cronologia */
 			ricevuta = generateRicevuta(codiceCliente, codiceCorsa, tipoBiglietto);
 			try {
 				corsa = CorsaDAO.readCorsa(codiceCorsa);
@@ -838,26 +857,32 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @return
+	 * @return lista di oggetti della classe CronologiaAcquisti per i quali ancora non Ë stato emesso un biglietto.
 	 */
 	public static List<CronologiaAcquisti> verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non √® ancora stato emesso un biglietto, viene restituito un
+		// POSTCONDITIONS: se ci sono acquisti per i quali non Ë ancora stato emesso un biglietto, viene restituito un
 		// riferimento all'oggetto della classe CronologiaAcquisti contenente i dati del nuovo acquisto;
-		// altrimenti, viene restituito un riferimento null.
+		// altrimenti, viene restituita una lista vuota. In caso di errore nell'accesso al database, viene restituito
+		// un riferimento null.
 
 		List<CronologiaAcquisti> lista = null;
 		List<CronologiaAcquisti> lista_result = new ArrayList<CronologiaAcquisti>();
 
+		/* Accedo al database per ottenere una lista di tutte le cronologie presenti */
 		try {
 			lista = CronologiaDAO.readallCronologia();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 
+		/* Verifico se la lista sia stata effettivamente ottenuta */
 		if (lista == null)
 			return null;
 
+		/* Creo una nuova lista aggiungendo tutte le cronologie 
+		 * il cui codice biglietto Ë uguale a zero */
 		for (CronologiaAcquisti c : lista) {
 			if (c.getBiglietto().getCodiceBiglietto() == 0) {
 				lista_result.add(c);
