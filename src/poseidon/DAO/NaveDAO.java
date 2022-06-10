@@ -8,7 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import poseidon.entity.Nave;
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import poseidon.DAO.*;
+import poseidon.entity.*;
+import poseidon.control.*;
 
 public class NaveDAO {
 	
@@ -104,7 +111,7 @@ public class NaveDAO {
 	}
 	
 	public static void deleteCorsa(String nome, int capienzaAutoveicoli, int capienzaPasseggeri, int codiceCorsa, String categoria) throws SQLException {
-		// PRECONDITION: � stata aggiunta almeno una nave all'interno del database.
+		// PRECONDITION: e' stata aggiunta almeno una nave all'interno del database.
 		// POSTCONDITION: elimina la nave dalla tabella NAVE. Se non la trova non modifica il database.
 		
 		Connection connection = null;
@@ -135,7 +142,7 @@ public class NaveDAO {
 
 	public static void deleteallNave() throws SQLException {
 		// PRECONDITION: - 
-		// POSTCONDITION: la tabella NAVE � stata eliminata.
+		// POSTCONDITION: la tabella NAVE e' stata eliminata.
 		
 		Connection connection = null;
 		Statement statement = null;

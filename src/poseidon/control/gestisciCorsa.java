@@ -1,5 +1,6 @@
 package poseidon.control;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -485,8 +486,8 @@ public class gestisciCorsa {
 	 * @param orarioArrivo: orario di arrivo della corsa in procinto di essere inserita.
 	 * @param portoPartenza: porto di partenza della corsa in procinto di essere inserita.
 	 * @param portoArrivo: porto di arrivo della corsa in procinto di essere inserita.
-	 * @param prezzo: prezzo base della corsa in procinto di essere inserita.
-	 * @param nomeNave: nome identificativo della nave che percorrerà la corsa in procinto di essere inserita.
+	 * @param prezzo: prezzo della corsa in procinto di essere inserita.
+	 * @param nomeNave: nome identificativo della nave che percorrera' la corsa.
 	 * @return oggetto della classe Corsa contenente i dati della nuova corsa.
 	 */
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo,
@@ -497,9 +498,82 @@ public class gestisciCorsa {
 
 		Corsa corsa = null;
 		Nave nave = null;
+		Porto porto_p = null;
+		Porto porto_a = null;
 		int codiceCorsa = 1;
 		List<Corsa> lista_corsa = new ArrayList<Corsa>();
+		
+		// CONTROLLO INPUT
+		if(portoPartenza.length() > 50) {
+			System.out.println("Errore: caratteri inseriti non validi");
+			return null;
+		}
+		
+		if(portoPartenza.equals("") || portoPartenza == null) {
+			System.out.println("Errore: valori inseriti non validi");
+			return null;
+		}
+		
+		try {
+			 porto_p = PortoDAO.readPorto(portoPartenza);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		if (porto_p == null) {
+			System.out.println("Errore: il porto inserito non e' registrato.");
+			return null;
+		}
+		
+		if(portoArrivo.length() > 50) {
+			System.out.println("Errore: caratteri inseriti non validi");
+			return null;
+		}
+		
+		if(portoArrivo.equals("") || portoArrivo == null) {
+			System.out.println("Errore: valore inserito non valido");
+			return null;
+		}
 
+		try {
+			 porto_a = PortoDAO.readPorto(portoArrivo);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		if (porto_a == null) {
+			System.out.println("Errore: il porto inserito non e' registrato.");
+			return null;
+		}
+		
+		if(orarioPartenza.compareTo(orarioArrivo) == 0) {
+			System.out.println("ERRORE: l'orario inserito non e' valido!");
+			return null;
+		}
+		else {
+			boolean is = false;
+			is = orarioPartenza.isAfter(orarioArrivo);
+			if(is == true) {
+				System.out.println("ERRORE: l'orario inserito non e' valido!");
+				return null;
+			}
+		}	
+		
+		if(prezzo < 5 || prezzo > 200) {
+			System.out.println("Errore: valore inserito non valido");
+			return null;
+		}
+
+		if(nomeNave.length() > 50) {
+			System.out.println("Errore: caratteri inseriti non validi");
+			return null;
+		}
+		
+		if(nomeNave.equals("") || nomeNave == null) {
+			System.out.println("Errore: valore inserito non valido");
+			return null;
+		}
+		
 		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata corsa)
 		try {
 			nave = NaveDAO.readNave(nomeNave);
@@ -535,6 +609,9 @@ public class gestisciCorsa {
 		return corsa;
 	}
 
+<<<<<<< HEAD
+	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli, int codiceCorsa) {
+=======
 	/**
 	 * @param nomeNave: nome identificativo della nave in procinto di essere aggiunta.
 	 * @param categoria: categoria della nave in procinto di essere aggiunta [traghetto/aliscafo].
@@ -545,12 +622,61 @@ public class gestisciCorsa {
 	 */
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
 			int codiceCorsa) {
+>>>>>>> 5910d849d6de57c97a42cacfb99a74f038cf6c97
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
 		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito un riferimento all'oggetto
 		// della classe Nave contenente i dati della nuova nave. Altrimenti viene restituita l'istanza = null.
 
 		Nave nave = null;
 
+		// CONTROLLO INPUT
+		if(nomeNave.length() > 50) {
+			System.out.println("Errore: caratteri inseriti non validi");
+			return null;
+		}
+		
+		if(nomeNave.equals("") || nomeNave == null) {
+			System.out.println("Errore: valori inseriti non validi");
+			return null;
+		}
+		
+		if(categoria != "traghetto" || categoria != "aliscafo") {
+			System.out.println("Errore: valori inseriti non validi");
+			return null;
+		}
+		
+		if(capienzaPasseggeri > 400) {
+			System.out.println("Errore: valore non valido (max 400).");
+			return null;
+		} 
+		else if(capienzaPasseggeri < 0) {
+			System.out.println("Errore: valore non valido.");
+			return null;			
+		}
+		
+		if(capienzaAutoveicoli > 100) {
+			System.out.println("Errore: valore non valido (max 100).");
+			return null;
+		}
+		else if(capienzaAutoveicoli < 0) {
+			System.out.println("Errore: valore non valido.");
+			return null;			
+		}
+		
+		if (codiceCorsa <= 0) {
+			System.out.println("Errore: il codice corsa deve essere > 0.");
+			return null;
+		}
+		try {
+			if (CorsaDAO.readCorsa(codiceCorsa) == null) {
+				System.out.println("Errore: la corsa selezionata non esiste.");
+				return null;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+					
 		nave = new Nave(nomeNave, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
 
 		try {
@@ -572,7 +698,48 @@ public class gestisciCorsa {
 		// della classe Porto contenente i dati del nuovo Porto. Altrimenti viene restituita l'istanza = null.
 
 		Porto porto = null;
+		int flag = 0;
+		String[] listaPorti = {"Napoli", "Ischia", "Capri", "Ravenna", "Pozzuoli", "Catania", 
+				"Bari", "Brindisi", "Palermo", "Cagliari", "Olbia", "Genova", 
+				"Sorrento", "Amalfi", "Salerno", "Carlo Pisacane", "Messina", 
+				"Ortona", "Pozzallo", "Maratea", "Livorno", "Civitavecchia", "Vasto",
+				"Pesaro", "Savona", "Piombino", "Flavia", "Roseto degli Abruzzi"};
 
+		// CONTROLLO INPUT
+		
+		if(citta.length() > 50) {
+			System.out.println("Errore: caratteri inseriti non validi");
+			return null;
+		}
+		
+		if(citta.equals("") || citta == null) {
+			System.out.println("Errore: valori inseriti non validi");
+			return null;
+		}
+		
+		for(int i = 0; i < listaPorti.length; i++) {
+			if (citta.compareTo(listaPorti[i])==0) {
+				flag = 1;
+				porto = gestisciCorsa.inserimentoPorto(citta);
+				System.out.println("Porto inserito correttamente o gia' esistente.");
+			}
+		}
+		if (flag == 0) {
+			System.out.println("Impossibile inserire questo porto.");
+		}
+		
+		for(int i = 0; i < listaPorti.length; i++) {
+			if (citta.compareTo(listaPorti[i])==0) {
+				flag = 1;
+				porto = gestisciCorsa.inserimentoPorto(citta);
+				System.out.println("Porto inserito correttamente o gia' esistente.");
+			}
+		}
+		if (flag == 0) {
+			System.out.println("Impossibile inserire questo porto.");
+			return null;
+		}
+		
 		try {
 			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
