@@ -3,15 +3,15 @@ package poseidon.entity;
 public class Nave {
 	private String nome;
 	private int capienzaAutoveicoli;
-	private int capienzaPassegeri;
+	private int capienzaPasseggeri;
 	private String categoria;
 	private int codiceCorsa;
 	
-	public Nave(String nome, int capienzaAutoveicoli, int capienzaPassegeri, String categoria, int codiceCorsa) {
+	public Nave(String nome, int capienzaAutoveicoli, int capienzaPasseggeri, String categoria, int codiceCorsa) {
 		super();
 		this.nome = nome;
 		this.capienzaAutoveicoli = capienzaAutoveicoli;
-		this.capienzaPassegeri = capienzaPassegeri;
+		this.capienzaPasseggeri = capienzaPasseggeri;
 		this.categoria = categoria;
 		this.codiceCorsa = codiceCorsa;
 	}
@@ -32,12 +32,12 @@ public class Nave {
 		this.capienzaAutoveicoli = capienzaAutoveicoli;
 	}
 
-	public int getCapienzaPassegeri() {
-		return capienzaPassegeri;
+	public int getCapienzaPasseggeri() {
+		return capienzaPasseggeri;
 	}
 
-	public void setCapienzaPassegeri(int capienzaPassegeri) {
-		this.capienzaPassegeri = capienzaPassegeri;
+	public void setCapienzaPasseggeri(int capienzaPasseggeri) {
+		this.capienzaPasseggeri = capienzaPasseggeri;
 	}
 
 	public String getCategoria() {
@@ -61,7 +61,7 @@ public class Nave {
 		Nave n = (Nave)o;
 		return (this.nome.equals(n.nome) &&
 				this.capienzaAutoveicoli == n.capienzaAutoveicoli &&
-				this.capienzaPassegeri == n.capienzaPassegeri &&
+				this.capienzaPasseggeri == n.capienzaPasseggeri &&
 				this.categoria.equals(n.categoria) &&
 				this.codiceCorsa == n.codiceCorsa);
 	}

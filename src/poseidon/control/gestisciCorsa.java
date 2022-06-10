@@ -356,13 +356,13 @@ public class gestisciCorsa {
 
 		return ricevuta;
 	}
-
+	
 	/**
-	 * @param codiceCliente
-	 * @param ricevuta
-	 * @param corsa
-	 * @param tipoBiglietto
-	 * @param targa
+	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
+	 * @param ricevuta: stringa identificativa dell'acquisto effettuato.
+	 * @param corsa: oggetto della classe Corsa contenente le informazioni sulla corsa.
+	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @param targa: targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
 	 */
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
 		// PRECONDITIONS: -
@@ -387,9 +387,9 @@ public class gestisciCorsa {
 	}
 	
 	/**
-	 * @param codiceCorsa
-	 * @param tipoBiglietto
-	 * @return
+	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @return intero contenente il numero di posti disponibili nella corsa selezionata.
 	 */
 	public static int calcolaDisponibilitaCronologia(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: creazione delle Navi effettuata
@@ -413,7 +413,7 @@ public class gestisciCorsa {
 		for (Nave n : lista_nave) {
 			if (codiceCorsa == n.getCodiceCorsa()) {
 				if (tipoBiglietto.equals("passeggero")) {
-					capienza = n.getCapienzaPassegeri();
+					capienza = n.getCapienzaPasseggeri();
 				} else if (tipoBiglietto.equals("veicolo")) {
 					capienza = n.getCapienzaAutoveicoli();
 				}
@@ -441,11 +441,11 @@ public class gestisciCorsa {
 
 		return disponibilita;
 	}
-
+	
 	/**
-	 * @param codiceCorsa
-	 * @param tipoBiglietto
-	 * @return
+	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @return double del prezzo della corsa selezionata in base alla tipologia del biglietto.
 	 */
 	public static double inserisciTipologiaBiglietto(int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
@@ -479,14 +479,15 @@ public class gestisciCorsa {
 	 *
 	 */
 
+
 	/**
-	 * @param orarioPartenza
-	 * @param orarioArrivo
-	 * @param portoPartenza
-	 * @param portoArrivo
-	 * @param prezzo
-	 * @param nomeNave
-	 * @return
+	 * @param orarioPartenza: orario di partenza della corsa in procinto di essere inserita.
+	 * @param orarioArrivo: orario di arrivo della corsa in procinto di essere inserita.
+	 * @param portoPartenza: porto di partenza della corsa in procinto di essere inserita.
+	 * @param portoArrivo: porto di arrivo della corsa in procinto di essere inserita.
+	 * @param prezzo: prezzo base della corsa in procinto di essere inserita.
+	 * @param nomeNave: nome identificativo della nave che percorrerà la corsa in procinto di essere inserita.
+	 * @return oggetto della classe Corsa contenente i dati della nuova corsa.
 	 */
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo,
 			Double prezzo, String nomeNave) {
@@ -535,12 +536,12 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param nomeNave
-	 * @param categoria
-	 * @param capienzaPasseggeri
-	 * @param capienzaAutoveicoli
-	 * @param codiceCorsa
-	 * @return
+	 * @param nomeNave: nome identificativo della nave in procinto di essere aggiunta.
+	 * @param categoria: categoria della nave in procinto di essere aggiunta [traghetto/aliscafo].
+	 * @param capienzaPasseggeri: capienza passeggeri della nave in procinto di essere aggiunta.
+	 * @param capienzaAutoveicoli: capienza veicoli della nave in procinto di essere aggiunta [categoria = traghetto].
+	 * @param codiceCorsa: codice identificativo della corsa di appartenenza della nave in procinto di essere aggiunta.
+	 * @return oggetto della classe Nave contenente i dati della nuova nave.
 	 */
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
 			int codiceCorsa) {
@@ -562,8 +563,8 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param citta
-	 * @return
+	 * @param citta: città di appartenenza del porto in procinto di essere aggiunto.
+	 * @return oggetto della classe Porto contenente i dati del nuovo porto.
 	 */
 	public static Porto inserimentoPorto(String citta) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova nave
@@ -619,7 +620,7 @@ public class gestisciCorsa {
 		for (Nave n : lista_nave) {
 			if (codiceCorsa == n.getCodiceCorsa()) {
 				if (tipoBiglietto.equals("passeggero")) {
-					capienza = n.getCapienzaPassegeri();
+					capienza = n.getCapienzaPasseggeri();
 				} else if (tipoBiglietto.equals("veicolo")) {
 					capienza = n.getCapienzaAutoveicoli();
 				}

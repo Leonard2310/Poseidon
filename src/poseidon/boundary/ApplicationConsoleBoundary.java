@@ -210,7 +210,7 @@ public class ApplicationConsoleBoundary {
 				for (Nave n : listaNave) {
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
 						System.out.println("\tTipo Nave:  "+n.getNome());
-						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPasseggeri());
 						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
 					}
 				}
@@ -240,7 +240,7 @@ public class ApplicationConsoleBoundary {
 				for (Nave n : listaNave) {
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
 						System.out.println("\tTipo Nave:  "+n.getNome());
-						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPasseggeri());
 						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
 					}
 				}
@@ -262,7 +262,7 @@ public class ApplicationConsoleBoundary {
 				for (Nave n : listaNave) {
 					if(c.getCodiceCorsa() == n.getCodiceCorsa()) {
 						System.out.println("\tTipo Nave:  "+n.getNome());
-						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPassegeri());
+						System.out.println("\tCapienza passeggeri:  "+n.getCapienzaPasseggeri());
 						System.out.println("\tCapienza autoveicoli:  "+n.getCapienzaAutoveicoli());
 					}
 				}
