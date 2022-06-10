@@ -30,10 +30,12 @@ class InserimentoNaveTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		NaveDAO.deleteallNave();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		NaveDAO.deleteallNave();
 	}
 
 	@Test

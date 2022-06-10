@@ -634,7 +634,7 @@ public class gestisciCorsa {
 			return null;
 		}
 		
-		if(categoria != "traghetto" || categoria != "aliscafo") {
+		if(categoria != "traghetto" && categoria != "aliscafo") {
 			System.out.println("Errore: valori inseriti non validi");
 			return null;
 		}
@@ -683,7 +683,7 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param citta: citta'  di appartenenza del porto in procinto di essere aggiunto.
+	 * @param citta: citta'ï¿½ di appartenenza del porto in procinto di essere aggiunto.
 	 * @return oggetto della classe Porto contenente i dati del nuovo porto.
 	 */
 	public static Porto inserimentoPorto(String citta) {
@@ -711,16 +711,6 @@ public class gestisciCorsa {
 			return null;
 		}
 		
-		for(int i = 0; i < listaPorti.length; i++) {
-			if (citta.compareTo(listaPorti[i])==0) {
-				flag = 1;
-				System.out.println("Porto inserito correttamente o gia' esistente.");
-			}
-		}
-		if (flag == 0) {
-			System.out.println("Impossibile inserire questo porto.");
-		}
-		
 		try {
 			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
@@ -737,7 +727,19 @@ public class gestisciCorsa {
 				return null;
 			}
 		} else {
-			// System.out.println("Il porto inserito e' gia' esistente.");
+			System.out.println("Il porto inserito e' gia' esistente.");
+			return null;
+		}
+		
+		for(int i = 0; i < listaPorti.length; i++) {
+			if (citta.compareTo(listaPorti[i])==0) {
+				flag = 1;
+				System.out.println("Porto inserito correttamente o gia' esistente.");
+			}
+		}	
+		
+		if (flag == 0) {
+			System.out.println("Impossibile inserire questo porto.");
 			return null;
 		}
 
@@ -745,8 +747,8 @@ public class gestisciCorsa {
 	}
 	
 	/**
-	 * @param codiceCorsa: codice identificativo della corsa per la quale si vuole calcolare la disponibilità residua.
-	 * @param tipoBiglietto: tipologia di biglietto per il quale si vuole calcolare la disponibilità residua.
+	 * @param codiceCorsa: codice identificativo della corsa per la quale si vuole calcolare la disponibilitï¿½ residua.
+	 * @param tipoBiglietto: tipologia di biglietto per il quale si vuole calcolare la disponibilitï¿½ residua.
 	 * @return intero contenente il numero di biglietti della tipologia indicata disponibili per la corsa selezionata.
 	 */
 	public static int calcolaDisponibilitaBiglietti(int codiceCorsa, String tipoBiglietto) {
@@ -798,7 +800,7 @@ public class gestisciCorsa {
 			}
 		}
 
-		/* Calcolo la disponibilità residua */
+		/* Calcolo la disponibilitï¿½ residua */
 		int disponibilita = capienza - count;
 
 		return disponibilita;
@@ -860,7 +862,7 @@ public class gestisciCorsa {
 		}
 
 		if (tipoBiglietto == null || (!tipoBiglietto.equals("veicolo") && !tipoBiglietto.equals("passeggero"))) {
-			System.out.println("Errore: il tipo di biglietto inserito non è valido.");
+			System.out.println("Errore: il tipo di biglietto inserito non ï¿½ valido.");
 			return null;
 		}
 
@@ -914,10 +916,10 @@ public class gestisciCorsa {
 			}
 		}
 
-		/* Verifico la disponibilità di posti disponibili per la corsa selezionata 
+		/* Verifico la disponibilitï¿½ di posti disponibili per la corsa selezionata 
 		 * e per la tipologia di biglietto inserita */
 		if (calcolaDisponibilitaBiglietti(codiceCorsa, tipoBiglietto) <= 0) {
-			System.out.println("Errore: non ci sono più biglietti disponibili di questo tipo per questa corsa.");
+			System.out.println("Errore: non ci sono piï¿½ biglietti disponibili di questo tipo per questa corsa.");
 			return null;
 		}
 
@@ -938,10 +940,10 @@ public class gestisciCorsa {
 		/* Ricavo i valori attuali di data e ora */
 		data = LocalDate.now();
 		ora = LocalTime.now();
-		/* Elimino i nanosecondi perché non è richiesto che vengano registati */
+		/* Elimino i nanosecondi perchï¿½ non ï¿½ richiesto che vengano registati */
 		ora = LocalTime.of(ora.getHour(), ora.getMinute(), ora.getSecond());
 
-		/* Creo una nuova entità della classe BigliettoVeicolo o BigliettoPasseggero,
+		/* Creo una nuova entitï¿½ della classe BigliettoVeicolo o BigliettoPasseggero,
 		 *  a seconda della tipologia di biglietto inserita */
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
@@ -961,13 +963,13 @@ public class gestisciCorsa {
 		 *  utilizzando un metodo del sistema esterno "Stampante" */
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
-			System.out.println("Al momento non è possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
+			System.out.println("Al momento non ï¿½ possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
 		/* Accedo al database per aggiornare l'elenco degli acquisti effettuati
 		 *  dal cliente che ha richiesto l'emissione del biglietto */
 		if (flag == 'n') {
-			/* Modifico la cronologia già esistente */
+			/* Modifico la cronologia giï¿½ esistente */
 			try {
 				c = CronologiaDAO.readCronologia(codiceCliente, codiceCorsa, ricevuta);
 				if (c != null) {
@@ -1005,11 +1007,11 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @return lista di oggetti della classe CronologiaAcquisti per i quali ancora non è stato emesso un biglietto.
+	 * @return lista di oggetti della classe CronologiaAcquisti per i quali ancora non ï¿½ stato emesso un biglietto.
 	 */
 	public static List<CronologiaAcquisti> verificaAcquisti() {
 		// PRECONDITIONS: -
-		// POSTCONDITIONS: se ci sono acquisti per i quali non è ancora stato emesso un biglietto, viene restituito un
+		// POSTCONDITIONS: se ci sono acquisti per i quali non ï¿½ ancora stato emesso un biglietto, viene restituito un
 		// riferimento all'oggetto della classe CronologiaAcquisti contenente i dati del nuovo acquisto;
 		// altrimenti, viene restituita una lista vuota. In caso di errore nell'accesso al database, viene restituito
 		// un riferimento null.
@@ -1030,7 +1032,7 @@ public class gestisciCorsa {
 			return null;
 
 		/* Creo una nuova lista aggiungendo tutte le cronologie 
-		 * il cui codice biglietto è uguale a zero */
+		 * il cui codice biglietto ï¿½ uguale a zero */
 		for (CronologiaAcquisti c : lista) {
 			if (c.getBiglietto().getCodiceBiglietto() == 0) {
 				lista_result.add(c);
