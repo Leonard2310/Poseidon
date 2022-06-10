@@ -124,7 +124,7 @@ public class DipendenteConsoleBoundary {
 						if (citta.compareTo(listaPorti[i])==0) {
 							flag = 1;
 							porto = gestisciCorsa.inserimentoPorto(citta);
-							System.out.println("Porto inserito correttamente o gia' esistente.");
+							System.out.println("Porto inserito correttamente.");
 						}
 					}
 					if (flag == 0) {

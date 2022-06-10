@@ -148,7 +148,7 @@ class InserimentoCorsaTest {
 	}
 	
 	@Test
-	void testInserimentoCorsa_7() throws SQLException {
+	void testInserimentoCorsa_8() throws SQLException {
 
 		/* Output attesi */
 		Corsa corsa = null;
@@ -165,7 +165,7 @@ class InserimentoCorsaTest {
 	}
 	
 	@Test
-	void testInserimentoCorsa_8() throws SQLException {
+	void testInserimentoCorsa_9() throws SQLException {
 	
 		/* Output attesi */
 		Corsa corsa = null;
@@ -182,7 +182,7 @@ class InserimentoCorsaTest {
 	}
 	
 	@Test
-	void testInserimentoCorsa_9() throws SQLException {
+	void testInserimentoCorsa_10() throws SQLException {
 
 		/* Output attesi */
 		Corsa corsa = null;

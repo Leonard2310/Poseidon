@@ -139,6 +139,7 @@ public class CorsaDAO {
 			statement.setTime(3, time_orarioArrivo);
 			statement.setString(4, portoPartenza);
 			statement.setString(5, portoArrivo);
+			statement.setDouble(6, prezzo);
 			statement.executeUpdate();
 			
 		} finally {

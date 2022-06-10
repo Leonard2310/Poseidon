@@ -210,12 +210,12 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
-	 * @param nome: nome dell'intestatario del biglietto in acquisto.
-	 * @param cognome: cognome dell'intestatario del biglietto in acquisto.
-	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
-	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
-	 * @param targa: targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
+	 * @param codiceCliente:      codice identificativo del cliente che si è loggato per acquistare un biglietto.
+	 * @param nome:               nome dell'intestatario del biglietto in acquisto.
+	 * @param cognome:            cognome dell'intestatario del biglietto in acquisto.
+	 * @param tipoBiglietto:      tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
+	 * @param codiceCorsa:        codice identificativo della corsa selezionata dall'utente.
+	 * @param targa:              targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
 	 * @param tipologiaPagamento: tipologia del pagamento per l'elaborazione dell'acquisto.
 	 * @return stringa identificativa dell'acquisto effettuato (null se acquisto fallito).
 	 */
@@ -291,7 +291,7 @@ public class gestisciCorsa {
 
 			if (disponibilita > 0) {
 				System.out.println("La corsa è disponibile (" + disponibilita + " posti rimanenti)");
-				System.out.println("Il prezzo finale è " + prezzo_finale +"0€");
+				System.out.println("Il prezzo finale è " + prezzo_finale + "0€");
 
 				bool_pagamento = SistemaDiPagamento.elaborazioneAcquisto(tipologiaPagamento);
 
@@ -323,10 +323,10 @@ public class gestisciCorsa {
 
 	/**
 	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
-	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param codiceCorsa:   codice identificativo della corsa selezionata dall'utente.
 	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
-	 * @return stringa alfanumerica identificativa dell'acquisto effettuato formata da codiceCliente, codiceCorsa, 
-	 * 			identificativo del tipoBiglietto e tre caratteri alfanumerici casuali.
+	 * @return stringa alfanumerica identificativa dell'acquisto effettuato formata da codiceCliente, codiceCorsa, identificativo del
+	 *         tipoBiglietto e tre caratteri alfanumerici casuali.
 	 */
 	public static String generateRicevuta(int codiceCliente, int codiceCorsa, String tipoBiglietto) {
 		// PRECONDITIONS: -
@@ -356,13 +356,13 @@ public class gestisciCorsa {
 
 		return ricevuta;
 	}
-	
+
 	/**
 	 * @param codiceCliente: codice identificativo del cliente che si è loggato per acquistare un biglietto.
-	 * @param ricevuta: stringa identificativa dell'acquisto effettuato.
-	 * @param corsa: oggetto della classe Corsa contenente le informazioni sulla corsa.
+	 * @param ricevuta:      stringa identificativa dell'acquisto effettuato.
+	 * @param corsa:         oggetto della classe Corsa contenente le informazioni sulla corsa.
 	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
-	 * @param targa: targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
+	 * @param targa:         targa identificativa del veicolo per il biglietto [tipologiaBiglietto = "veicolo"].
 	 */
 	public static void aggiuntaAcquistoCronologia(int codiceCliente, String ricevuta, Corsa corsa, String tipoBiglietto, String targa) {
 		// PRECONDITIONS: -
@@ -385,9 +385,9 @@ public class gestisciCorsa {
 		}
 
 	}
-	
+
 	/**
-	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param codiceCorsa:   codice identificativo della corsa selezionata dall'utente.
 	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
 	 * @return intero contenente il numero di posti disponibili nella corsa selezionata.
 	 */
@@ -398,7 +398,7 @@ public class gestisciCorsa {
 
 		List<CronologiaAcquisti> lista_cronologia = new ArrayList<CronologiaAcquisti>();
 		List<Nave> lista_nave = new ArrayList<Nave>();
-		
+
 		Corsa corsa = new Corsa(0, null, null, null, null, 0);
 
 		String ricevuta = null;
@@ -441,9 +441,9 @@ public class gestisciCorsa {
 
 		return disponibilita;
 	}
-	
+
 	/**
-	 * @param codiceCorsa: codice identificativo della corsa selezionata dall'utente.
+	 * @param codiceCorsa:   codice identificativo della corsa selezionata dall'utente.
 	 * @param tipoBiglietto: tipologia del biglietto in acquisto da parte del cliente [passeggero/veicolo].
 	 * @return double del prezzo della corsa selezionata in base alla tipologia del biglietto.
 	 */
@@ -479,14 +479,13 @@ public class gestisciCorsa {
 	 *
 	 */
 
-
 	/**
 	 * @param orarioPartenza: orario di partenza della corsa in procinto di essere inserita.
-	 * @param orarioArrivo: orario di arrivo della corsa in procinto di essere inserita.
-	 * @param portoPartenza: porto di partenza della corsa in procinto di essere inserita.
-	 * @param portoArrivo: porto di arrivo della corsa in procinto di essere inserita.
-	 * @param prezzo: prezzo della corsa in procinto di essere inserita.
-	 * @param nomeNave: nome identificativo della nave che percorrera' la corsa.
+	 * @param orarioArrivo:   orario di arrivo della corsa in procinto di essere inserita.
+	 * @param portoPartenza:  porto di partenza della corsa in procinto di essere inserita.
+	 * @param portoArrivo:    porto di arrivo della corsa in procinto di essere inserita.
+	 * @param prezzo:         prezzo della corsa in procinto di essere inserita.
+	 * @param nomeNave:       nome identificativo della nave che percorrera' la corsa.
 	 * @return oggetto della classe Corsa contenente i dati della nuova corsa.
 	 */
 	public static Corsa inserimentoCorsa(LocalTime orarioPartenza, LocalTime orarioArrivo, String portoPartenza, String portoArrivo,
@@ -501,93 +500,77 @@ public class gestisciCorsa {
 		Porto porto_a = null;
 		int codiceCorsa = 1;
 		List<Corsa> lista_corsa = new ArrayList<Corsa>();
-		
+
 		// CONTROLLO INPUT
-		if(portoPartenza.length() > 50) {
+		if (portoPartenza.length() > 50) {
 			System.out.println("Errore: caratteri inseriti non validi");
 			return null;
 		}
-		
-		if(portoPartenza.equals("") || portoPartenza == null) {
+
+		if (portoPartenza.equals("") || portoPartenza == null) {
 			System.out.println("Errore: valori inseriti non validi");
 			return null;
 		}
-		
+
 		try {
-			 porto_p = PortoDAO.readPorto(portoPartenza);
+			porto_p = PortoDAO.readPorto(portoPartenza);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		if (porto_p == null) {
 			System.out.println("Errore: il porto inserito non e' registrato.");
 			return null;
 		}
-		
-		if(portoArrivo.length() > 50) {
+
+		if (portoArrivo.length() > 50) {
 			System.out.println("Errore: caratteri inseriti non validi");
 			return null;
 		}
-		
-		if(portoArrivo.equals("") || portoArrivo == null) {
+
+		if (portoArrivo.equals("") || portoArrivo == null) {
 			System.out.println("Errore: valore inserito non valido");
 			return null;
 		}
 
 		try {
-			 porto_a = PortoDAO.readPorto(portoArrivo);
+			porto_a = PortoDAO.readPorto(portoArrivo);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		if (porto_a == null) {
 			System.out.println("Errore: il porto inserito non e' registrato.");
 			return null;
 		}
 
-		/*
-		LocalTime test_error1 = LocalTime.of(24, 00);
-		LocalTime test_error2 = LocalTime.of(00, 00);
-		
-		if(orarioPartenza.isAfter(test_error1) || orarioPartenza.isBefore(test_error2)) {
-			System.out.println("ERRORE: l'orario inserito non e' valido!");
+		if (orarioPartenza.compareTo(orarioArrivo) == 0) {
+			System.out.println("Errore: l'orario inserito non e' valido!");
 			return null;
-		}
-		
-		if(orarioArrivo.isAfter(test_error1) || orarioArrivo.isBefore(test_error2)) {
-			System.out.println("ERRORE: l'orario inserito non e' valido!");
-			return null;
-		}
-		*/
-		
-		if(orarioPartenza.compareTo(orarioArrivo) == 0) {
-			System.out.println("ERRORE: l'orario inserito non e' valido!");
-			return null;
-		}
-		else {
+		} else {
 			boolean is = false;
 			is = orarioPartenza.isAfter(orarioArrivo);
-			if(is == true) {
-				System.out.println("ERRORE: l'orario inserito non e' valido!");
+			if (is == true) {
+				System.out.println("Errore: l'orario inserito non e' valido!");
 				return null;
 			}
-		}	
-		
-		if(prezzo < 5 || prezzo > 200) {
+		}
+
+		if (prezzo < 5 || prezzo > 200) {
 			System.out.println("Errore: valore inserito non valido");
 			return null;
 		}
 
-		if(nomeNave.length() > 50) {
+		if (nomeNave.length() > 50) {
 			System.out.println("Errore: caratteri inseriti non validi");
 			return null;
 		}
-		
-		if(nomeNave.equals("") || nomeNave == null) {
+
+		if (nomeNave.equals("") || nomeNave == null) {
 			System.out.println("Errore: valore inserito non valido");
 			return null;
 		}
-		
+
 		// Verifica se gia' esiste la nave (ad ogni nave e' associata una determinata corsa)
 		try {
 			nave = NaveDAO.readNave(nomeNave);
@@ -608,7 +591,7 @@ public class gestisciCorsa {
 			}
 
 			corsa = new Corsa(codiceCorsa, orarioPartenza, orarioArrivo, portoPartenza, portoArrivo, prezzo);
-			
+
 			try {
 				CorsaDAO.creaCorsa(corsa);
 			} catch (SQLException e1) {
@@ -616,7 +599,7 @@ public class gestisciCorsa {
 			}
 
 		} else {
-			System.out.println("Errore: la nave inserita e' gia' esistente.");
+			System.out.println("Errore: la corsa inserita e' gia' esistente.");
 			return null;
 		}
 
@@ -624,68 +607,125 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param nomeNave: nome identificativo della nave in procinto di essere aggiunta.
-	 * @param categoria: categoria della nave in procinto di essere aggiunta [traghetto/aliscafo].
-	 * @param capienzaPasseggeri: capienza passeggeri della nave in procinto di essere aggiunta.
+	 * @param nomeNave:            nome identificativo della nave in procinto di essere aggiunta.
+	 * @param categoria:           categoria della nave in procinto di essere aggiunta [traghetto/aliscafo].
+	 * @param capienzaPasseggeri:  capienza passeggeri della nave in procinto di essere aggiunta.
 	 * @param capienzaAutoveicoli: capienza veicoli della nave in procinto di essere aggiunta [categoria = traghetto].
-	 * @param codiceCorsa: codice identificativo della corsa di appartenenza della nave in procinto di essere aggiunta.
+	 * @param codiceCorsa:         codice identificativo della corsa di appartenenza della nave in procinto di essere aggiunta.
 	 * @return oggetto della classe Nave contenente i dati della nuova nave.
 	 */
-	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli, int codiceCorsa) {
+	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli,
+			int codiceCorsa) {
 		// PRECONDIZIONE: deve essere stata inserita con successo una nuova corsa
 		// POSTOCONDIZIONE: se l'inserimento della nave e' avvenuta con successo viene restituito un riferimento all'oggetto
 		// della classe Nave contenente i dati della nuova nave. Altrimenti viene restituita l'istanza = null.
 
 		Nave nave = null;
-
-		// CONTROLLO INPUT
-		if(nomeNave.length() > 50) {
-			System.out.println("Errore: caratteri inseriti non validi");
-			return null;
-		}
-		
-		if(nomeNave.equals("") || nomeNave == null) {
-			System.out.println("Errore: valori inseriti non validi");
-			return null;
-		}
-		
-		if(categoria != "traghetto" && categoria != "aliscafo") {
-			System.out.println("Errore: valori inseriti non validi");
-			return null;
-		}
-		
-		if(capienzaPasseggeri > 400) {
-			System.out.println("Errore: valore non valido (max 400).");
-			return null;
-		} 
-		else if(capienzaPasseggeri < 0) {
-			System.out.println("Errore: valore non valido.");
-			return null;			
-		}
-		
-		if(capienzaAutoveicoli > 100) {
-			System.out.println("Errore: valore non valido (max 100).");
-			return null;
-		}
-		else if(capienzaAutoveicoli < 0) {
-			System.out.println("Errore: valore non valido.");
-			return null;			
-		}
-		
-		if (codiceCorsa <= 0) {
-			System.out.println("Errore: il codice corsa deve essere > 0.");
-			return null;
-		}
+		Corsa corsa;
 		try {
-			if (CorsaDAO.readCorsa(codiceCorsa) == null) {
+			corsa = CorsaDAO.readCorsa(codiceCorsa);
+			if (corsa != null) {
+				// CONTROLLO INPUT CON CODICE CORSA VALIDO
+				if (nomeNave.length() > 50) {
+					System.out.println("Errore: caratteri inseriti non validi");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+
+				if (nomeNave.equals("") || nomeNave == null) {
+					System.out.println("Errore: valori inseriti non validi");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+
+				if (!categoria.equals("traghetto") && !categoria.equals("aliscafo")) {
+					System.out.println("Errore: valori inseriti non validi");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+
+				if (capienzaPasseggeri > 400) {
+					System.out.println("Errore: valore non valido (max 400).");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				} else if (capienzaPasseggeri < 0) {
+					System.out.println("Errore: valore non valido.");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+
+				if (capienzaAutoveicoli > 100) {
+					System.out.println("Errore: valore non valido (max 100).");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				} else if (capienzaAutoveicoli < 0) {
+					System.out.println("Errore: valore non valido.");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+
+				if (codiceCorsa <= 0) {
+					System.out.println("Errore: il codice corsa deve essere > 0.");
+					try {
+						System.out.println("CORSA CANCELLATA");
+						CorsaDAO.deleteCorsa(corsa.getCodiceCorsa(), corsa.getOrarioPartenza(), corsa.getOrarioArrivo(),
+								corsa.getPortoPartenza(), corsa.getPortoArrivo(), corsa.getPrezzo());
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+			} else {
 				System.out.println("Errore: la corsa selezionata non esiste.");
 				return null;
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			return null;
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
 		}
-					
+
 		nave = new Nave(nomeNave, capienzaAutoveicoli, capienzaPasseggeri, categoria, codiceCorsa);
 
 		try {
@@ -708,24 +748,22 @@ public class gestisciCorsa {
 
 		Porto porto = null;
 		int flag = 0;
-		String[] listaPorti = {"Napoli", "Ischia", "Capri", "Ravenna", "Pozzuoli", "Catania", 
-				"Bari", "Brindisi", "Palermo", "Cagliari", "Olbia", "Genova", 
-				"Sorrento", "Amalfi", "Salerno", "Carlo Pisacane", "Messina", 
-				"Ortona", "Pozzallo", "Maratea", "Livorno", "Civitavecchia", "Vasto",
-				"Pesaro", "Savona", "Piombino", "Flavia", "Roseto degli Abruzzi"};
+		String[] listaPorti = { "Napoli", "Ischia", "Capri", "Ravenna", "Pozzuoli", "Catania", "Bari", "Brindisi", "Palermo",
+				"Cagliari", "Olbia", "Genova", "Sorrento", "Amalfi", "Salerno", "Carlo Pisacane", "Messina", "Ortona", "Pozzallo",
+				"Maratea", "Livorno", "Civitavecchia", "Vasto", "Pesaro", "Savona", "Piombino", "Flavia", "Roseto degli Abruzzi" };
 
 		// CONTROLLO INPUT
-		
-		if(citta.length() > 50) {
+
+		if (citta.length() > 50) {
 			System.out.println("Errore: caratteri inseriti non validi");
 			return null;
 		}
-		
+
 		if (citta == null || citta.equals("")) {
 			System.out.println("Errore: valori inseriti non validi");
 			return null;
 		}
-		
+
 		try {
 			porto = PortoDAO.readPorto(citta);
 		} catch (SQLException e1) {
@@ -745,14 +783,13 @@ public class gestisciCorsa {
 			System.out.println("Il porto inserito e' gia' esistente.");
 			return null;
 		}
-		
-		for(int i = 0; i < listaPorti.length; i++) {
-			if (citta.compareTo(listaPorti[i])==0) {
+
+		for (int i = 0; i < listaPorti.length; i++) {
+			if (citta.compareTo(listaPorti[i]) == 0) {
 				flag = 1;
-				System.out.println("Porto inserito correttamente.");
 			}
-		}	
-		
+		}
+
 		if (flag == 0) {
 			System.out.println("Impossibile inserire questo porto.");
 			return null;
@@ -760,9 +797,9 @@ public class gestisciCorsa {
 
 		return porto;
 	}
-	
+
 	/**
-	 * @param codiceCorsa: codice identificativo della corsa per la quale si vuole calcolare la disponibilit� residua.
+	 * @param codiceCorsa:   codice identificativo della corsa per la quale si vuole calcolare la disponibilit� residua.
 	 * @param tipoBiglietto: tipologia di biglietto per il quale si vuole calcolare la disponibilit� residua.
 	 * @return intero contenente il numero di biglietti della tipologia indicata disponibili per la corsa selezionata.
 	 */
@@ -777,8 +814,9 @@ public class gestisciCorsa {
 		int capienza = 0;
 		int count = 0;
 
-		/* Accedo al database per ottenere il numero di posti totali 
-		 * della nave corrispondente alla corsa indicata */
+		/*
+		 * Accedo al database per ottenere il numero di posti totali della nave corrispondente alla corsa indicata
+		 */
 		try {
 			lista_nave = NaveDAO.readallNave();
 		} catch (SQLException e) {
@@ -794,8 +832,9 @@ public class gestisciCorsa {
 			}
 		}
 
-		/* Accedo al database per contare il numero di biglietti della 
-		 * tipologia indicata emessi per la corsa desiderata*/
+		/*
+		 * Accedo al database per contare il numero di biglietti della tipologia indicata emessi per la corsa desiderata
+		 */
 		try {
 			lista_biglietto = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e) {
@@ -823,12 +862,12 @@ public class gestisciCorsa {
 
 	/**
 	 * @param codiceImpiegato: codice identificativo dell'impiegato che emette il biglietto.
-	 * @param codiceCorsa: codice identificativo della corsa per la quale si emette il biglietto.
-	 * @param targa: targa identificativa del veicolo per il quale si emette il biglietto (di tipo "veicolo").
-	 * @param tipoBiglietto: tipologia del biglietto che viene emesso.
-	 * @param codiceCliente: codice identificativo del cliente che ha richiesto l'emissione del biglietto.
-	 * @param flag: carattere indicante la scelta di generare o meno una nuova ricevuta ('y' o 'n').
-	 * @param ricevuta: stringa rappresentante la ricevuta d'acquisto del biglietto che viene emesso (flag == 'n').
+	 * @param codiceCorsa:     codice identificativo della corsa per la quale si emette il biglietto.
+	 * @param targa:           targa identificativa del veicolo per il quale si emette il biglietto (di tipo "veicolo").
+	 * @param tipoBiglietto:   tipologia del biglietto che viene emesso.
+	 * @param codiceCliente:   codice identificativo del cliente che ha richiesto l'emissione del biglietto.
+	 * @param flag:            carattere indicante la scelta di generare o meno una nuova ricevuta ('y' o 'n').
+	 * @param ricevuta:        stringa rappresentante la ricevuta d'acquisto del biglietto che viene emesso (flag == 'n').
 	 * @return oggetto della classe Biglietto contenente i dati del biglietto emesso (null in caso di fallimento).
 	 */
 	public static Biglietto emissioneBiglietto(int codiceImpiegato, int codiceCorsa, String targa, String tipoBiglietto,
@@ -931,15 +970,17 @@ public class gestisciCorsa {
 			}
 		}
 
-		/* Verifico la disponibilit� di posti disponibili per la corsa selezionata 
-		 * e per la tipologia di biglietto inserita */
+		/*
+		 * Verifico la disponibilit� di posti disponibili per la corsa selezionata e per la tipologia di biglietto inserita
+		 */
 		if (calcolaDisponibilitaBiglietti(codiceCorsa, tipoBiglietto) <= 0) {
 			System.out.println("Errore: non ci sono pi� biglietti disponibili di questo tipo per questa corsa.");
 			return null;
 		}
 
-		/* Accedo al database per ottenere il codice dell'ultimo biglietto 
-		 * emesso per la corsa selezionata */
+		/*
+		 * Accedo al database per ottenere il codice dell'ultimo biglietto emesso per la corsa selezionata
+		 */
 		try {
 			lista = BigliettoDAO.readallBiglietto();
 		} catch (SQLException e) {
@@ -958,8 +999,9 @@ public class gestisciCorsa {
 		/* Elimino i nanosecondi perch� non � richiesto che vengano registati */
 		ora = LocalTime.of(ora.getHour(), ora.getMinute(), ora.getSecond());
 
-		/* Creo una nuova entit� della classe BigliettoVeicolo o BigliettoPasseggero,
-		 *  a seconda della tipologia di biglietto inserita */
+		/*
+		 * Creo una nuova entit� della classe BigliettoVeicolo o BigliettoPasseggero, a seconda della tipologia di biglietto inserita
+		 */
 		if (tipoBiglietto.equals("veicolo")) {
 			biglietto = new BigliettoVeicolo(codiceBiglietto, data, ora, codiceCorsa, codiceImpiegato, targa);
 		} else if (tipoBiglietto.equals("passeggero")) {
@@ -974,15 +1016,17 @@ public class gestisciCorsa {
 			return null;
 		}
 
-		/* Effettuo la stampa delle informazioni del biglietto emesso
-		 *  utilizzando un metodo del sistema esterno "Stampante" */
+		/*
+		 * Effettuo la stampa delle informazioni del biglietto emesso utilizzando un metodo del sistema esterno "Stampante"
+		 */
 		esito = Stampante.stampa(data, ora, targa);
 		if (esito != 0) {
 			System.out.println("Al momento non � possibile effettuare la stampa del biglietto." + "\nRiprovare tra 10 minuti");
 		}
 
-		/* Accedo al database per aggiornare l'elenco degli acquisti effettuati
-		 *  dal cliente che ha richiesto l'emissione del biglietto */
+		/*
+		 * Accedo al database per aggiornare l'elenco degli acquisti effettuati dal cliente che ha richiesto l'emissione del biglietto
+		 */
 		if (flag == 'n') {
 			/* Modifico la cronologia gi� esistente */
 			try {
@@ -1046,8 +1090,9 @@ public class gestisciCorsa {
 		if (lista == null)
 			return null;
 
-		/* Creo una nuova lista aggiungendo tutte le cronologie 
-		 * il cui codice biglietto � uguale a zero */
+		/*
+		 * Creo una nuova lista aggiungendo tutte le cronologie il cui codice biglietto � uguale a zero
+		 */
 		for (CronologiaAcquisti c : lista) {
 			if (c.getBiglietto().getCodiceBiglietto() == 0) {
 				lista_result.add(c);
