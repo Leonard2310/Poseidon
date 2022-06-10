@@ -1,5 +1,6 @@
 package poseidon.control;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
@@ -157,7 +158,7 @@ class acquistoBigliettoTest {
 	
 	@Test
 	void testAcquistoBiglietto_6() throws SQLException {	// -1, 10001, passeggero, AA000AA, Leonardo, Catello, contante
-		
+		//assertEquals("mcm non corretto!");
 	}
 	
 	@Test
