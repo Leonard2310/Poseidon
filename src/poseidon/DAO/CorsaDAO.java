@@ -119,7 +119,7 @@ public class CorsaDAO {
 	
 	public static void deleteCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo, 
 			String portoPartenza, String portoArrivo, double prezzo) throws SQLException {
-		// PRECONDITION: è stata aggiunta almeno una corsa all'interno del database.
+		// PRECONDITION: e' stata aggiunta almeno una corsa all'interno del database.
 		// POSTCONDITION: elimina la corsa dalla tabella CORSA. Se non la trova non modifica il database.
 		
 		Connection connection = null;
@@ -153,7 +153,7 @@ public class CorsaDAO {
 
 	public static void deleteallCorsa() throws SQLException {
 		// PRECONDITION: - 
-		// POSTCONDITION: la tabella CORSA è stata eliminata.
+		// POSTCONDITION: la tabella CORSA e' stata eliminata.
 		
 		Connection connection = null;
 		Statement statement = null;

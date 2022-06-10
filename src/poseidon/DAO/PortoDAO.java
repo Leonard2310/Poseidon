@@ -93,7 +93,7 @@ public class PortoDAO {
 	}
 	
 	public static void deletePorto(String citta) throws SQLException {
-		// PRECONDITION: � stata aggiunta almeno un porto all'interno del database.
+		// PRECONDITION: e' stata aggiunta almeno un porto all'interno del database.
 		// POSTCONDITION: elimina il porto dalla tabella PORTO. Se non la trova non modifica il database.
 		
 		Connection connection = null;
