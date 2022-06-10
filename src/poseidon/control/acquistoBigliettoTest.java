@@ -157,49 +157,224 @@ class acquistoBigliettoTest {
 	 */
 	
 	@Test
-	void testAcquistoBiglietto_6() throws SQLException {	// -1, 10001, passeggero, AA000AA, Leonardo, Catello, contante
-		//assertEquals("mcm non corretto!");
+	void testAcquistoBiglietto_6() throws SQLException {
+		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", -1, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: il codice corsa deve essere > 0.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
+		
 	}
 	
 	@Test
-	void testAcquistoBiglietto_7() throws SQLException {	// 500, 10001, passeggero, AA000AA, Leonardo, Catello, contante
+	void testAcquistoBiglietto_7() throws SQLException {
+		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: la corsa selezionata non esiste.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
 		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_8() throws SQLException {	// 101, -1, passeggero, AA000AA, Leonardo, Catello, contante
 		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(-1, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: il codice cliente deve essere > 0.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
+		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_9() throws SQLException {	// 101, 50000, passeggero, AA000AA, Leonardo, Catello, contante
+		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(50000, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: il cliente selezionato non esiste.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
 		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_10() throws SQLException {	// 101, 10001, null, AA000AA, Leonardo, Catello, contante
 		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", null, 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: il tipo di biglietto inserito non è valido.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
+		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_11() throws SQLException {	// 101, 10001, passeggero, null, Leonardo, Catello, contante
+		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, null, "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: necessario inserire la targa.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
 		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_12() throws SQLException {	// 101, 10001, passeggero, AA000AA, null, Catello, contante
 		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, null, "Catello", "veicolo", 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: necessario inserire il nome.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
+		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_13() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, null, contante
+		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", null, "veicolo", 500, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: necessario inserire il cognome.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
 		
 	}
 	
 	@Test
 	void testAcquistoBiglietto_14() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, Catello, null
 		
+		/* Prima di ogni test di errore */
+		CronologiaDAO.deleteallCronologia();
+		
+		/* Output attesi */
+		int codiceCliente = 0;
+		int codiceCorsa = 0;
+		String exp_ricevuta = null;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, "AA000AA", null);
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals("Errore: necessario inserire la tipologia del pagamento.", exp_ricevuta, ricevuta);
+		assertNull(v.getTarga());
+		
 	}
+	
+	
+	
+	
 	
 //	DA CONTROLLARE
 	@Test
@@ -257,50 +432,14 @@ class acquistoBigliettoTest {
 
 	
 // DA RIVEDERE	
-	@Test
-	void testEmissioneBiglietto_15() throws SQLException {
-		
-		/* Before all error tests */
-		BigliettoDAO.deleteallBiglietto();
 
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(-1, 101, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
-
-	@Test
-	void testEmissioneBiglietto_16() throws SQLException {
-		
-		/* Output attesi */
-		Biglietto biglietto = null;
-		List<Biglietto> lista_biglietti = new ArrayList<Biglietto>(0);
-		List<CronologiaAcquisti> lista_cronologie = new ArrayList<CronologiaAcquisti>(0);
-		
-		/* Eseguo la funzione */
-		Biglietto b = gestisciCorsa.emissioneBiglietto(5000, 101, "AA000AA", "veicolo", 10001, 'y', "10001VEI1019UO");
-		List<Biglietto> lista_b = BigliettoDAO.readallBiglietto();
-		List<CronologiaAcquisti> lista_c = CronologiaDAO.readallCronologia();
-
-		/* Controllo l'output */
-		assertEquals(biglietto, b);
-		assertEquals(lista_biglietti, lista_b);
-		assertEquals(lista_cronologie, lista_c);
-	}
 	
 	
 	@Test
 	void testEmissioneBiglietto_23() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);
@@ -326,6 +465,9 @@ class acquistoBigliettoTest {
 	
 	@Test
 	void testEmissioneBiglietto_24() throws SQLException {
+		
+		/* Before each error tests */
+		BigliettoDAO.deleteallBiglietto();
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);

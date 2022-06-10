@@ -305,7 +305,7 @@ public class gestisciCorsa {
 				return null;
 			}
 		} else {
-			System.out.println("Errore: corsa non trovata");
+			System.out.println("Errore: prezzo non valido");
 			return null;
 		}
 
