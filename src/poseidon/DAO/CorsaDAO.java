@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Time;
 
 import poseidon.entity.Corsa;
 
@@ -114,6 +115,62 @@ public class CorsaDAO {
 		DBManager.getInstance().closeConnection();
 
 		return corsa;
+	}
+	
+	public static void deleteCorsa(int codiceCorsa, LocalTime orarioPartenza, LocalTime orarioArrivo, 
+			String portoPartenza, String portoArrivo, double prezzo) throws SQLException {
+		// PRECONDITION: è stata aggiunta almeno una corsa all'interno del database.
+		// POSTCONDITION: elimina la corsa dalla tabella CORSA. Se non la trova non modifica il database.
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		connection = DBManager.getInstance().getConnection();
+		
+		try {
+			statement = connection.prepareStatement("DELETE FROM CORSA WHERE " + 
+					"codiceCorsa = ? AND orarioPartenza = ? AND orarioArrivo = ? AND portoPartenza = ? AND portoArrivo = ? AND prezzo = ?");
+			
+			Time time_orarioPartenza = Time.valueOf(orarioPartenza);
+			Time time_orarioArrivo = Time.valueOf(orarioArrivo);
+			
+			statement.setInt(1, codiceCorsa);
+			statement.setTime(2, time_orarioPartenza);
+			statement.setTime(3, time_orarioArrivo);
+			statement.setString(4, portoPartenza);
+			statement.setString(5, portoArrivo);
+			statement.executeUpdate();
+			
+		} finally {
+			if(statement != null) {
+				statement.close();
+			}
+		}
+		
+		DBManager.getInstance().closeConnection();
+		
+	}
+
+	public static void deleteallCorsa() throws SQLException {
+		// PRECONDITION: - 
+		// POSTCONDITION: la tabella CORSA è stata eliminata.
+		
+		Connection connection = null;
+		Statement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM CORSA");
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+		
 	}
 
 }
