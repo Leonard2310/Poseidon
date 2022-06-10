@@ -209,7 +209,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_8() throws SQLException {	// 101, -1, passeggero, AA000AA, Leonardo, Catello, contante
+	void testAcquistoBiglietto_8() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -233,7 +233,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_9() throws SQLException {	// 101, 50000, passeggero, AA000AA, Leonardo, Catello, contante
+	void testAcquistoBiglietto_9() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -257,7 +257,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_10() throws SQLException {	// 101, 10001, null, AA000AA, Leonardo, Catello, contante
+	void testAcquistoBiglietto_10() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -281,7 +281,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_11() throws SQLException {	// 101, 10001, passeggero, null, Leonardo, Catello, contante
+	void testAcquistoBiglietto_11() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -305,7 +305,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_12() throws SQLException {	// 101, 10001, passeggero, AA000AA, null, Catello, contante
+	void testAcquistoBiglietto_12() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -329,7 +329,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_13() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, null, contante
+	void testAcquistoBiglietto_13() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -353,7 +353,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_14() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, Catello, null
+	void testAcquistoBiglietto_14() throws SQLException {	
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -376,6 +376,7 @@ class acquistoBigliettoTest {
 		
 	}
 
+	
 	
 // DA RIVEDERE	
 
