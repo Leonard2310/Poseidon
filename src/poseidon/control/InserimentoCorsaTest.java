@@ -15,7 +15,6 @@ import java.util.List;
 
 import poseidon.DAO.*;
 import poseidon.entity.*;
-import poseidon.control.*;
 
 class InserimentoCorsaTest {
 

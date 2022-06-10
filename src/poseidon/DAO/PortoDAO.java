@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +93,7 @@ public class PortoDAO {
 	}
 	
 	public static void deletePorto(String citta) throws SQLException {
-		// PRECONDITION: è stata aggiunta almeno un porto all'interno del database.
+		// PRECONDITION: ï¿½ stata aggiunta almeno un porto all'interno del database.
 		// POSTCONDITION: elimina il porto dalla tabella PORTO. Se non la trova non modifica il database.
 		
 		Connection connection = null;
@@ -121,7 +119,7 @@ public class PortoDAO {
 
 	public static void deleteallPorto() throws SQLException {
 		// PRECONDITION: - 
-		// POSTCONDITION: la tabella PORTO è stata eliminata.
+		// POSTCONDITION: la tabella PORTO ï¿½ stata eliminata.
 		
 		Connection connection = null;
 		Statement statement = null;

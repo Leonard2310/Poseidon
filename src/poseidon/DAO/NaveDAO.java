@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +104,7 @@ public class NaveDAO {
 	}
 	
 	public static void deleteCorsa(String nome, int capienzaAutoveicoli, int capienzaPasseggeri, int codiceCorsa, String categoria) throws SQLException {
-		// PRECONDITION: è stata aggiunta almeno una nave all'interno del database.
+		// PRECONDITION: ï¿½ stata aggiunta almeno una nave all'interno del database.
 		// POSTCONDITION: elimina la nave dalla tabella NAVE. Se non la trova non modifica il database.
 		
 		Connection connection = null;
@@ -137,7 +135,7 @@ public class NaveDAO {
 
 	public static void deleteallNave() throws SQLException {
 		// PRECONDITION: - 
-		// POSTCONDITION: la tabella NAVE è stata eliminata.
+		// POSTCONDITION: la tabella NAVE ï¿½ stata eliminata.
 		
 		Connection connection = null;
 		Statement statement = null;
