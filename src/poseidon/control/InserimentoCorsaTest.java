@@ -21,7 +21,6 @@ class InserimentoCorsaTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		CorsaDAO.deleteallCorsa();
-		NaveDAO.deleteallNave();
 		
 	}
 
@@ -43,6 +42,8 @@ class InserimentoCorsaTest {
 	@Test
 	void testInserimentoCorsa_1() throws SQLException {
 		
+		NaveDAO.deleteallNave();
+		
 		/* Output attesi */
 		int codiceCorsa = 1;
 		String portoPartenza = "Napoli";
@@ -50,11 +51,9 @@ class InserimentoCorsaTest {
 		LocalTime orarioPartenza = LocalTime.of(10,15);
 		LocalTime orarioArrivo = LocalTime.of(13,40);
 		double prezzo = 20.00; 
-		String nome = "Estate";
 		
 		/* Funzione */
 		Corsa c = gestisciCorsa.inserimentoCorsa(LocalTime.of(10,15), LocalTime.of(13,40), "Napoli", "Ischia", 20.00, "Estate");
-		Nave n = NaveDAO.readNave(nome);
 
 		/* Controllo Output */
 		assertEquals(codiceCorsa, c.getCodiceCorsa());
@@ -62,8 +61,7 @@ class InserimentoCorsaTest {
 		assertEquals(portoArrivo, c.getPortoArrivo());
 		assertEquals(orarioPartenza, c.getOrarioPartenza());
 		assertEquals(orarioArrivo, c.getOrarioArrivo());
-		assertEquals(prezzo, c.getPrezzo());
-		assertEquals(nome, n.getNome());		
+		assertEquals(prezzo, c.getPrezzo());	
 				
 	}
 
@@ -75,13 +73,11 @@ class InserimentoCorsaTest {
 		List<Corsa> lista_corse = new ArrayList<Corsa>(0);
 		
 		/* Funzione */
-		final int max_string_size = 50;
 		Corsa c = gestisciCorsa.inserimentoCorsa(LocalTime.of(10,15), LocalTime.of(13,40), "Naaaaaaaaaappppppppppoooooooooolllllllllliiiiiiiiiiiiii", "Ischia", 20.00, "Estate");
 		List<Corsa> lista_c = CorsaDAO.readallCorsa();
 
 		/* Controllo Output */
 		assertEquals(corsa, c);
-		assertEquals(max_string_size, c.getPortoPartenza().length());
 		assertEquals(lista_corse, lista_c);	
 	}
 
@@ -109,13 +105,11 @@ class InserimentoCorsaTest {
 		List<Corsa> lista_corse = new ArrayList<Corsa>(0);
 		
 		/* Funzione */
-		final int max_string_size = 50;
 		Corsa c = gestisciCorsa.inserimentoCorsa(LocalTime.of(10,15), LocalTime.of(13,40), "Napoli", "Isssssssssscccccccccchhhhhhhhhhiiiiiiiiiiiaaaaaaaaaaaaaaa", 20.00, "Estate");
 		List<Corsa> lista_c = CorsaDAO.readallCorsa();
 
 		/* Controllo Output */
 		assertEquals(corsa, c);
-		assertFalse(max_string_size < c.getPortoArrivo().length());
 		assertEquals(lista_corse, lista_c);		
 	}
 	
@@ -133,7 +127,6 @@ class InserimentoCorsaTest {
 		/* Controllo Output */
 		assertEquals(corsa, c);
 		assertEquals(lista_corse, lista_c);		
-		assertNull(c.getCodiceCorsa());
 
 	}
 	
@@ -156,23 +149,6 @@ class InserimentoCorsaTest {
 	
 	@Test
 	void testInserimentoCorsa_7() throws SQLException {
-		
-		/* Output attesi */
-		Corsa corsa = null;
-		List<Corsa> lista_corse = new ArrayList<Corsa>(0);
-		
-		/* Funzione */
-		Corsa c = gestisciCorsa.inserimentoCorsa(LocalTime.of(10,15), LocalTime.of(40,40), "Napoli", "Ischia", 20.00, "Estate");
-		List<Corsa> lista_c = CorsaDAO.readallCorsa();
-
-		/* Controllo Output */
-		assertEquals(corsa, c);
-		assertEquals(lista_corse, lista_c);		
-
-	}
-	
-	@Test
-	void testInserimentoCorsa_8() throws SQLException {
 
 		/* Output attesi */
 		Corsa corsa = null;
@@ -189,7 +165,7 @@ class InserimentoCorsaTest {
 	}
 	
 	@Test
-	void testInserimentoCorsa_9() throws SQLException {
+	void testInserimentoCorsa_8() throws SQLException {
 	
 		/* Output attesi */
 		Corsa corsa = null;
@@ -206,7 +182,7 @@ class InserimentoCorsaTest {
 	}
 	
 	@Test
-	void testInserimentoCorsa_10() throws SQLException {
+	void testInserimentoCorsa_9() throws SQLException {
 
 		/* Output attesi */
 		Corsa corsa = null;

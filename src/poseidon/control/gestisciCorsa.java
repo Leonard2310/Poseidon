@@ -544,6 +544,21 @@ public class gestisciCorsa {
 			System.out.println("Errore: il porto inserito non e' registrato.");
 			return null;
 		}
+
+		/*
+		LocalTime test_error1 = LocalTime.of(24, 00);
+		LocalTime test_error2 = LocalTime.of(00, 00);
+		
+		if(orarioPartenza.isAfter(test_error1) || orarioPartenza.isBefore(test_error2)) {
+			System.out.println("ERRORE: l'orario inserito non e' valido!");
+			return null;
+		}
+		
+		if(orarioArrivo.isAfter(test_error1) || orarioArrivo.isBefore(test_error2)) {
+			System.out.println("ERRORE: l'orario inserito non e' valido!");
+			return null;
+		}
+		*/
 		
 		if(orarioPartenza.compareTo(orarioArrivo) == 0) {
 			System.out.println("ERRORE: l'orario inserito non e' valido!");
