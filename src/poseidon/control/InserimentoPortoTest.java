@@ -42,14 +42,12 @@ class InserimentoPortoTest {
 		
 		/* Output attesi */
 		String citta = "Pozzuoli";
-		Porto porto = new Porto("Pozzuoli");
 		
 		/* Funzione */
 		Porto p = gestisciCorsa.inserimentoPorto("Pozzuoli");
 		
 		/* Controllo Output */
 		assertEquals(citta, p.getCitta());		
-		assertEquals(porto, p);
 		
 	}
 

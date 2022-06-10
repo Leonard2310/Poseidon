@@ -89,20 +89,11 @@ public class DipendenteConsoleBoundary {
 		
 		inputReader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
 		
-		/*
-		 * print: inserire la citta del porto
-		 * controllo se la citta inserita � presente in un vettore in cui ci sono tutti i porti possibili di italia,
-		 * altrimenti errore 'citta inserita non valida'
-		 * � possibile inserirne una tra le seguenti
-		 * sytampa del vettore
-		 * 
-		 * */
 		String[] listaPorti = {"Napoli", "Ischia", "Capri", "Ravenna", "Pozzuoli", "Catania", 
 								"Bari", "Brindisi", "Palermo", "Cagliari", "Olbia", "Genova", 
 								"Sorrento", "Amalfi", "Salerno", "Carlo Pisacane", "Messina", 
 								"Ortona", "Pozzallo", "Maratea", "Livorno", "Civitavecchia", "Vasto",
 								"Pesaro", "Savona", "Piombino", "Flavia", "Roseto degli Abruzzi"};
-		
 		
 		List<Porto> lista_porto = new ArrayList<Porto>();
 

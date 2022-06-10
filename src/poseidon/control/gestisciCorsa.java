@@ -609,7 +609,7 @@ public class gestisciCorsa {
 		return corsa;
 	}
 
-<<<<<<< HEAD
+
 	public static Nave inserimentoNave(String nomeNave, String categoria, int capienzaPasseggeri, int capienzaAutoveicoli, int codiceCorsa) {
 =======
 	/**
@@ -689,7 +689,7 @@ public class gestisciCorsa {
 	}
 
 	/**
-	 * @param citta: cittÃ  di appartenenza del porto in procinto di essere aggiunto.
+	 * @param citta: citta'  di appartenenza del porto in procinto di essere aggiunto.
 	 * @return oggetto della classe Porto contenente i dati del nuovo porto.
 	 */
 	public static Porto inserimentoPorto(String citta) {

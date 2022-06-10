@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,166 @@ class InserimentoNaveTest {
 
 	@Test
 	void InserimentoNaveTest_1() throws SQLException {
-		fail("Not yet implemented");
+		
+		/* Output attesi */
+		String nome = "Estate";
+		int capienzaAutoveicoli = 270;
+		int capienzaPasseggeri = 30;
+		String categoria = "traghetto";
+		int codiceCorsa = 101;
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", 270, 30, 101);
+
+		/* Controllo Output */
+		assertEquals(nome, n.getNome());
+		assertEquals(capienzaAutoveicoli, n.getCapienzaAutoveicoli());
+		assertEquals(capienzaPasseggeri, n.getCapienzaPasseggeri());
+		assertEquals(categoria, n.getCategoria());
+		assertEquals(codiceCorsa, n.getCodiceCorsa());
+				
+	}
+
+	@Test
+	void InserimentoNaveTest_2() throws SQLException {
+
+		/* Output attesi */
+		String nome = "Estate";
+		int capienzaAutoveicoli = 270;
+		int capienzaPasseggeri = 0;
+		String categoria = "aliscafo";
+		int codiceCorsa = 101;
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "aliscafo", 270, 0, 101);
+
+		/* Controllo Output */
+		assertEquals(nome, n.getNome());
+		assertEquals(capienzaAutoveicoli, n.getCapienzaAutoveicoli());
+		assertEquals(capienzaPasseggeri, n.getCapienzaPasseggeri());
+		assertEquals(categoria, n.getCategoria());
+		assertEquals(codiceCorsa, n.getCodiceCorsa());
+				
+	}
+	
+	@Test
+	void InserimentoNaveTest_3() throws SQLException {
+		
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Coooooooooossssssssstttttttttttttttaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "traghetto", 270, 30, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);		
+
+	}
+	
+	@Test
+	void InserimentoNaveTest_4() throws SQLException {
+		
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "Battello", 270, 30, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);		
+
+	}
+
+	@Test
+	void InserimentoNaveTest_5() throws SQLException {
+		
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", 500, 30, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);		
+
+	}
+
+	@Test
+	void InserimentoNaveTest_6() throws SQLException {
+
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", -1, 30, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);		
+
+	}
+
+	@Test
+	void InserimentoNaveTest_7() throws SQLException {
+
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", 270, 150, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);		
+
+	}
+
+	@Test
+	void InserimentoNaveTest_8() throws SQLException {
+
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", 270, -1, 101);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);	
+
+	}
+
+	@Test
+	void InserimentoNaveTest_9() throws SQLException {
+
+		/* Output attesi */
+		Nave nave = null;
+		List<Nave> lista_nave = new ArrayList<Nave>(0);
+		
+		/* Funzione */
+		Nave n = gestisciCorsa.inserimentoNave("Estate", "traghetto", 270, 30, -1);
+		List<Nave> lista_n = NaveDAO.readallNave();
+		
+		/* Controllo Output */
+		assertEquals(lista_nave, lista_n);
+		assertEquals(nave, n);	
+		assertNull(n.getCodiceCorsa());
+
 	}
 
 }
