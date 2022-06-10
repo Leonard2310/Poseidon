@@ -42,6 +42,10 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 	}
 	
+	/*
+	 * 		TEST INPUT VALIDI
+	 */
+	
 	@Test
 	void testAcquistoBiglietto_1() throws SQLException {
 
@@ -71,7 +75,7 @@ class acquistoBigliettoTest {
 		int codiceCorsa = 101;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10002, "Leonardo", "Catello", "passeggero", 101, null, "bancomat");
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 102, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
 		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
@@ -87,24 +91,118 @@ class acquistoBigliettoTest {
 	void testAcquistoBiglietto_3() throws SQLException {
 
 		/* Output attesi */
-		int codiceCliente = 10003;
-		int codiceCorsa = 3;
+		int codiceCliente = 10001;
+		int codiceCorsa = 101;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10003, "Daiana", "Cipollaro", "passeggero", 3, null, "contante");
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "passeggero", 101, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
 		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
 				
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(ricevuta.length(), 12);
+		assertEquals(ricevuta.length(), 14);
 		assertNull(v.getTarga());
 		assertNotNull(ricevuta);
 	}
 	
 	@Test
 	void testAcquistoBiglietto_4() throws SQLException {
+
+		/* Output attesi */
+		int codiceCliente = 10002;
+		int codiceCorsa = 102;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10002, "Leonardo", "Catello", "passeggero", 102, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals(ricevuta.length(), 14);
+		assertNull(v.getTarga());
+		assertNotNull(ricevuta);
+	}
+	
+	/*
+	 * 		TEST SINGLE
+	 */
+	
+	@Test
+	void testAcquistoBiglietto_5() throws SQLException {
+
+		/* Output attesi */
+		int codiceCliente = 10001;
+		int codiceCorsa = 103;
+		
+		/* Eseguo la funzione */
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 103, "AA000AA", "contante");
+		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
+		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+				
+		/* Controllo l'output */
+		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
+		assertEquals(codiceCliente, c.getCodiceCliente());
+		assertEquals(ricevuta.length(), 14);
+		assertNull(v.getTarga());
+		assertNotNull(ricevuta);
+	}
+	
+	/*
+	 * 		TEST ERRORE
+	 */
+	
+	@Test
+	void testAcquistoBiglietto_6() throws SQLException {	// -1, 10001, passeggero, AA000AA, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_7() throws SQLException {	// 500, 10001, passeggero, AA000AA, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_8() throws SQLException {	// 101, -1, passeggero, AA000AA, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_9() throws SQLException {	// 101, 50000, passeggero, AA000AA, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_10() throws SQLException {	// 101, 10001, null, AA000AA, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_11() throws SQLException {	// 101, 10001, passeggero, null, Leonardo, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_12() throws SQLException {	// 101, 10001, passeggero, AA000AA, null, Catello, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_13() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, null, contante
+		
+	}
+	
+	@Test
+	void testAcquistoBiglietto_14() throws SQLException {	// 101, 10001, passeggero, AA000AA, Leonardo, Catello, null
+		
+	}
+	
+//	DA CONTROLLARE
+	@Test
+	void testAcquistoBiglietto_15() throws SQLException {
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(101);
@@ -131,7 +229,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_5() throws SQLException {
+	void testAcquistoBiglietto_16() throws SQLException {
 		
 		/* Inizializzazione precondizioni */
 		Corsa corsa = CorsaDAO.readCorsa(103);
@@ -157,7 +255,7 @@ class acquistoBigliettoTest {
 	}
 
 	
-	
+// DA RIVEDERE	
 	@Test
 	void testEmissioneBiglietto_15() throws SQLException {
 		
