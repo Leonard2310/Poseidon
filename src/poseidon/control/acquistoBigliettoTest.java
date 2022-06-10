@@ -68,27 +68,6 @@ class acquistoBigliettoTest {
 	void testAcquistoBiglietto_2() throws SQLException {
 
 		/* Output attesi */
-		int codiceCliente = 10002;
-		int codiceCorsa = 101;
-		String targa = "AA000AA";
-		
-		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 102, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
-		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(ricevuta.length(), 14);
-		assertEquals(targa, v.getTarga());
-		assertNotNull(ricevuta);
-	}
-	
-	@Test
-	void testAcquistoBiglietto_3() throws SQLException {
-
-		/* Output attesi */
 		int codiceCliente = 10001;
 		int codiceCorsa = 101;
 		
@@ -106,7 +85,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_4() throws SQLException {
+	void testAcquistoBiglietto_3() throws SQLException {
 
 		/* Output attesi */
 		int codiceCliente = 10002;
@@ -132,7 +111,7 @@ class acquistoBigliettoTest {
 	 */
 	
 	@Test
-	void testAcquistoBiglietto_5() throws SQLException {
+	void testAcquistoBiglietto_4() throws SQLException {
 
 		/* Output attesi */
 		int codiceCliente = 10001;
@@ -160,7 +139,7 @@ class acquistoBigliettoTest {
 	 */
 	
 	@Test
-	void testAcquistoBiglietto_6() throws SQLException {
+	void testAcquistoBiglietto_5() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -180,7 +159,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_7() throws SQLException {
+	void testAcquistoBiglietto_6() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -200,7 +179,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_8() throws SQLException {
+	void testAcquistoBiglietto_7() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -220,7 +199,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_9() throws SQLException {
+	void testAcquistoBiglietto_8() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -240,7 +219,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_10() throws SQLException {
+	void testAcquistoBiglietto_9() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -260,7 +239,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_11() throws SQLException {
+	void testAcquistoBiglietto_10() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -280,7 +259,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_12() throws SQLException {
+	void testAcquistoBiglietto_11() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -300,7 +279,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_13() throws SQLException {
+	void testAcquistoBiglietto_12() throws SQLException {
 		
 		/* Prima di ogni test di errore */
 		CronologiaDAO.deleteallCronologia();
@@ -320,7 +299,7 @@ class acquistoBigliettoTest {
 	}
 	
 	@Test
-	void testAcquistoBiglietto_14() throws SQLException {
+	void testAcquistoBiglietto_13() throws SQLException {
 		
 		/* Before each error tests */
 		CronologiaDAO.deleteallCronologia();
