@@ -8,14 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.SQLException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import poseidon.DAO.*;
 import poseidon.entity.*;
-import poseidon.control.*;
 
 public class NaveDAO {
 	
