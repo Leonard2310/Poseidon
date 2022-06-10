@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import poseidon.DAO.CronologiaDAO;
+import poseidon.entity.Biglietto;
+import poseidon.entity.BigliettoPasseggero;
 import poseidon.entity.BigliettoVeicolo;
 import poseidon.entity.CronologiaAcquisti;
 
@@ -93,13 +95,13 @@ class acquistoBigliettoTest {
 		/* Eseguo la funzione */
 		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "passeggero", 101, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+		Biglietto b = c.getBiglietto();
 				
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
 		assertEquals(ricevuta.length(), 14);
-		assertNull(v.getTarga());
+		assertTrue(b instanceof BigliettoPasseggero);
 		assertNotNull(ricevuta);
 	}
 	
@@ -113,13 +115,13 @@ class acquistoBigliettoTest {
 		/* Eseguo la funzione */
 		String ricevuta = gestisciCorsa.acquistaBiglietto(10002, "Leonardo", "Catello", "passeggero", 102, "AA000AA", "contante");
 		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+		Biglietto b = c.getBiglietto();
 				
 		/* Controllo l'output */
 		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
 		assertEquals(codiceCliente, c.getCodiceCliente());
 		assertEquals(ricevuta.length(), 14);
-		assertNull(v.getTarga());
+		assertTrue(b instanceof BigliettoPasseggero);
 		assertNotNull(ricevuta);
 	}
 	
@@ -164,22 +166,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
 		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", -1, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -190,22 +186,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
 		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -216,22 +206,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(-1, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(-1, "Leonardo", "Catello", "veicolo", 101, "AA000AA", "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -242,22 +226,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(50000, "Leonardo", "Catello", "veicolo", 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(50000, "Leonardo", "Catello", "veicolo", 101, "AA000AA", "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -268,22 +246,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", null, 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", null, 101, "AA000AA", "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -294,22 +266,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, null, "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 101, null, "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -320,22 +286,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, null, "Catello", "veicolo", 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, null, "Catello", "veicolo", 101, "AA000AA", "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -346,22 +306,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
-		
+		int numero_cronologie = 0;
+
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", null, "veicolo", 500, "AA000AA", "contante");
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", null, "veicolo", 101, "AA000AA", "contante");
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
 				
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 		
 	}
 	
@@ -372,22 +326,16 @@ class acquistoBigliettoTest {
 		CronologiaDAO.deleteallCronologia();
 		
 		/* Output attesi */
-		int codiceCliente = 0;
-		int codiceCorsa = 0;
 		String exp_ricevuta = null;
-		CronologiaAcquisti cronologia = null;
+		int numero_cronologie = 0;
 		
 		/* Eseguo la funzione */
-		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 500, "AA000AA", null);
-		CronologiaAcquisti c = CronologiaDAO.readallCronologia().get(0);
-		BigliettoVeicolo v = (BigliettoVeicolo) c.getBiglietto();
-				
+		String ricevuta = gestisciCorsa.acquistaBiglietto(10001, "Leonardo", "Catello", "veicolo", 101, "AA000AA", null);
+		int cronologia_size = CronologiaDAO.readallCronologia().size();
+		
 		/* Controllo l'output */
-		assertEquals(codiceCorsa, c.getCorsa().getCodiceCorsa());
-		assertEquals(codiceCliente, c.getCodiceCliente());
-		assertEquals(cronologia, c);
 		assertEquals(exp_ricevuta, ricevuta);
-		assertNull(v.getTarga());
+		assertEquals(numero_cronologie, cronologia_size);
 	}
 
 }

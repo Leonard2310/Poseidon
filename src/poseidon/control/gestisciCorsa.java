@@ -234,12 +234,12 @@ public class gestisciCorsa {
 			return null;
 		}
 
-		if (nome.equals("") || nome == null) {
+		if (nome == null || nome.equals("")) {
 			System.out.println("Errore: necessario inserire il nome.");
 			return null;
 		}
 
-		if (cognome.equals("") || cognome == null) {
+		if (cognome == null || cognome.equals("")) {
 			System.out.println("Errore: necessario inserire il cognome.");
 			return null;
 		}
