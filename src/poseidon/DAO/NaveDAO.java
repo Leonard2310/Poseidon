@@ -26,7 +26,7 @@ public class NaveDAO {
 			
 			statement.setString(1, n.getNome());			
 			statement.setInt(2,n.getCapienzaAutoveicoli());
-			statement.setInt(3, n.getCapienzaPassegeri());
+			statement.setInt(3, n.getCapienzaPasseggeri());
 			statement.setString(4, n.getCategoria());
 			statement.setInt(5, n.getCodiceCorsa());
  			
