@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +92,53 @@ public class PortoDAO {
 		DBManager.getInstance().closeConnection();
 
 		return lista_porto;
+	}
+	
+	public static void deletePorto(String citta) throws SQLException {
+		// PRECONDITION: è stata aggiunta almeno un porto all'interno del database.
+		// POSTCONDITION: elimina il porto dalla tabella PORTO. Se non la trova non modifica il database.
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		connection = DBManager.getInstance().getConnection();
+		
+		try {
+			statement = connection.prepareStatement("DELETE FROM PORTO WHERE " + "citta = ?");
+
+			statement.setString(1, citta);
+			statement.executeUpdate();
+			
+		} finally {
+			if(statement != null) {
+				statement.close();
+			}
+		}
+		
+		DBManager.getInstance().closeConnection();
+		
+	}
+
+	public static void deleteallPorto() throws SQLException {
+		// PRECONDITION: - 
+		// POSTCONDITION: la tabella PORTO è stata eliminata.
+		
+		Connection connection = null;
+		Statement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM PORTO");
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+		
 	}
 	
 }

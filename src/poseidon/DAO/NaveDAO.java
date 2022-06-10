@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,5 +104,58 @@ public class NaveDAO {
 
 		return lista_nave;
 	}
+	
+	public static void deleteCorsa(String nome, int capienzaAutoveicoli, int capienzaPasseggeri, int codiceCorsa, String categoria) throws SQLException {
+		// PRECONDITION: è stata aggiunta almeno una nave all'interno del database.
+		// POSTCONDITION: elimina la nave dalla tabella NAVE. Se non la trova non modifica il database.
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		connection = DBManager.getInstance().getConnection();
+		
+		try {
+			statement = connection.prepareStatement("DELETE FROM NAVE WHERE " + 
+					"nome = ? AND capienzaAutoveicoli = ? AND capienzaPasseggeri = ? AND codiceCorsa = ? AND categoria = ?");
+			
+			statement.setString(1, nome);
+			statement.setInt(2, capienzaAutoveicoli);
+			statement.setInt(3, capienzaPasseggeri);
+			statement.setInt(4, codiceCorsa);
+			statement.setString(5, categoria);
+			statement.executeUpdate();
+			
+		} finally {
+			if(statement != null) {
+				statement.close();
+			}
+		}
+		
+		DBManager.getInstance().closeConnection();
+		
+	}
+
+	public static void deleteallNave() throws SQLException {
+		// PRECONDITION: - 
+		// POSTCONDITION: la tabella NAVE è stata eliminata.
+		
+		Connection connection = null;
+		Statement statement = null;
+				
+		connection = DBManager.getInstance().getConnection();
+
+		try { 
+			statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM NAVE");
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+		}		
+				
+		DBManager.getInstance().closeConnection();	
+		
+	}
+
 
 }
