@@ -25,7 +25,7 @@ The project involved a thorough analysis and requirement specification process. 
 
 ## Contributions
 - [Leonardo Catello](https://github.com/Leonard2310) 
-- [Lorenzo Manco](https://github.com/Dad-cip)
+- [Daiana Cipollaro](https://github.com/Dad-cip)
 - [Francesco Di Serio](https://github.com/fdiserio)
 
 ## License
