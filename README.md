@@ -16,6 +16,7 @@ Testing encompassed both structural and functional aspects. Structural testing a
 ## Requirements
 - Eclipse IDE (version 2022-2023 or higher)
 - PostgreSQL (version 42.3.5 or higher)
+- Visual Paradigm (version 16.3 or higher)
 
 ## Results
 The Poseidon application successfully enables navigation companies to efficiently issue tickets for maritime travel. The application supports both passenger and vehicle ticketing, allowing the company to manage their fleet, schedule trips, and ensure seat availability. The system provides a user-friendly interface for employees to issue tickets, record issuance details, and update seat availability. Customers can also make online reservations, which are processed by company employees upon presentation of a reservation printout.
