@@ -1,4 +1,4 @@
-# Poseidon: Maritime Ticketing Application for Navigation Companies
+![Poseidon_Logo](https://github.com/Leonard2310/Poseidon/assets/71086591/35edd9e8-10d5-4e78-84b2-8e55a65b9e37)
 
 Poseidon is a software engineering project developed for Federico II University. The project aims to create an application for navigation companies to streamline the issuance of tickets for maritime travel. The specific company for which the application is designed is named Poseidon. The company offers passenger transportation services operated by hydrofoils and ferries, as well as passenger and vehicle transportation services operated by ferries.
 
